@@ -11,7 +11,8 @@
     "lint": "node --check --experimental-strip-types src/index.ts && node --check --experimental-strip-types src/aggregator.ts && node --check --experimental-strip-types src/scrapers/*.ts && node --check --experimental-strip-types src/formatters/*.ts && node --check --experimental-strip-types scripts/*.ts && node --check --experimental-strip-types tests/*.test.ts",
     "download-fixtures": "node --experimental-strip-types scripts/download-fixtures.ts",
     "check-fixtures": "node --experimental-strip-types scripts/check-fixtures.ts",
-    "render-examples": "node --experimental-strip-types scripts/render-examples.ts"
+    "render-examples": "node --experimental-strip-types scripts/render-examples.ts",
+    "ci:live-gate": "node --experimental-strip-types scripts/ci-live-gate.ts"
   },
   "dependencies": {
     "cheerio": "^1.2.0"

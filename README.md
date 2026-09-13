@@ -16,3 +16,19 @@ Status: in planning phase. See [issue #1](https://github.com/ilteoood/meno-meno/
 ## Next step
 
 Follow the wayfinding map at https://github.com/ilteoood/meno-meno/issues/1.
+
+## CI live gate
+
+GitHub Actions runs two workflows on every PR:
+
+- `ci` (`.github/workflows/ci.yml`) — runs `npm ci && npm run lint && npm test` against fixture mocks. Must pass before merge.
+- `live-gate` (`.github/workflows/live-gate.yml`) — triggers only when paths match `src/scrapers/**/*.ts` or `fixtures/**/*.html`. For each affected operator, it runs `npm run ci:live-gate`, which extracts operator IDs from PR files via `gh pr view`, then runs `node --experimental-strip-types src/index.ts --operatore <id> --commodity <commodity> --live` for each. Any non-zero exit fails the gate.
+
+Local debug:
+
+```sh
+export CI_PR_NUMBER=42
+npm run ci:live-gate
+```
+
+Operators without a registered live source (today: every operator except `enel/luce`) are skipped, not failed.
