@@ -7,18 +7,33 @@ import { format } from './formatters/index.ts';
 
 const VALID_COMMODITIES: readonly Commodity[] = ['luce', 'gas', 'mobile', 'fisso'];
 
-function parseArgs(argv: readonly string[]): {
+type OutputFormat = 'all' | 'markdown' | 'csv' | 'json';
+
+const VALID_FORMATS: readonly OutputFormat[] = ['all', 'markdown', 'csv', 'json'];
+
+function parseFormat(value: string | null): OutputFormat {
+  if (value !== null && !VALID_FORMATS.includes(value as OutputFormat)) {
+    throw new Error(
+      `invalid --format: ${value} (atteso: ${VALID_FORMATS.join(', ')})`,
+    );
+  }
+  return (value as OutputFormat | null) ?? 'all';
+}
+
+type ParsedArgs = {
   operatore: string | null;
   commodity: Commodity | null;
   fixture: string | null;
   live: boolean;
-  format: 'all' | 'markdown' | 'csv' | 'json';
-} {
+  format: OutputFormat;
+};
+
+function parseArgs(argv: readonly string[]): ParsedArgs {
   let operatore: string | null = null;
   let commodity: Commodity | null = null;
   let fixture: string | null = null;
   let live = false;
-  let fmt: 'all' | 'markdown' | 'csv' | 'json' = 'all';
+  let rawFormat: string | null = null;
 
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
@@ -36,11 +51,11 @@ function parseArgs(argv: readonly string[]): {
         live = true;
         break;
       case '--format':
-        fmt = (argv[++i] ?? 'all') as 'all' | 'markdown' | 'csv' | 'json';
+        rawFormat = argv[++i] ?? null;
         break;
     }
   }
-  return { operatore, commodity, fixture, live, format: fmt };
+  return { operatore, commodity, fixture, live, format: parseFormat(rawFormat) };
 }
 
 function validateCommodity(value: string | null): Commodity {
@@ -72,13 +87,25 @@ function emit(label: string, content: string): void {
 }
 
 async function main(argv: readonly string[]): Promise<number> {
-  const args = parseArgs(argv);
+  let args: ParsedArgs;
+  try {
+    args = parseArgs(argv);
+  } catch (err) {
+    process.stderr.write(`${(err as Error).message}\n`);
+    return 2;
+  }
   if (!args.operatore) {
     process.stderr.write('Missing --operatore\n');
     return 2;
   }
   const commodity = validateCommodity(args.commodity);
-  const source = buildSource(args.operatore, commodity, args.fixture, args.live);
+  let source: ScrapeSource;
+  try {
+    source = buildSource(args.operatore, commodity, args.fixture, args.live);
+  } catch (err) {
+    process.stderr.write(`${(err as Error).message}\n`);
+    return 2;
+  }
 
   const scraper = createScraper(args.operatore, commodity, source);
   if (!scraper) {
