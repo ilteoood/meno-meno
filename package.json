@@ -1,0 +1,19 @@
+{
+  "name": "meno-meno",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Italian utility/telco price comparison Claude Code skill",
+  "scripts": {
+    "start": "node --experimental-strip-types src/index.ts",
+    "scrape": "node --experimental-strip-types src/index.ts",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "lint": "node --check --experimental-strip-types src/index.ts && node --check --experimental-strip-types src/aggregator.ts && node --check --experimental-strip-types src/scrapers/*.ts && node --check --experimental-strip-types src/formatters/*.ts && node --check --experimental-strip-types tests/*.test.ts"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  }
+}
