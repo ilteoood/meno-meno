@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
-import { extractAffectedOperators } from '../scripts/ci-live-gate.ts';
+import { extractAffectedOperators, requiresPlaywright } from '../scripts/ci-live-gate.ts';
 
 test('extractAffectedOperators picks scraper files under src/scrapers/<id>.ts', () => {
   const ops = extractAffectedOperators([
@@ -44,4 +44,12 @@ test('extractAffectedOperators returns every regex match (registry filtering is 
   assert.equal(ops.size, 2);
   assert.ok(ops.has('index'));
   assert.ok(ops.has('types'));
+});
+
+test('requiresPlaywright flags edison and windtre, not cheerio operators', () => {
+  assert.equal(requiresPlaywright('edison'), true);
+  assert.equal(requiresPlaywright('windtre'), true);
+  assert.equal(requiresPlaywright('enel'), false);
+  assert.equal(requiresPlaywright('vodafone'), false);
+  assert.equal(requiresPlaywright('unknown'), false);
 });

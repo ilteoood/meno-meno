@@ -24,6 +24,10 @@ export function extractAffectedOperators(files: readonly string[]): Set<string> 
   return ids;
 }
 
+export function requiresPlaywright(operatorId: string): boolean {
+  return V1_FIXTURE_SOURCES.some((s) => s.operatore === operatorId && s.playwright);
+}
+
 function lookupCommodity(operatorId: string): string | null {
   const source = V1_FIXTURE_SOURCES.find((s) => s.operatore === operatorId);
   return source ? source.commodity : null;
@@ -88,6 +92,10 @@ async function main(): Promise<void> {
     const commodity = lookupCommodity(id);
     if (commodity === null) {
       process.stdout.write(`ci-live-gate: skip ${id} (not in v1 operator registry)\n`);
+      continue;
+    }
+    if (requiresPlaywright(id)) {
+      process.stdout.write(`ci-live-gate: skip ${id}/${commodity} (Playwright required, Chromium not downloaded in CI)\n`);
       continue;
     }
     process.stdout.write(`\n--- ci-live-gate: ${id}/${commodity} ---\n`);
