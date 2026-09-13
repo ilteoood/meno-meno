@@ -106,6 +106,9 @@ function buildSource(
   if (live && operatore === 'octopus' && commodity === 'luce') {
     return { kind: 'live', url: 'https://octopusenergy.it/offerta/tariffe' };
   }
+  if (live && operatore === 'nen' && commodity === 'luce') {
+    return { kind: 'live', url: 'https://nen.it/landing/migliore-offerta-luce' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 

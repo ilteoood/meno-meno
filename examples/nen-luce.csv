@@ -1,0 +1,4 @@
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,luce,nen,NEN-FIX-LUCE-001,,NeN Fix Luce,0.11,EUR/kWh,60,fisso,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/nen/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,nen,NEN-INDICE-LUCE-002,,NeN Indicizzata Luce,0.13,EUR/kWh,72,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/nen/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,nen,NEN-WEB-LUCE-003,,NeN Web Luce,0.1,EUR/kWh,48,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/nen/luce.html,2026-09-13T10:00:00.000Z
