@@ -14,6 +14,7 @@ import { NenLuceScraper } from './nen.ts';
 import { TimMobileScraper } from './tim.ts';
 import { VodafoneMobileScraper } from './vodafone.ts';
 import { IliadMobileScraper } from './iliad.ts';
+import { FastwebMobileScraper } from './fastweb.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -62,6 +63,9 @@ export function createScraper(
   if (operatoreId === 'iliad' && commodity === 'mobile') {
     return new IliadMobileScraper(source);
   }
+  if (operatoreId === 'fastweb' && commodity === 'mobile') {
+    return new FastwebMobileScraper(source);
+  }
   return null;
 }
 
@@ -79,4 +83,5 @@ export { NenLuceScraper } from './nen.ts';
 export { TimMobileScraper } from './tim.ts';
 export { VodafoneMobileScraper } from './vodafone.ts';
 export { IliadMobileScraper } from './iliad.ts';
+export { FastwebMobileScraper } from './fastweb.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';

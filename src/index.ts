@@ -118,6 +118,9 @@ function buildSource(
   if (live && operatore === 'iliad' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.iliad.it/offerte-iliad-mobile.html' };
   }
+  if (live && operatore === 'fastweb' && commodity === 'mobile') {
+    return { kind: 'live', url: 'https://www.fastweb.it/adsl-fibra-ottica/offerta-mobile' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 

@@ -1,0 +1,4 @@
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,mobile,fastweb,FW-MOBILE-001,,Fastweb Mobile 100,7.95,EUR/mese,undefined,,,100,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/fastweb/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,fastweb,FW-MOBILE-002,,Fastweb Mobile 50,5.95,EUR/mese,undefined,,,50,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/fastweb/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,fastweb,FW-MOBILE-003,,Fastweb Mobile Light,3.95,EUR/mese,undefined,,,20,-1,entrambe,4G,150,,,,file:///root/workspaces/meno-meno/fixtures/fastweb/mobile.html,2026-09-13T10:00:00.000Z
