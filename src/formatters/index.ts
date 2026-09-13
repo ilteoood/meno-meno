@@ -28,7 +28,7 @@ export function format(input: FormatInput): FormattedOutput {
       warnings: input.warnings,
       sourceCount: input.sourceCount,
     }),
-    csv: toCsv(input.offerte, input.commodity),
+    csv: toCsv(input.offerte, input.commodity, input.bundle),
     json: toJson(input.offerte, input.commodity, input.scrapedAt, input.bundle),
   };
 }

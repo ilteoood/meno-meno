@@ -47,7 +47,7 @@ function bundleSection(bundle: readonly OffertaBundle[]): string {
   if (bundle.length === 0) return '';
   const lines = ['## Bundle luce+gas', ''];
   for (const b of bundle) {
-    lines.push(`- ${b.operatore_id} — ${b.nome_commerciale}: componenti ${b.componenti.length}`);
+    lines.push(`- ${b.operatore_id} — ${b.nome_commerciale}: ${b.componenti.length} componenti`);
   }
   return lines.join('\n');
 }
