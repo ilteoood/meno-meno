@@ -56,13 +56,17 @@ const inputWithBundle = {
   bundle: [sampleBundle] as readonly OffertaBundle[],
 };
 
-test('format emits markdown with header, table, and trade-off placeholders', () => {
+test('format emits markdown with header, table, deterministic trade-off and top-3 sections', () => {
   const out = format(input);
   assert.match(out.markdown, /^# Confronto luce — /m);
   assert.match(out.markdown, /\| Operatore \| Offerta \| €/);
   assert.match(out.markdown, /Enel Fix Web Luce/);
-  assert.match(out.markdown, /LLM: genera blocco Trade-off/);
-  assert.match(out.markdown, /LLM: genera top-3 motivata/);
+  assert.match(out.markdown, /## Trade-off per offerta top-3/);
+  assert.match(out.markdown, /- \*\*Vince su\*\*: /);
+  assert.match(out.markdown, /- \*\*Perde su\*\*: /);
+  assert.match(out.markdown, /## Top-3 motivata/);
+  assert.match(out.markdown, /1\. \*\*enel — Enel Fix Web Luce\*\* — €408\/anno stimato/);
+  assert.doesNotMatch(out.markdown, /<!-- LLM: /);
   assert.match(out.markdown, /Fonte: live scrape di 1\/1/);
 });
 

@@ -1,5 +1,6 @@
 import type { Offerta, OffertaBundle } from '../types/offerta.ts';
 import type { Commodity } from '../types/offerta.ts';
+import { rankOfferte, renderRankedSections } from '../rank/index.ts';
 
 function csvSafe(value: string): string {
   return value.replace(/\|/g, '\\|').replace(/\n/g, ' ');
@@ -68,14 +69,13 @@ export function toMarkdown(input: MarkdownInput): string {
   parts.push(separator());
   for (const o of input.offerte) parts.push(rowFor(o));
   parts.push('');
-  parts.push('## Trade-off per offerta top-3');
-  parts.push('');
-  parts.push('<!-- LLM: genera blocco Trade-off per top-3 -->');
-  parts.push('');
-  parts.push('## Top-3 motivata');
-  parts.push('');
-  parts.push('<!-- LLM: genera top-3 motivata con 3 campi (Costo, Verde, Fissità) -->');
-  parts.push('');
+
+  const ranked = rankOfferte({ commodity: input.commodity, offerte: input.offerte });
+  const sections = renderRankedSections(ranked);
+  parts.push(sections.tradeOffs, '', sections.top3);
+
+  if (sections.esclusi.length > 0) parts.push('', sections.esclusi);
+
   if (input.warnings && input.warnings.length > 0) {
     parts.push('## Non disponibili', '');
     for (const w of input.warnings) parts.push(`- ${w}`);

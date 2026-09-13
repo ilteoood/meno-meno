@@ -11,10 +11,23 @@
 
 ## Trade-off per offerta top-3
 
-<!-- LLM: genera blocco Trade-off per top-3 -->
+### enel — Enel Fix Web Luce
+- **Vince su**: nessuna
+- **Perde su**: nessuna
+
+### enel — Enel Move
+- **Vince su**: nessuna
+- **Perde su**: costo annuo, fissità
+
+### enel — Enel Move Plus
+- **Vince su**: nessuna
+- **Perde su**: costo annuo, fissità
+
 
 ## Top-3 motivata
 
-<!-- LLM: genera top-3 motivata con 3 campi (Costo, Verde, Fissità) -->
+1. **enel — Enel Fix Web Luce** — €408/anno stimato, Verde: [C], Fissità: [fisso]
+2. **enel — Enel Move** — €474/anno stimato, Verde: [C], Fissità: [PUN]
+3. **enel — Enel Move Plus** — €540/anno stimato, Verde: [C], Fissità: [PUN]
 
 Fonte: live scrape di 1/1 operatori.
