@@ -1,0 +1,54 @@
+{
+  "commodity": "luce",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 3,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "luce",
+        "operatore_id": "a2a",
+        "codice_offerta": "A2A-FIX-LUCE-001",
+        "nome_commerciale": "A2A Fix Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.13,
+        "quota_fissa_euro_anno": 96,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "a2a",
+        "codice_offerta": "A2A-INDICE-LUCE-002",
+        "nome_commerciale": "A2A Indicizzata Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.15,
+        "quota_fissa_euro_anno": 108,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "a2a",
+        "codice_offerta": "A2A-WEB-LUCE-003",
+        "nome_commerciale": "A2A Web Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.11,
+        "quota_fissa_euro_anno": 72,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      }
+    ],
+    "bundle": []
+  }
+}

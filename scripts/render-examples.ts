@@ -10,6 +10,7 @@ const ROOT = resolve(HERE, '..');
 const EXAMPLES_DIR = resolve(ROOT, 'examples');
 const ENEL_FIXTURE = resolve(ROOT, 'fixtures/enel/luce.html');
 const PLENITUDE_FIXTURE = resolve(ROOT, 'fixtures/plenitude/luce.html');
+const A2A_FIXTURE = resolve(ROOT, 'fixtures/a2a/luce.html');
 const BUNDLES_FIXTURE = resolve(ROOT, 'fixtures/bundles/luce-gas.json');
 const SCRAPED_AT = '2026-09-13T10:00:00.000Z';
 
@@ -88,6 +89,40 @@ function parsePlenitudeFixture(html: string): readonly Offerta[] {
   return cards;
 }
 
+// ponytail: parse duplicated from src/scrapers/a2a.ts for deterministic timestamps.
+function parseA2aFixture(html: string): readonly Offerta[] {
+  const $ = load(html);
+  const cards: Offerta[] = [];
+  const url = `file://${A2A_FIXTURE}`;
+  $('article[data-offer]').each((_, el) => {
+    const $el = $(el);
+    const codice = $el.attr('data-offer-code');
+    const nome = $el.find('.offer-name, h3').first().text().trim();
+    const prezzoText = $el.find('.offer-price, .price').first().text();
+    const quotaText = $el.find('.offer-fee, .fee').first().text();
+    if (!codice || !nome) return;
+    const prezzo = parsePrice(prezzoText);
+    const quota = parsePrice(quotaText);
+    if (prezzo === null || quota === null) return;
+    const isFisso = nome.toLowerCase().includes('fix');
+    cards.push({
+      commodity: 'luce' satisfies Commodity,
+      operatore_id: 'a2a',
+      codice_offerta: codice,
+      nome_commerciale: nome,
+      url_sorgente: url,
+      scraped_at: SCRAPED_AT,
+      prezzo_effettivo_euro_kwh: prezzo,
+      quota_fissa_euro_anno: quota,
+      meccanismo_prezzo: isFisso
+        ? { tipo: 'fisso' }
+        : { tipo: 'PUN', spread_euro_kwh: 0 },
+      green_flag: 'C',
+    });
+  });
+  return cards;
+}
+
 async function loadBundles(path: string): Promise<readonly OffertaBundle[]> {
   const raw = await readFile(path, 'utf8');
   const parsed: unknown = JSON.parse(raw);
@@ -135,6 +170,21 @@ async function renderPlenitudeExample(): Promise<void> {
   process.stdout.write(`rendered examples/plenitude-luce.{md,csv,json} (${offerte.length} offerte)\n`);
 }
 
+async function renderA2aExample(): Promise<void> {
+  const html = await readFile(A2A_FIXTURE, 'utf8');
+  const offerte = parseA2aFixture(html);
+  const output = format({
+    commodity: 'luce',
+    scrapedAt: SCRAPED_AT,
+    offerte,
+    bundle: [],
+    warnings: [],
+    sourceCount: { ok: 1, total: 1 },
+  });
+  await writeExample('a2a-luce', output);
+  process.stdout.write(`rendered examples/a2a-luce.{md,csv,json} (${offerte.length} offerte)\n`);
+}
+
 async function renderBundleExample(): Promise<void> {
   const bundle = await loadBundles(BUNDLES_FIXTURE);
   const output = format({
@@ -152,6 +202,7 @@ async function renderBundleExample(): Promise<void> {
 async function main(): Promise<void> {
   await renderEnelExample();
   await renderPlenitudeExample();
+  await renderA2aExample();
   await renderBundleExample();
 }
 
