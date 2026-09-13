@@ -1,0 +1,4 @@
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,luce,a2a,A2A-FIX-LUCE-001,,A2A Fix Luce,0.13,EUR/kWh,96,fisso,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,a2a,A2A-INDICE-LUCE-002,,A2A Indicizzata Luce,0.15,EUR/kWh,108,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,a2a,A2A-WEB-LUCE-003,,A2A Web Luce,0.11,EUR/kWh,72,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z

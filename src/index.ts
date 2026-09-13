@@ -82,6 +82,9 @@ function buildSource(
   if (live && operatore === 'plenitude' && commodity === 'luce') {
     return { kind: 'live', url: 'https://eniplenitude.com/offerta/casa/gas-e-luce/offerte-energia-elettrica' };
   }
+  if (live && operatore === 'a2a' && commodity === 'luce') {
+    return { kind: 'live', url: 'https://www.a2a.it/casa/offerte-luce-gas' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 

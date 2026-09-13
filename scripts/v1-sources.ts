@@ -11,7 +11,7 @@ export const V1_FIXTURE_SOURCES: readonly V1FixtureSource[] = [
   { operatore: 'plenitude', commodity: 'luce', url: 'https://eniplenitude.com/offerta/casa/gas-e-luce/offerte-energia-elettrica', playwright: false },
   { operatore: 'hera', commodity: 'luce', url: 'https://www.gruppohera.it/it-it/luce-gas/offerte-luce', playwright: false },
   { operatore: 'iren', commodity: 'luce', url: 'https://www.iren.it/it/luce-gas/offerte-luce', playwright: false },
-  { operatore: 'a2a', commodity: 'luce', url: 'https://www.a2a.it/it/luce-gas/offerte-luce', playwright: false },
+  { operatore: 'a2a', commodity: 'luce', url: 'https://www.a2a.it/casa/offerte-luce-gas', playwright: false },
   { operatore: 'acea', commodity: 'luce', url: 'https://www.acea.it/it/luce-gas/offerte-luce', playwright: false },
   { operatore: 'sorgenia', commodity: 'luce', url: 'https://www.sorgenia.it/offerte-luce', playwright: false },
   { operatore: 'illumia', commodity: 'luce', url: 'https://www.illumia.it/offerte-luce', playwright: false },
