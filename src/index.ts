@@ -109,6 +109,9 @@ function buildSource(
   if (live && operatore === 'nen' && commodity === 'luce') {
     return { kind: 'live', url: 'https://nen.it/landing/migliore-offerta-luce' };
   }
+  if (live && operatore === 'tim' && commodity === 'mobile') {
+    return { kind: 'live', url: 'https://www.tim.it/fisso-e-mobile/mobile' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 

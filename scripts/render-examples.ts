@@ -19,6 +19,7 @@ const ILLUMIA_FIXTURE = resolve(ROOT, 'fixtures/illumia/luce.html');
 const ENGIE_FIXTURE = resolve(ROOT, 'fixtures/engie/luce.html');
 const OCTOPUS_FIXTURE = resolve(ROOT, 'fixtures/octopus/luce.html');
 const NEN_FIXTURE = resolve(ROOT, 'fixtures/nen/luce.html');
+const TIM_FIXTURE = resolve(ROOT, 'fixtures/tim/mobile.html');
 const BUNDLES_FIXTURE = resolve(ROOT, 'fixtures/bundles/luce-gas.json');
 const SCRAPED_AT = '2026-09-13T10:00:00.000Z';
 
@@ -591,6 +592,66 @@ async function renderNenExample(): Promise<void> {
   process.stdout.write(`rendered examples/nen-luce.{md,csv,json} (${offerte.length} offerte)\n`);
 }
 
+// ponytail: parse duplicated from src/scrapers/tim.ts for deterministic timestamps.
+function parseTimFixture(html: string): readonly Offerta[] {
+  const $ = load(html);
+  const cards: Offerta[] = [];
+  const url = `file://${TIM_FIXTURE}`;
+  $('article[data-offer]').each((_, el) => {
+    const $el = $(el);
+    const codice = $el.attr('data-offer-code');
+    const nome = $el.find('.offer-name, h3').first().text().trim();
+    const prezzoText = $el.find('.offer-price, .price').first().text();
+    const gbText = $el.find('.offer-gb').first().text();
+    const minutiText = $el.find('.offer-minuti').first().text();
+    const techText = $el.find('.offer-tech').first().text();
+    if (!codice || !nome) return;
+    const match = prezzoText.match(/(\d{1,4}(?:[.,]\d{2})?)/);
+    if (!match) return;
+    const prezzo = Number(match[1].replace(',', '.'));
+    const isIllimitato = (text: string): boolean => text.toLowerCase().includes('illimitat');
+    const gbNumber = isIllimitato(gbText) ? -1 : Number(gbText.match(/(\d+)/)?.[1] ?? '0');
+    const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
+    const tecnologia = (() => {
+      const v = techText.trim().toUpperCase();
+      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
+      if (v === '5G') return '5G' as const;
+      return '4G' as const;
+    })();
+    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
+    cards.push({
+      commodity: 'mobile' satisfies Commodity,
+      operatore_id: 'tim',
+      codice_offerta: codice,
+      nome_commerciale: nome,
+      url_sorgente: url,
+      scraped_at: SCRAPED_AT,
+      prezzo_effettivo_euro_mese: prezzo,
+      gb: gbNumber,
+      minuti,
+      tipo_sim: 'entrambe',
+      tecnologia,
+      velocita_mbps: velocita,
+    });
+  });
+  return cards;
+}
+
+async function renderTimExample(): Promise<void> {
+  const html = await readFile(TIM_FIXTURE, 'utf8');
+  const offerte = parseTimFixture(html);
+  const output = format({
+    commodity: 'mobile',
+    scrapedAt: SCRAPED_AT,
+    offerte,
+    bundle: [],
+    warnings: [],
+    sourceCount: { ok: 1, total: 1 },
+  });
+  await writeExample('tim-mobile', output);
+  process.stdout.write(`rendered examples/tim-mobile.{md,csv,json} (${offerte.length} offerte)\n`);
+}
+
 async function main(): Promise<void> {
   await renderEnelExample();
   await renderPlenitudeExample();
@@ -603,6 +664,7 @@ async function main(): Promise<void> {
   await renderEngieExample();
   await renderOctopusExample();
   await renderNenExample();
+  await renderTimExample();
   await renderBundleExample();
 }
 

@@ -11,6 +11,7 @@ import { IllumiaLuceScraper } from './illumia.ts';
 import { EngieLuceScraper } from './engie.ts';
 import { OctopusLuceScraper } from './octopus.ts';
 import { NenLuceScraper } from './nen.ts';
+import { TimMobileScraper } from './tim.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -50,6 +51,9 @@ export function createScraper(
   if (operatoreId === 'nen' && commodity === 'luce') {
     return new NenLuceScraper(source);
   }
+  if (operatoreId === 'tim' && commodity === 'mobile') {
+    return new TimMobileScraper(source);
+  }
   return null;
 }
 
@@ -64,4 +68,5 @@ export { IllumiaLuceScraper } from './illumia.ts';
 export { EngieLuceScraper } from './engie.ts';
 export { OctopusLuceScraper } from './octopus.ts';
 export { NenLuceScraper } from './nen.ts';
+export { TimMobileScraper } from './tim.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';
