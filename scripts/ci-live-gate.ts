@@ -110,7 +110,7 @@ async function main(): Promise<void> {
       if (DRIFT_ERROR_RE.test(stderr)) {
         process.stderr.write(`ci-live-gate: drift ${id}/${commodity} — live page shape differs from fixture contract; refresh fixture (ADR 0006)\n`);
       } else {
-        process.stderr.write(`ci-live-gate: FAILED ${id}/${commodity} (exit ${exitCode})\n`);
+        process.stderr.write(`ci-live-gate: FAILED ${id}/${commodity} (exit ${exitCode}); stderr: ${stderr.trim() || '<empty>'}\n`);
         anyFailed = true;
       }
     }
