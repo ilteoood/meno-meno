@@ -13,6 +13,7 @@ const PLENITUDE_FIXTURE = resolve(ROOT, 'fixtures/plenitude/luce.html');
 const A2A_FIXTURE = resolve(ROOT, 'fixtures/a2a/luce.html');
 const IREN_FIXTURE = resolve(ROOT, 'fixtures/iren/luce.html');
 const HERA_FIXTURE = resolve(ROOT, 'fixtures/hera/luce.html');
+const ACEA_FIXTURE = resolve(ROOT, 'fixtures/acea/luce.html');
 const BUNDLES_FIXTURE = resolve(ROOT, 'fixtures/bundles/luce-gas.json');
 const SCRAPED_AT = '2026-09-13T10:00:00.000Z';
 
@@ -297,12 +298,61 @@ function parseHeraFixture(html: string): readonly Offerta[] {
   return cards;
 }
 
+function parseAceaFixture(html: string): readonly Offerta[] {
+  const $ = load(html);
+  const cards: Offerta[] = [];
+  const url = `file://${ACEA_FIXTURE}`;
+  $('article[data-offer]').each((_, el) => {
+    const $el = $(el);
+    const codice = $el.attr('data-offer-code');
+    const nome = $el.find('.offer-name, h3').first().text().trim();
+    const prezzoText = $el.find('.offer-price, .price').first().text();
+    const quotaText = $el.find('.offer-fee, .fee').first().text();
+    if (!codice || !nome) return;
+    const prezzo = parsePrice(prezzoText);
+    const quota = parsePrice(quotaText);
+    if (prezzo === null || quota === null) return;
+    const isFisso = nome.toLowerCase().includes('fix');
+    cards.push({
+      commodity: 'luce' satisfies Commodity,
+      operatore_id: 'acea',
+      codice_offerta: codice,
+      nome_commerciale: nome,
+      url_sorgente: url,
+      scraped_at: SCRAPED_AT,
+      prezzo_effettivo_euro_kwh: prezzo,
+      quota_fissa_euro_anno: quota,
+      meccanismo_prezzo: isFisso
+        ? { tipo: 'fisso' }
+        : { tipo: 'PUN', spread_euro_kwh: 0 },
+      green_flag: 'C',
+    });
+  });
+  return cards;
+}
+
+async function renderAceaExample(): Promise<void> {
+  const html = await readFile(ACEA_FIXTURE, 'utf8');
+  const offerte = parseAceaFixture(html);
+  const output = format({
+    commodity: 'luce',
+    scrapedAt: SCRAPED_AT,
+    offerte,
+    bundle: [],
+    warnings: [],
+    sourceCount: { ok: 1, total: 1 },
+  });
+  await writeExample('acea-luce', output);
+  process.stdout.write(`rendered examples/acea-luce.{md,csv,json} (${offerte.length} offerte)\n`);
+}
+
 async function main(): Promise<void> {
   await renderEnelExample();
   await renderPlenitudeExample();
   await renderA2aExample();
   await renderIrenExample();
   await renderHeraExample();
+  await renderAceaExample();
   await renderBundleExample();
 }
 

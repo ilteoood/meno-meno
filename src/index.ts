@@ -91,6 +91,9 @@ function buildSource(
   if (live && operatore === 'hera' && commodity === 'luce') {
     return { kind: 'live', url: 'https://heracomm.gruppohera.it/casa/offerte-luce-gas' };
   }
+  if (live && operatore === 'acea' && commodity === 'luce') {
+    return { kind: 'live', url: 'https://www.aceaenergia.it/elenco-offerte' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
