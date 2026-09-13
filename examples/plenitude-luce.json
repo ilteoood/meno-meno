@@ -1,0 +1,55 @@
+{
+  "commodity": "luce",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 3,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "luce",
+        "operatore_id": "plenitude",
+        "codice_offerta": "EPL-FLEX-LUCE-001",
+        "nome_commerciale": "Plenitude Flex Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/plenitude/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.14,
+        "quota_fissa_euro_anno": 96,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "plenitude",
+        "codice_offerta": "EPL-TREND-LUCE-002",
+        "nome_commerciale": "Plenitude Trend Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/plenitude/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.12,
+        "quota_fissa_euro_anno": 84,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "plenitude",
+        "codice_offerta": "EPL-VARIABILE-LUCE-003",
+        "nome_commerciale": "Plenitude Variabile Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/plenitude/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.16,
+        "quota_fissa_euro_anno": 120,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      }
+    ],
+    "bundle": []
+  }
+}
