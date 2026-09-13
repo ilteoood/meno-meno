@@ -1,0 +1,54 @@
+{
+  "commodity": "luce",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 3,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "luce",
+        "operatore_id": "octopus",
+        "codice_offerta": "OCT-FLEX-LUCE-001",
+        "nome_commerciale": "Octopus Flex Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/octopus/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.13,
+        "quota_fissa_euro_anno": 72,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "octopus",
+        "codice_offerta": "OCT-FIX-LUCE-002",
+        "nome_commerciale": "Octopus Fix Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/octopus/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.14,
+        "quota_fissa_euro_anno": 84,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "octopus",
+        "codice_offerta": "OCT-VAR-LUCE-003",
+        "nome_commerciale": "Octopus Variabile Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/octopus/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.15,
+        "quota_fissa_euro_anno": 96,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      }
+    ],
+    "bundle": []
+  }
+}

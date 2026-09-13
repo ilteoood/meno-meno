@@ -1,0 +1,4 @@
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,luce,octopus,OCT-FLEX-LUCE-001,,Octopus Flex Luce,0.13,EUR/kWh,72,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/octopus/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,octopus,OCT-FIX-LUCE-002,,Octopus Fix Luce,0.14,EUR/kWh,84,fisso,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/octopus/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,octopus,OCT-VAR-LUCE-003,,Octopus Variabile Luce,0.15,EUR/kWh,96,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/octopus/luce.html,2026-09-13T10:00:00.000Z

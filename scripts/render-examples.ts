@@ -17,6 +17,7 @@ const ACEA_FIXTURE = resolve(ROOT, 'fixtures/acea/luce.html');
 const SORGENIA_FIXTURE = resolve(ROOT, 'fixtures/sorgenia/luce.html');
 const ILLUMIA_FIXTURE = resolve(ROOT, 'fixtures/illumia/luce.html');
 const ENGIE_FIXTURE = resolve(ROOT, 'fixtures/engie/luce.html');
+const OCTOPUS_FIXTURE = resolve(ROOT, 'fixtures/octopus/luce.html');
 const BUNDLES_FIXTURE = resolve(ROOT, 'fixtures/bundles/luce-gas.json');
 const SCRAPED_AT = '2026-09-13T10:00:00.000Z';
 
@@ -493,6 +494,54 @@ async function renderEngieExample(): Promise<void> {
   process.stdout.write(`rendered examples/engie-luce.{md,csv,json} (${offerte.length} offerte)\n`);
 }
 
+function parseOctopusFixture(html: string): readonly Offerta[] {
+  const $ = load(html);
+  const cards: Offerta[] = [];
+  const url = `file://${OCTOPUS_FIXTURE}`;
+  $('article[data-offer]').each((_, el) => {
+    const $el = $(el);
+    const codice = $el.attr('data-offer-code');
+    const nome = $el.find('.offer-name, h3').first().text().trim();
+    const prezzoText = $el.find('.offer-price, .price').first().text();
+    const quotaText = $el.find('.offer-fee, .fee').first().text();
+    if (!codice || !nome) return;
+    const prezzo = parsePrice(prezzoText);
+    const quota = parsePrice(quotaText);
+    if (prezzo === null || quota === null) return;
+    const isFisso = nome.toLowerCase().includes('fix');
+    cards.push({
+      commodity: 'luce' satisfies Commodity,
+      operatore_id: 'octopus',
+      codice_offerta: codice,
+      nome_commerciale: nome,
+      url_sorgente: url,
+      scraped_at: SCRAPED_AT,
+      prezzo_effettivo_euro_kwh: prezzo,
+      quota_fissa_euro_anno: quota,
+      meccanismo_prezzo: isFisso
+        ? { tipo: 'fisso' }
+        : { tipo: 'PUN', spread_euro_kwh: 0 },
+      green_flag: 'C',
+    });
+  });
+  return cards;
+}
+
+async function renderOctopusExample(): Promise<void> {
+  const html = await readFile(OCTOPUS_FIXTURE, 'utf8');
+  const offerte = parseOctopusFixture(html);
+  const output = format({
+    commodity: 'luce',
+    scrapedAt: SCRAPED_AT,
+    offerte,
+    bundle: [],
+    warnings: [],
+    sourceCount: { ok: 1, total: 1 },
+  });
+  await writeExample('octopus-luce', output);
+  process.stdout.write(`rendered examples/octopus-luce.{md,csv,json} (${offerte.length} offerte)\n`);
+}
+
 async function main(): Promise<void> {
   await renderEnelExample();
   await renderPlenitudeExample();
@@ -503,6 +552,7 @@ async function main(): Promise<void> {
   await renderSorgeniaExample();
   await renderIllumiaExample();
   await renderEngieExample();
+  await renderOctopusExample();
   await renderBundleExample();
 }
 
