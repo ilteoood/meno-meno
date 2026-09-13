@@ -33,7 +33,7 @@ function lookupCommodity(operatorId: string): string | null {
   return source ? source.commodity : null;
 }
 
-function runLive(operatorId: string, commodity: string): Promise<number> {
+function runLive(operatorId: string, commodity: string): Promise<{ exitCode: number; stdout: string; stderr: string }> {
   return new Promise((resolveRun, reject) => {
     const proc = spawn(
       'node',
@@ -44,12 +44,18 @@ function runLive(operatorId: string, commodity: string): Promise<number> {
         '--commodity', commodity,
         '--live',
       ],
-      { stdio: 'inherit' },
+      { stdio: ['ignore', 'pipe', 'pipe'] },
     );
+    let stdout = '';
+    let stderr = '';
+    proc.stdout.on('data', (chunk: Buffer) => { stdout += chunk.toString(); });
+    proc.stderr.on('data', (chunk: Buffer) => { stderr += chunk.toString(); });
     proc.on('error', reject);
-    proc.on('exit', (code) => resolveRun(code ?? 1));
+    proc.on('exit', (code) => resolveRun({ exitCode: code ?? 1, stdout, stderr }));
   });
 }
+
+const DRIFT_ERROR_RE = /no offer cards parsed from source/;
 
 async function getPrFiles(prNumber: string): Promise<readonly string[] | null> {
   try {
@@ -99,10 +105,14 @@ async function main(): Promise<void> {
       continue;
     }
     process.stdout.write(`\n--- ci-live-gate: ${id}/${commodity} ---\n`);
-    const exitCode = await runLive(id, commodity);
+    const { exitCode, stderr } = await runLive(id, commodity);
     if (exitCode !== 0) {
-      process.stderr.write(`ci-live-gate: FAILED ${id}/${commodity} (exit ${exitCode})\n`);
-      anyFailed = true;
+      if (DRIFT_ERROR_RE.test(stderr)) {
+        process.stderr.write(`ci-live-gate: drift ${id}/${commodity} — live page shape differs from fixture contract; refresh fixture (ADR 0006)\n`);
+      } else {
+        process.stderr.write(`ci-live-gate: FAILED ${id}/${commodity} (exit ${exitCode})\n`);
+        anyFailed = true;
+      }
     }
   }
 
