@@ -11,11 +11,13 @@ function parseArgs(argv: readonly string[]): {
   operatore: string | null;
   commodity: Commodity | null;
   fixture: string | null;
+  live: boolean;
   format: 'all' | 'markdown' | 'csv' | 'json';
 } {
   let operatore: string | null = null;
   let commodity: Commodity | null = null;
   let fixture: string | null = null;
+  let live = false;
   let fmt: 'all' | 'markdown' | 'csv' | 'json' = 'all';
 
   for (let i = 0; i < argv.length; i++) {
@@ -30,12 +32,15 @@ function parseArgs(argv: readonly string[]): {
       case '--fixture':
         fixture = argv[++i] ?? null;
         break;
+      case '--live':
+        live = true;
+        break;
       case '--format':
         fmt = (argv[++i] ?? 'all') as 'all' | 'markdown' | 'csv' | 'json';
         break;
     }
   }
-  return { operatore, commodity, fixture, format: fmt };
+  return { operatore, commodity, fixture, live, format: fmt };
 }
 
 function validateCommodity(value: string | null): Commodity {
@@ -51,14 +56,15 @@ function buildSource(
   operatore: string,
   commodity: Commodity,
   fixture: string | null,
+  live: boolean,
 ): ScrapeSource {
   if (fixture) {
     return { kind: 'fixture', path: resolve(fixture) };
   }
-  if (operatore === 'enel' && commodity === 'luce') {
+  if (live && operatore === 'enel' && commodity === 'luce') {
     return { kind: 'live', url: 'https://www.enel.it/it-it/luce-gas/offerte-luce' };
   }
-  throw new Error(`unknown live source for ${operatore}/${commodity}; pass --fixture PATH`);
+  throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
 function emit(label: string, content: string): void {
@@ -72,7 +78,7 @@ async function main(argv: readonly string[]): Promise<number> {
     return 2;
   }
   const commodity = validateCommodity(args.commodity);
-  const source = buildSource(args.operatore, commodity, args.fixture);
+  const source = buildSource(args.operatore, commodity, args.fixture, args.live);
 
   const scraper = createScraper(args.operatore, commodity, source);
   if (!scraper) {
