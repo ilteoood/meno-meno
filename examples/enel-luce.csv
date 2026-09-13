@@ -1,0 +1,5 @@
+commodity,operatore_id,codice_offerta,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,url_sorgente,scraped_at
+luce,enel,EN-FIX-WEB-LUCE-001,Enel Fix Web Luce,0.12,EUR/kWh,84,fisso,C,,,,,,,,https://www.enel.it/it-it/luce-gas/offerte-luce,2026-09-13T10:00:00.000Z
+luce,enel,EN-MESE-LIGHT-LUCE-002,Enel Mese Light,0.18,EUR/kWh,120,PUN,C,,,,,,,,https://www.enel.it/it-it/luce-gas/offerte-luce,2026-09-13T10:00:00.000Z
+luce,enel,EN-MOVE-LUCE-003,Enel Move,0.14,EUR/kWh,96,PUN,C,,,,,,,,https://www.enel.it/it-it/luce-gas/offerte-luce,2026-09-13T10:00:00.000Z
+luce,enel,EN-MOVE-PLUS-LUCE-004,Enel Move Plus,0.16,EUR/kWh,108,PUN,C,,,,,,,,https://www.enel.it/it-it/luce-gas/offerte-luce,2026-09-13T10:00:00.000Z
