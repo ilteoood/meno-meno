@@ -4,8 +4,10 @@ export interface JsonOutput {
   readonly commodity: Commodity;
   readonly scraped_at: string;
   readonly count: number;
-  readonly offerte: readonly Offerta[];
-  readonly bundle?: readonly OffertaBundle[];
+  readonly offerte: {
+    readonly singole: readonly Offerta[];
+    readonly bundle: readonly OffertaBundle[];
+  };
 }
 
 export function toJson(
@@ -14,8 +16,14 @@ export function toJson(
   scrapedAt: string,
   bundle?: readonly OffertaBundle[],
 ): string {
-  const payload: JsonOutput = bundle
-    ? { commodity, scraped_at: scrapedAt, count: offerte.length, offerte, bundle }
-    : { commodity, scraped_at: scrapedAt, count: offerte.length, offerte };
+  const payload: JsonOutput = {
+    commodity,
+    scraped_at: scrapedAt,
+    count: offerte.length,
+    offerte: {
+      singole: offerte,
+      bundle: bundle ?? [],
+    },
+  };
   return JSON.stringify(payload, null, 2) + '\n';
 }
