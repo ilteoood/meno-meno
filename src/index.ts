@@ -124,6 +124,9 @@ function buildSource(
   if (live && operatore === 'skywifi' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.sky.it/wifi' };
   }
+  if (live && operatore === 'postemobile' && commodity === 'mobile') {
+    return { kind: 'live', url: 'https://www.postemobile.it/privati/offerte-telefonia-mobile' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
