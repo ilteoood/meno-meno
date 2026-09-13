@@ -51,7 +51,7 @@ function runLive(operatorId: string, commodity: string): Promise<{ exitCode: num
     proc.stdout.on('data', (chunk: Buffer) => { stdout += chunk.toString(); });
     proc.stderr.on('data', (chunk: Buffer) => { stderr += chunk.toString(); });
     proc.on('error', reject);
-    proc.on('exit', (code) => resolveRun({ exitCode: code ?? 1, stdout, stderr }));
+    proc.on('close', (code) => resolveRun({ exitCode: code ?? 1, stdout, stderr }));
   });
 }
 
