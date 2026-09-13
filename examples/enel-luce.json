@@ -2,55 +2,68 @@
   "commodity": "luce",
   "scraped_at": "2026-09-13T10:00:00.000Z",
   "count": 4,
-  "offerte": [
-    {
-      "commodity": "luce",
-      "operatore_id": "enel",
-      "codice_offerta": "EN-FIX-WEB-LUCE-001",
-      "nome_commerciale": "Enel Fix Web Luce",
-      "url_sorgente": "https://www.enel.it/it-it/luce-gas/offerte-luce",
-      "scraped_at": "2026-09-13T10:00:00.000Z",
-      "prezzo_effettivo_euro_kwh": 0.12,
-      "quota_fissa_euro_anno": 84,
-      "meccanismo_prezzo": { "tipo": "fisso" },
-      "green_flag": "C"
-    },
-    {
-      "commodity": "luce",
-      "operatore_id": "enel",
-      "codice_offerta": "EN-MESE-LIGHT-LUCE-002",
-      "nome_commerciale": "Enel Mese Light",
-      "url_sorgente": "https://www.enel.it/it-it/luce-gas/offerte-luce",
-      "scraped_at": "2026-09-13T10:00:00.000Z",
-      "prezzo_effettivo_euro_kwh": 0.18,
-      "quota_fissa_euro_anno": 120,
-      "meccanismo_prezzo": { "tipo": "PUN", "spread_euro_kwh": 0 },
-      "green_flag": "C"
-    },
-    {
-      "commodity": "luce",
-      "operatore_id": "enel",
-      "codice_offerta": "EN-MOVE-LUCE-003",
-      "nome_commerciale": "Enel Move",
-      "url_sorgente": "https://www.enel.it/it-it/luce-gas/offerte-luce",
-      "scraped_at": "2026-09-13T10:00:00.000Z",
-      "prezzo_effettivo_euro_kwh": 0.14,
-      "quota_fissa_euro_anno": 96,
-      "meccanismo_prezzo": { "tipo": "PUN", "spread_euro_kwh": 0 },
-      "green_flag": "C"
-    },
-    {
-      "commodity": "luce",
-      "operatore_id": "enel",
-      "codice_offerta": "EN-MOVE-PLUS-LUCE-004",
-      "nome_commerciale": "Enel Move Plus",
-      "url_sorgente": "https://www.enel.it/it-it/luce-gas/offerte-luce",
-      "scraped_at": "2026-09-13T10:00:00.000Z",
-      "prezzo_effettivo_euro_kwh": 0.16,
-      "quota_fissa_euro_anno": 108,
-      "meccanismo_prezzo": { "tipo": "PUN", "spread_euro_kwh": 0 },
-      "green_flag": "C"
-    }
-  ],
-  "bundle": []
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "luce",
+        "operatore_id": "enel",
+        "codice_offerta": "EN-FIX-WEB-LUCE-001",
+        "nome_commerciale": "Enel Fix Web Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.12,
+        "quota_fissa_euro_anno": 84,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "enel",
+        "codice_offerta": "EN-MESE-LIGHT-LUCE-002",
+        "nome_commerciale": "Enel Mese Light",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.18,
+        "quota_fissa_euro_anno": 120,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "enel",
+        "codice_offerta": "EN-MOVE-LUCE-003",
+        "nome_commerciale": "Enel Move",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.14,
+        "quota_fissa_euro_anno": 96,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "enel",
+        "codice_offerta": "EN-MOVE-PLUS-LUCE-004",
+        "nome_commerciale": "Enel Move Plus",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.16,
+        "quota_fissa_euro_anno": 108,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      }
+    ],
+    "bundle": []
+  }
 }

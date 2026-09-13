@@ -1,0 +1,132 @@
+{
+  "commodity": "luce",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 0,
+  "offerte": {
+    "singole": [],
+    "bundle": [
+      {
+        "bundle_id": "edison-world-luce-gas",
+        "operatore_id": "edison",
+        "nome_commerciale": "Edison World Luce e Gas",
+        "url_sorgente": "https://www.edison.it/casa/luce-gas/offerta-world",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "durata_mesi": 12,
+        "componenti": [
+          {
+            "commodity": "luce",
+            "operatore_id": "edison",
+            "codice_offerta": "ED-WORLD-LUCE-001",
+            "nome_commerciale": "Edison World Luce",
+            "url_sorgente": "https://www.edison.it/casa/luce-gas/offerta-world",
+            "scraped_at": "2026-09-13T10:00:00.000Z",
+            "prezzo_effettivo_euro_kwh": 0.13,
+            "quota_fissa_euro_anno": 96,
+            "meccanismo_prezzo": {
+              "tipo": "fisso"
+            },
+            "green_flag": "C"
+          },
+          {
+            "commodity": "gas",
+            "operatore_id": "edison",
+            "codice_offerta": "ED-WORLD-GAS-002",
+            "nome_commerciale": "Edison World Gas",
+            "url_sorgente": "https://www.edison.it/casa/luce-gas/offerta-world",
+            "scraped_at": "2026-09-13T10:00:00.000Z",
+            "prezzo_effettivo_euro_smc": 0.38,
+            "quota_fissa_euro_anno": 96,
+            "meccanismo_prezzo": {
+              "tipo": "PSV",
+              "spread_euro_smc": 0.05
+            },
+            "green_flag": "C"
+          }
+        ],
+        "sconto_bundle_euro_anno": 80
+      },
+      {
+        "bundle_id": "tim-energia-tim-wifi-fibra",
+        "operatore_id": "tim",
+        "nome_commerciale": "TIM Energia + TIM WiFi Fibra",
+        "url_sorgente": "https://www.tim.it/fisso-e-mobile/luce-e-gas/tim-energia",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "durata_mesi": 24,
+        "vincoli": "Richiede TIM WiFi Fibra FTTH attiva e permanenza 24 mesi.",
+        "componenti": [
+          {
+            "commodity": "luce",
+            "operatore_id": "tim",
+            "codice_offerta": "TIM-EN-LUCE-001",
+            "nome_commerciale": "TIM Energia Luce",
+            "url_sorgente": "https://www.tim.it/fisso-e-mobile/luce-e-gas/tim-energia",
+            "scraped_at": "2026-09-13T10:00:00.000Z",
+            "prezzo_effettivo_euro_kwh": 0.14,
+            "quota_fissa_euro_anno": 84,
+            "meccanismo_prezzo": {
+              "tipo": "PUN",
+              "spread_euro_kwh": 0.02
+            },
+            "green_flag": "C"
+          },
+          {
+            "commodity": "fisso",
+            "operatore_id": "tim",
+            "codice_offerta": "TIM-WIFI-FTTH-001",
+            "nome_commerciale": "TIM WiFi Fibra FTTH",
+            "url_sorgente": "https://www.tim.it/fisso-e-mobile/luce-e-gas/tim-energia",
+            "scraped_at": "2026-09-13T10:00:00.000Z",
+            "prezzo_effettivo_euro_mese": 24.9,
+            "costo_attivazione_euro": 39,
+            "tecnologia": "FTTH",
+            "velocita_mbps": 1000
+          }
+        ],
+        "sconto_bundle_euro_anno": 60
+      },
+      {
+        "bundle_id": "sorgenia-next-energy-sun",
+        "operatore_id": "sorgenia",
+        "nome_commerciale": "Sorgenia Next Energy Sun",
+        "url_sorgente": "https://www.sorgenia.it/luce-gas/next-energy-sun",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "durata_mesi": null,
+        "componenti": [
+          {
+            "commodity": "luce",
+            "operatore_id": "sorgenia",
+            "codice_offerta": "SOR-NEXT-LUCE-001",
+            "nome_commerciale": "Sorgenia Next Energy Luce",
+            "url_sorgente": "https://www.sorgenia.it/luce-gas/next-energy-sun",
+            "scraped_at": "2026-09-13T10:00:00.000Z",
+            "prezzo_effettivo_euro_kwh": 0.12,
+            "quota_fissa_euro_anno": 72,
+            "meccanismo_prezzo": {
+              "tipo": "fisso"
+            },
+            "green_flag": "B"
+          },
+          {
+            "commodity": "gas",
+            "operatore_id": "sorgenia",
+            "codice_offerta": "SOR-NEXT-GAS-002",
+            "nome_commerciale": "Sorgenia Next Energy Gas",
+            "url_sorgente": "https://www.sorgenia.it/luce-gas/next-energy-sun",
+            "scraped_at": "2026-09-13T10:00:00.000Z",
+            "prezzo_effettivo_euro_smc": 0.34,
+            "quota_fissa_euro_anno": 96,
+            "meccanismo_prezzo": {
+              "tipo": "fisso"
+            },
+            "green_flag": "C"
+          },
+          {
+            "tipo": "assistenza",
+            "descrizione": "Manutenzione annuale impianto di riscaldamento e caldaia inclusa"
+          }
+        ],
+        "sconto_bundle_euro_anno": 40
+      }
+    ]
+  }
+}
