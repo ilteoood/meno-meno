@@ -115,6 +115,9 @@ function buildSource(
   if (live && operatore === 'vodafone' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://privati.vodafone.it/mobile/telefonia-mobile' };
   }
+  if (live && operatore === 'iliad' && commodity === 'mobile') {
+    return { kind: 'live', url: 'https://www.iliad.it/offerte-iliad-mobile.html' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 

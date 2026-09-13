@@ -1,0 +1,52 @@
+{
+  "commodity": "mobile",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 3,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "mobile",
+        "operatore_id": "iliad",
+        "codice_offerta": "ILD-MOBILE-001",
+        "nome_commerciale": "Iliad 150",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/iliad/mobile.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 9.99,
+        "gb": 150,
+        "minuti": -1,
+        "tipo_sim": "entrambe",
+        "tecnologia": "5G",
+        "velocita_mbps": 1000
+      },
+      {
+        "commodity": "mobile",
+        "operatore_id": "iliad",
+        "codice_offerta": "ILD-MOBILE-002",
+        "nome_commerciale": "Iliad 100",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/iliad/mobile.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 7.99,
+        "gb": 100,
+        "minuti": -1,
+        "tipo_sim": "entrambe",
+        "tecnologia": "5G",
+        "velocita_mbps": 1000
+      },
+      {
+        "commodity": "mobile",
+        "operatore_id": "iliad",
+        "codice_offerta": "ILD-MOBILE-003",
+        "nome_commerciale": "Iliad Flash 50",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/iliad/mobile.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 4.99,
+        "gb": 50,
+        "minuti": -1,
+        "tipo_sim": "entrambe",
+        "tecnologia": "5G",
+        "velocita_mbps": 1000
+      }
+    ],
+    "bundle": []
+  }
+}
