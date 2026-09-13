@@ -97,6 +97,9 @@ function buildSource(
   if (live && operatore === 'sorgenia' && commodity === 'luce') {
     return { kind: 'live', url: 'https://www.sorgenia.it/offerte-luce-e-gas-casa' };
   }
+  if (live && operatore === 'illumia' && commodity === 'luce') {
+    return { kind: 'live', url: 'https://www.illumia.it/offerte-luce' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 

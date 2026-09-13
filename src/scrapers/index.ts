@@ -7,6 +7,7 @@ import { IrenLuceScraper } from './iren.ts';
 import { HeraLuceScraper } from './hera.ts';
 import { AceaLuceScraper } from './acea.ts';
 import { SorgeniaLuceScraper } from './sorgenia.ts';
+import { IllumiaLuceScraper } from './illumia.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -34,6 +35,9 @@ export function createScraper(
   if (operatoreId === 'sorgenia' && commodity === 'luce') {
     return new SorgeniaLuceScraper(source);
   }
+  if (operatoreId === 'illumia' && commodity === 'luce') {
+    return new IllumiaLuceScraper(source);
+  }
   return null;
 }
 
@@ -44,4 +48,5 @@ export { IrenLuceScraper } from './iren.ts';
 export { HeraLuceScraper } from './hera.ts';
 export { AceaLuceScraper } from './acea.ts';
 export { SorgeniaLuceScraper } from './sorgenia.ts';
+export { IllumiaLuceScraper } from './illumia.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';
