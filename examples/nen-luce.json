@@ -1,0 +1,54 @@
+{
+  "commodity": "luce",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 3,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "luce",
+        "operatore_id": "nen",
+        "codice_offerta": "NEN-FIX-LUCE-001",
+        "nome_commerciale": "NeN Fix Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/nen/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.11,
+        "quota_fissa_euro_anno": 60,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "nen",
+        "codice_offerta": "NEN-INDICE-LUCE-002",
+        "nome_commerciale": "NeN Indicizzata Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/nen/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.13,
+        "quota_fissa_euro_anno": 72,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "nen",
+        "codice_offerta": "NEN-WEB-LUCE-003",
+        "nome_commerciale": "NeN Web Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/nen/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.1,
+        "quota_fissa_euro_anno": 48,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      }
+    ],
+    "bundle": []
+  }
+}
