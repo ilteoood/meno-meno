@@ -7,11 +7,11 @@
 
 ## Trade-off per offerta top-3
 
-<!-- LLM: genera blocco Trade-off per top-3 -->
+Nessuna offerta eleggibile.
 
 ## Top-3 motivata
 
-<!-- LLM: genera top-3 motivata con 3 campi (Costo, Verde, Fissità) -->
+Nessuna offerta eleggibile.
 
 ## Bundle luce+gas
 
