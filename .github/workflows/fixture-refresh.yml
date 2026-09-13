@@ -1,0 +1,62 @@
+name: fixture-refresh
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Download v1 fixtures
+        run: node --experimental-strip-types scripts/download-fixtures.ts
+
+      - name: Detect fixture drift
+        id: drift
+        run: |
+          stat=$(git diff --stat fixtures/)
+          if [ -n "$stat" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "stat<<EOF"
+              echo "$stat"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+            echo "$stat" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Compute refresh date
+        id: date
+        run: echo "today=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Open PR on drift
+        if: steps.drift.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/fixture-refresh-${{ steps.date.outputs.today }}
+          commit-message: 'chore(fixtures): refresh settimanale'
+          title: 'chore(fixtures): refresh settimanale ${{ steps.date.outputs.today }}'
+          body: |
+            Auto-generated fixture refresh (ADR 0006).
+
+            File modificati e dimensioni prima/dopo:
+            ```
+            ${{ steps.drift.outputs.stat }}
+            ```
+
+            Le fixture sono cambiate sui siti degli operatori v1. Review del diff e merge se le modifiche sono attese.
+          add-paths: |
+            fixtures/**

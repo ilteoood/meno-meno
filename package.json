@@ -8,7 +8,9 @@
     "start": "node --experimental-strip-types src/index.ts",
     "scrape": "node --experimental-strip-types src/index.ts",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
-    "lint": "node --check --experimental-strip-types src/index.ts && node --check --experimental-strip-types src/aggregator.ts && node --check --experimental-strip-types src/scrapers/*.ts && node --check --experimental-strip-types src/formatters/*.ts && node --check --experimental-strip-types tests/*.test.ts"
+    "lint": "node --check --experimental-strip-types src/index.ts && node --check --experimental-strip-types src/aggregator.ts && node --check --experimental-strip-types src/scrapers/*.ts && node --check --experimental-strip-types src/formatters/*.ts && node --check --experimental-strip-types scripts/*.ts && node --check --experimental-strip-types tests/*.test.ts",
+    "download-fixtures": "node --experimental-strip-types scripts/download-fixtures.ts",
+    "check-fixtures": "node --experimental-strip-types scripts/check-fixtures.ts"
   },
   "dependencies": {
     "cheerio": "^1.2.0"
