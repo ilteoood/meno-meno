@@ -12,6 +12,7 @@ import { EngieLuceScraper } from './engie.ts';
 import { OctopusLuceScraper } from './octopus.ts';
 import { NenLuceScraper } from './nen.ts';
 import { TimMobileScraper } from './tim.ts';
+import { VodafoneMobileScraper } from './vodafone.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -54,6 +55,9 @@ export function createScraper(
   if (operatoreId === 'tim' && commodity === 'mobile') {
     return new TimMobileScraper(source);
   }
+  if (operatoreId === 'vodafone' && commodity === 'mobile') {
+    return new VodafoneMobileScraper(source);
+  }
   return null;
 }
 
@@ -69,4 +73,5 @@ export { EngieLuceScraper } from './engie.ts';
 export { OctopusLuceScraper } from './octopus.ts';
 export { NenLuceScraper } from './nen.ts';
 export { TimMobileScraper } from './tim.ts';
+export { VodafoneMobileScraper } from './vodafone.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';
