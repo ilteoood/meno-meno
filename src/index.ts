@@ -103,6 +103,9 @@ function buildSource(
   if (live && operatore === 'engie' && commodity === 'luce') {
     return { kind: 'live', url: 'https://www.engie.it/casa/offerte-luce-gas/' };
   }
+  if (live && operatore === 'octopus' && commodity === 'luce') {
+    return { kind: 'live', url: 'https://octopusenergy.it/offerta/tariffe' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 

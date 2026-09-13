@@ -16,7 +16,7 @@ export const V1_FIXTURE_SOURCES: readonly V1FixtureSource[] = [
   { operatore: 'sorgenia', commodity: 'luce', url: 'https://www.sorgenia.it/offerte-luce-e-gas-casa', playwright: false },
   { operatore: 'illumia', commodity: 'luce', url: 'https://www.illumia.it/offerte-luce', playwright: false },
   { operatore: 'engie', commodity: 'luce', url: 'https://www.engie.it/casa/offerte-luce-gas/', playwright: false },
-  { operatore: 'octopus', commodity: 'luce', url: 'https://octopusenergy.it/offerte', playwright: false },
+  { operatore: 'octopus', commodity: 'luce', url: 'https://octopusenergy.it/offerta/tariffe', playwright: false },
   { operatore: 'nen', commodity: 'luce', url: 'https://nenergy.it/offerte-luce', playwright: false },
   { operatore: 'tim', commodity: 'mobile', url: 'https://www.tim.it/offerte-mobile', playwright: false },
   { operatore: 'windtre', commodity: 'mobile', url: 'https://www.windtre.it/offerte-mobile', playwright: true },
