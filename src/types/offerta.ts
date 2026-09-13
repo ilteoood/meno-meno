@@ -1,9 +1,12 @@
 export const ILLIMITATO = -1;
 export const NON_INCLUSO = 0;
 
-export type Commodity = 'luce' | 'gas' | 'telco';
+export type Commodity = 'luce' | 'gas' | 'mobile' | 'fisso';
 export type GreenFlag = 'A' | 'B' | 'C' | 'D';
 export type TipoSim = 'eSIM' | 'fisica' | 'entrambe';
+
+export type TecnologiaMobile = '4G' | '5G' | '5G+';
+export type TecnologiaFisso = 'FTTH' | 'FTTC' | 'ADSL';
 
 export type MeccanismoPrezzo =
   | { tipo: 'fisso' }
@@ -39,13 +42,40 @@ export interface OffertaGas extends OffertaBase {
   green_flag: GreenFlag;
 }
 
-export interface OffertaTelco extends OffertaBase {
-  commodity: 'telco';
+export interface OffertaMobile extends OffertaBase {
+  commodity: 'mobile';
   prezzo_effettivo_euro_mese: number;
   gb: number;
   minuti: number;
   tipo_sim: TipoSim;
   costo_attivazione_euro?: number;
+  tecnologia: TecnologiaMobile;
+  velocita_mbps: number;
 }
 
-export type Offerta = OffertaLuce | OffertaGas | OffertaTelco;
+export interface OffertaFisso extends OffertaBase {
+  commodity: 'fisso';
+  prezzo_effettivo_euro_mese: number;
+  costo_attivazione_euro?: number;
+  tecnologia: TecnologiaFisso;
+  velocita_mbps: number;
+}
+
+export type Offerta = OffertaLuce | OffertaGas | OffertaMobile | OffertaFisso;
+
+export interface ComponenteServizio {
+  tipo: 'assistenza' | 'connettivita' | 'impianto' | 'altro';
+  descrizione: string;
+}
+
+export interface OffertaBundle {
+  bundle_id: string;
+  operatore_id: string;
+  nome_commerciale: string;
+  url_sorgente: string;
+  scraped_at: string;
+  durata_mesi: number | null;
+  vincoli?: string;
+  componenti: (Offerta | ComponenteServizio)[];
+  sconto_bundle_euro_anno: number | null;
+}
