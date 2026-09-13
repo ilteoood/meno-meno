@@ -94,6 +94,9 @@ function buildSource(
   if (live && operatore === 'acea' && commodity === 'luce') {
     return { kind: 'live', url: 'https://www.aceaenergia.it/elenco-offerte' };
   }
+  if (live && operatore === 'sorgenia' && commodity === 'luce') {
+    return { kind: 'live', url: 'https://www.sorgenia.it/offerte-luce-e-gas-casa' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
