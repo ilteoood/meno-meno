@@ -11,6 +11,7 @@ const EXAMPLES_DIR = resolve(ROOT, 'examples');
 const ENEL_FIXTURE = resolve(ROOT, 'fixtures/enel/luce.html');
 const PLENITUDE_FIXTURE = resolve(ROOT, 'fixtures/plenitude/luce.html');
 const A2A_FIXTURE = resolve(ROOT, 'fixtures/a2a/luce.html');
+const IREN_FIXTURE = resolve(ROOT, 'fixtures/iren/luce.html');
 const BUNDLES_FIXTURE = resolve(ROOT, 'fixtures/bundles/luce-gas.json');
 const SCRAPED_AT = '2026-09-13T10:00:00.000Z';
 
@@ -185,6 +186,54 @@ async function renderA2aExample(): Promise<void> {
   process.stdout.write(`rendered examples/a2a-luce.{md,csv,json} (${offerte.length} offerte)\n`);
 }
 
+function parseIrenFixture(html: string): readonly Offerta[] {
+  const $ = load(html);
+  const cards: Offerta[] = [];
+  const url = `file://${IREN_FIXTURE}`;
+  $('article[data-offer]').each((_, el) => {
+    const $el = $(el);
+    const codice = $el.attr('data-offer-code');
+    const nome = $el.find('.offer-name, h3').first().text().trim();
+    const prezzoText = $el.find('.offer-price, .price').first().text();
+    const quotaText = $el.find('.offer-fee, .fee').first().text();
+    if (!codice || !nome) return;
+    const prezzo = parsePrice(prezzoText);
+    const quota = parsePrice(quotaText);
+    if (prezzo === null || quota === null) return;
+    const isFisso = nome.toLowerCase().includes('fix');
+    cards.push({
+      commodity: 'luce' satisfies Commodity,
+      operatore_id: 'iren',
+      codice_offerta: codice,
+      nome_commerciale: nome,
+      url_sorgente: url,
+      scraped_at: SCRAPED_AT,
+      prezzo_effettivo_euro_kwh: prezzo,
+      quota_fissa_euro_anno: quota,
+      meccanismo_prezzo: isFisso
+        ? { tipo: 'fisso' }
+        : { tipo: 'PUN', spread_euro_kwh: 0 },
+      green_flag: 'C',
+    });
+  });
+  return cards;
+}
+
+async function renderIrenExample(): Promise<void> {
+  const html = await readFile(IREN_FIXTURE, 'utf8');
+  const offerte = parseIrenFixture(html);
+  const output = format({
+    commodity: 'luce',
+    scrapedAt: SCRAPED_AT,
+    offerte,
+    bundle: [],
+    warnings: [],
+    sourceCount: { ok: 1, total: 1 },
+  });
+  await writeExample('iren-luce', output);
+  process.stdout.write(`rendered examples/iren-luce.{md,csv,json} (${offerte.length} offerte)\n`);
+}
+
 async function renderBundleExample(): Promise<void> {
   const bundle = await loadBundles(BUNDLES_FIXTURE);
   const output = format({
@@ -203,6 +252,7 @@ async function main(): Promise<void> {
   await renderEnelExample();
   await renderPlenitudeExample();
   await renderA2aExample();
+  await renderIrenExample();
   await renderBundleExample();
 }
 
