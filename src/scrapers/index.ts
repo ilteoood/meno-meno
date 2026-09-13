@@ -3,6 +3,7 @@ import type { Scraper, ScrapeSource } from './types.ts';
 import { EnelLuceScraper } from './enel.ts';
 import { PlenitudeLuceScraper } from './plenitude.ts';
 import { A2aLuceScraper } from './a2a.ts';
+import { IrenLuceScraper } from './iren.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -18,10 +19,14 @@ export function createScraper(
   if (operatoreId === 'a2a' && commodity === 'luce') {
     return new A2aLuceScraper(source);
   }
+  if (operatoreId === 'iren' && commodity === 'luce') {
+    return new IrenLuceScraper(source);
+  }
   return null;
 }
 
 export { EnelLuceScraper } from './enel.ts';
 export { PlenitudeLuceScraper } from './plenitude.ts';
 export { A2aLuceScraper } from './a2a.ts';
+export { IrenLuceScraper } from './iren.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';
