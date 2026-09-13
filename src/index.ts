@@ -112,6 +112,9 @@ function buildSource(
   if (live && operatore === 'tim' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.tim.it/fisso-e-mobile/mobile' };
   }
+  if (live && operatore === 'vodafone' && commodity === 'mobile') {
+    return { kind: 'live', url: 'https://privati.vodafone.it/mobile/telefonia-mobile' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
