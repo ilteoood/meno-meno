@@ -1,0 +1,54 @@
+{
+  "commodity": "luce",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 3,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "luce",
+        "operatore_id": "engie",
+        "codice_offerta": "ENG-FIX-LUCE-001",
+        "nome_commerciale": "Engie Fix Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/engie/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.14,
+        "quota_fissa_euro_anno": 96,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "engie",
+        "codice_offerta": "ENG-INDICE-LUCE-002",
+        "nome_commerciale": "Engie Indicizzata Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/engie/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.16,
+        "quota_fissa_euro_anno": 108,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "engie",
+        "codice_offerta": "ENG-WEB-LUCE-003",
+        "nome_commerciale": "Engie Web Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/engie/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.12,
+        "quota_fissa_euro_anno": 84,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0
+        },
+        "green_flag": "C"
+      }
+    ],
+    "bundle": []
+  }
+}
