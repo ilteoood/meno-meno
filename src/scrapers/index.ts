@@ -16,6 +16,7 @@ import { VodafoneMobileScraper } from './vodafone.ts';
 import { IliadMobileScraper } from './iliad.ts';
 import { FastwebMobileScraper } from './fastweb.ts';
 import { SkywifiMobileScraper } from './skywifi.ts';
+import { PostemobileMobileScraper } from './postemobile.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -70,6 +71,9 @@ export function createScraper(
   if (operatoreId === 'skywifi' && commodity === 'mobile') {
     return new SkywifiMobileScraper(source);
   }
+  if (operatoreId === 'postemobile' && commodity === 'mobile') {
+    return new PostemobileMobileScraper(source);
+  }
   return null;
 }
 
@@ -89,4 +93,5 @@ export { VodafoneMobileScraper } from './vodafone.ts';
 export { IliadMobileScraper } from './iliad.ts';
 export { FastwebMobileScraper } from './fastweb.ts';
 export { SkywifiMobileScraper } from './skywifi.ts';
+export { PostemobileMobileScraper } from './postemobile.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';
