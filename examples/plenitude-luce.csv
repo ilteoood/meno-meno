@@ -1,0 +1,4 @@
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,luce,plenitude,EPL-FLEX-LUCE-001,,Plenitude Flex Luce,0.14,EUR/kWh,96,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/plenitude/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,plenitude,EPL-TREND-LUCE-002,,Plenitude Trend Luce,0.12,EUR/kWh,84,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/plenitude/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,plenitude,EPL-VARIABILE-LUCE-003,,Plenitude Variabile Luce,0.16,EUR/kWh,120,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/plenitude/luce.html,2026-09-13T10:00:00.000Z

@@ -8,7 +8,7 @@ export interface V1FixtureSource {
 export const V1_FIXTURE_SOURCES: readonly V1FixtureSource[] = [
   { operatore: 'enel', commodity: 'luce', url: 'https://www.enel.it/it-it/luce-gas/offerte-luce', playwright: false },
   { operatore: 'edison', commodity: 'luce', url: 'https://www.edison.it/it-it/luce-gas/offerte-luce', playwright: true },
-  { operatore: 'plenitude', commodity: 'luce', url: 'https://eniplenitude.com/it-it/luce-gas/offerte-luce', playwright: false },
+  { operatore: 'plenitude', commodity: 'luce', url: 'https://eniplenitude.com/offerta/casa/gas-e-luce/offerte-energia-elettrica', playwright: false },
   { operatore: 'hera', commodity: 'luce', url: 'https://www.gruppohera.it/it-it/luce-gas/offerte-luce', playwright: false },
   { operatore: 'iren', commodity: 'luce', url: 'https://www.iren.it/it/luce-gas/offerte-luce', playwright: false },
   { operatore: 'a2a', commodity: 'luce', url: 'https://www.a2a.it/it/luce-gas/offerte-luce', playwright: false },
