@@ -1,6 +1,8 @@
 ---
 name: meno-meno
 description: Italian utility and telco market comparison. Compares luce, gas, mobile, and fisso offers from registered operators and outputs EUR/kWh, EUR/Smc, and quota fissa in Markdown, CSV, and JSON. No consumption profile required.
+commands:
+  doctor: Run diagnostics against all v1 operators (or one with --operatore). Use this when scrapers fail or fixtures look stale.
 ---
 
 # meno-meno
@@ -15,7 +17,11 @@ Invoca la skill dal prompt di Claude Code con `Skill name: meno-meno` oppure chi
 
 ### Sub-command: `doctor`
 
-Placeholder per il sub-command `doctor` (T5, #20). Esegue un health check di tutti gli scraper registrati: HTTP status, numero di offerte parsate, parse failures, e drift rispetto all'ultimo run noto. Output come tabella Markdown con una riga per operatore. Per il reference completo vedi [ADR 0007](docs/adr/0007-skill-doctor-cli-e-sub-skill.md).
+Sub-command `doctor` (T5, #20). Esegue un health check di tutti gli scraper registrati: HTTP status, numero di offerte parsate, parse failures, e drift rispetto all'ultimo run noto. Output come tabella Markdown con una riga per operatore. Operatori senza scraper registrato (oggi 23 su 24, enel è l'unico live) vengono marcati con `scraper not yet registered for v1` invece di un errore — è il comportamento v1 corretto, non un fallimento. Per il reference completo vedi [ADR 0007](docs/adr/0007-skill-doctor-cli-e-sub-skill.md).
+
+Invocabile in due modi:
+- Standalone CLI: `node --experimental-strip-types src/cli/doctor-cli.ts [--operatore <id>] [--output <path>] [--json]`
+- Come sub-skill Claude Code: `runSkillDoctor({ operatore: 'enel' })` (vedi `src/skills/doctor.ts`)
 
 ## Flags
 
