@@ -79,6 +79,9 @@ function buildSource(
   if (live && operatore === 'enel' && commodity === 'luce') {
     return { kind: 'live', url: 'https://www.enel.it/it-it/luce-gas/offerte-luce' };
   }
+  if (live && operatore === 'plenitude' && commodity === 'luce') {
+    return { kind: 'live', url: 'https://eniplenitude.com/it-it/luce-gas/offerte-luce' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
