@@ -34,7 +34,7 @@ Usa la skill meno-meno per confrontare le offerte luce di enel.
 ### Gas
 
 ```
-Usa la skill meno-meno per confrontare le offerte gas di enel con --output reports/enel-gas.json --json.
+Usa la skill meno-meno per confrontare le offerte gas di enel con --fixture fixtures/enel/luce.html --format csv.
 ```
 
 ### Mobile

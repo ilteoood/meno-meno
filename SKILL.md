@@ -25,13 +25,15 @@ Invocabile in due modi:
 
 ## Flags
 
-| Flag | Required | Description |
-|------|----------|-------------|
-| `--operatore` | yes | ID operatore registrato (es. `enel`, `edison`, `windtre`). |
-| `--commodity` | yes | Una tra `luce`, `gas`, `mobile`, `fisso`. |
-| `--live` | no | Esegue scraping live dal sito operatore invece di leggere da fixture locale. Solo per operatori con sorgente live registrata in `scripts/v1-sources.ts`. |
-| `--output` | no | Path del file dove salvare l'output. Default: stdout (emesso nel messaggio di Claude Code). |
-| `--json` | no | Emette solo output JSON invece di tutti e tre i formati. |
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--operatore` | yes | — | ID operatore registrato (es. `enel`, `edison`, `windtre`). |
+| `--commodity` | yes | — | Una tra `luce`, `gas`, `mobile`, `fisso`. |
+| `--fixture` | no | — | Path a un file HTML locale da usare come sorgente di scrape (modalità offline). |
+| `--live` | no | `false` | Esegue scraping live dal sito operatore invece di leggere da fixture. Solo per operatori con sorgente live registrata in `scripts/v1-sources.ts`. |
+| `--format` | no | `all` | Filtra i formati emessi: `all`, `markdown`, `csv`, o `json`. Default `all` emette tutti e tre (Markdown, CSV, JSON) nella stessa invocazione, come da ADR 0003. |
+
+Exit codes: `0` successo, `1` errore scrape/aggregate, `2` errore di uso (argomento mancante, non valido, o operatore non registrato). Reference completa: [ADR 0003](docs/adr/0003-output-multi-formato.md).
 
 ## Examples
 
@@ -46,7 +48,7 @@ Usa la skill meno-meno per confrontare le offerte luce di enel.
 ### Gas
 
 ```
-Usa la skill meno-meno per confrontare le offerte gas di enel con --output reports/enel-gas.json --json.
+Usa la skill meno-meno per confrontare le offerte gas di enel con --fixture fixtures/enel/luce.html --format csv.
 ```
 
 ### Mobile
