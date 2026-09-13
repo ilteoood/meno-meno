@@ -88,6 +88,9 @@ function buildSource(
   if (live && operatore === 'iren' && commodity === 'luce') {
     return { kind: 'live', url: 'https://www.irenlucegas.it/casa' };
   }
+  if (live && operatore === 'hera' && commodity === 'luce') {
+    return { kind: 'live', url: 'https://heracomm.gruppohera.it/casa/offerte-luce-gas' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 

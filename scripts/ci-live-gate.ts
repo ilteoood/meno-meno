@@ -55,7 +55,7 @@ function runLive(operatorId: string, commodity: string): Promise<{ exitCode: num
   });
 }
 
-const DRIFT_ERROR_RE = /no offer cards parsed from source/;
+const DRIFT_ERROR_RE = /no offer cards parsed from source|HTTP (4|5)\d\d/;
 
 async function getPrFiles(prNumber: string): Promise<readonly string[] | null> {
   try {
