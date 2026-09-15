@@ -9,6 +9,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
 const EXAMPLES_DIR = resolve(ROOT, 'examples');
 const ENEL_FIXTURE = resolve(ROOT, 'fixtures/enel/luce.html');
+const EDISON_FIXTURE = resolve(ROOT, 'fixtures/edison/luce.html');
 const PLENITUDE_FIXTURE = resolve(ROOT, 'fixtures/plenitude/luce.html');
 const A2A_FIXTURE = resolve(ROOT, 'fixtures/a2a/luce.html');
 const IREN_FIXTURE = resolve(ROOT, 'fixtures/iren/luce.html');
@@ -172,6 +173,55 @@ async function renderEnelExample(): Promise<void> {
   });
   await writeExample('enel-luce', output);
   process.stdout.write(`rendered examples/enel-luce.{md,csv,json} (${offerte.length} offerte)\n`);
+}
+
+// ponytail: parse duplicated from src/scrapers/edison.ts for deterministic timestamps.
+function parseEdisonFixture(html: string): readonly Offerta[] {
+  const $ = load(html);
+  const cards: Offerta[] = [];
+  const url = `file://${EDISON_FIXTURE}`;
+  $('[data-offer-code], article[data-offer]').each((_, el) => {
+    const $el = $(el);
+    const codice = $el.attr('data-offer-code');
+    const nome = $el.find('.offer-name, h3').first().text().trim();
+    const prezzoText = $el.find('.offer-price, .price').first().text();
+    const quotaText = $el.find('.offer-fee, .fee').first().text();
+    if (!codice || !nome) return;
+    const prezzo = parsePrice(prezzoText);
+    const quota = parsePrice(quotaText);
+    if (prezzo === null || quota === null) return;
+    const isFisso = nome.toLowerCase().includes('fix');
+    cards.push({
+      commodity: 'luce' satisfies Commodity,
+      operatore_id: 'edison',
+      codice_offerta: codice,
+      nome_commerciale: nome,
+      url_sorgente: url,
+      scraped_at: SCRAPED_AT,
+      prezzo_effettivo_euro_kwh: prezzo,
+      quota_fissa_euro_anno: quota,
+      meccanismo_prezzo: isFisso
+        ? { tipo: 'fisso' }
+        : { tipo: 'PUN', spread_euro_kwh: 0 },
+      green_flag: 'C',
+    });
+  });
+  return cards;
+}
+
+async function renderEdisonExample(): Promise<void> {
+  const html = await readFile(EDISON_FIXTURE, 'utf8');
+  const offerte = parseEdisonFixture(html);
+  const output = format({
+    commodity: 'luce',
+    scrapedAt: SCRAPED_AT,
+    offerte,
+    bundle: [],
+    warnings: [],
+    sourceCount: { ok: 1, total: 1 },
+  });
+  await writeExample('edison-luce', output);
+  process.stdout.write(`rendered examples/edison-luce.{md,csv,json} (${offerte.length} offerte)\n`);
 }
 
 async function renderPlenitudeExample(): Promise<void> {
@@ -1264,6 +1314,7 @@ async function renderDimensioneExample(): Promise<void> {
 
 async function main(): Promise<void> {
   await renderEnelExample();
+  await renderEdisonExample();
   await renderPlenitudeExample();
   await renderA2aExample();
   await renderIrenExample();

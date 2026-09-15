@@ -1,6 +1,7 @@
 import type { Commodity } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource } from './types.ts';
 import { EnelLuceScraper } from './enel.ts';
+import { EdisonLuceScraper } from './edison.ts';
 import { PlenitudeLuceScraper } from './plenitude.ts';
 import { A2aLuceScraper } from './a2a.ts';
 import { IrenLuceScraper } from './iren.ts';
@@ -30,6 +31,9 @@ export function createScraper(
 ): Scraper | null {
   if (operatoreId === 'enel' && commodity === 'luce') {
     return new EnelLuceScraper(source);
+  }
+  if (operatoreId === 'edison' && commodity === 'luce') {
+    return new EdisonLuceScraper(source);
   }
   if (operatoreId === 'plenitude' && commodity === 'luce') {
     return new PlenitudeLuceScraper(source);
@@ -98,6 +102,7 @@ export function createScraper(
 }
 
 export { EnelLuceScraper } from './enel.ts';
+export { EdisonLuceScraper } from './edison.ts';
 export { PlenitudeLuceScraper } from './plenitude.ts';
 export { A2aLuceScraper } from './a2a.ts';
 export { IrenLuceScraper } from './iren.ts';

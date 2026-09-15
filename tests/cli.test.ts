@@ -151,25 +151,25 @@ test('CLI invalid --commodity exits 1 with commodity_required', async () => {
 test('CLI unknown --operatore exits 2 with usage error (no source registered)', async () => {
   const { exitCode, stderr } = await runCli([
     '--operatore',
-    'edison',
+    'unknown-op',
     '--commodity',
     'luce',
   ]);
   assert.equal(exitCode, 2);
-  assert.match(stderr, /unknown source for edison\/luce/);
+  assert.match(stderr, /unknown source for unknown-op\/luce/);
 });
 
 test('CLI --operatore with valid source but no scraper registered exits 2', async () => {
   const { exitCode, stderr } = await runCli([
     '--operatore',
-    'edison',
+    'unknown-op',
     '--commodity',
     'luce',
     '--fixture',
     FIXTURE_PATH,
   ]);
   assert.equal(exitCode, 2);
-  assert.match(stderr, /no scraper registered for edison\/luce/);
+  assert.match(stderr, /no scraper registered for unknown-op\/luce/);
 });
 
 test('CLI invalid --format value exits 2 with usage error', async () => {
