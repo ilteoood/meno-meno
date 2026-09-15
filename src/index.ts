@@ -136,6 +136,9 @@ function buildSource(
   if (live && operatore === 'very' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://verymobile.it/offerte' };
   }
+  if (live && operatore === 'tiscali' && commodity === 'mobile') {
+    return { kind: 'live', url: 'https://casa.tiscali.it/mobile/' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
