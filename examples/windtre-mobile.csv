@@ -1,0 +1,4 @@
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,mobile,windtre,W3-MOBILE-001,,WindTre GO 100,7.99,EUR/mese,undefined,,,100,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/windtre/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,windtre,W3-MOBILE-002,,WindTre GO Unlimited,9.99,EUR/mese,undefined,,,-1,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/windtre/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,windtre,W3-MOBILE-003,,WindTre GO Young,5.99,EUR/mese,undefined,,,50,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/windtre/mobile.html,2026-09-13T10:00:00.000Z

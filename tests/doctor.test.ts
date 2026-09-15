@@ -28,14 +28,17 @@ test('runDoctor({ operatore: "enel" }) returns the enel/luce row only', async ()
   assert.equal(report.rows[0]!.commodity, 'luce');
 });
 
-test('unregistered operators carry parse_ok=false and the v1 note', async () => {
-  const report = await runDoctor({ operatore: 'windtre', source: enelFixture() });
+test('registered windtre operator parses the windtre fixture and reports OK', async () => {
+  const windtreFixture = (): { kind: 'fixture'; path: string } => ({
+    kind: 'fixture',
+    path: resolve(import.meta.dirname, '..', 'fixtures', 'windtre', 'mobile.html'),
+  });
+  const report = await runDoctor({ operatore: 'windtre', source: windtreFixture() });
   assert.equal(report.rows.length, 1);
   const row = report.rows[0]!;
-  assert.equal(row.http_status, null);
-  assert.equal(row.offerte_count, 0);
-  assert.equal(row.parse_ok, false);
-  assert.equal(row.note, 'scraper not yet registered for v1');
+  assert.equal(row.parse_ok, true);
+  assert.ok(row.offerte_count > 0, `expected parsed offerte > 0, got ${row.offerte_count}`);
+  assert.equal(row.note, 'OK');
 });
 
 test('runDoctor parses the enel fixture and marks parse_ok=true', async () => {
