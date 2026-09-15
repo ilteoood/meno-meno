@@ -18,6 +18,7 @@ import { FastwebMobileScraper } from './fastweb.ts';
 import { SkywifiMobileScraper } from './skywifi.ts';
 import { PostemobileMobileScraper } from './postemobile.ts';
 import { HoMobileScraper } from './ho.ts';
+import { KenaMobileScraper } from './kena.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -78,6 +79,9 @@ export function createScraper(
   if (operatoreId === 'ho' && commodity === 'mobile') {
     return new HoMobileScraper(source);
   }
+  if (operatoreId === 'kena' && commodity === 'mobile') {
+    return new KenaMobileScraper(source);
+  }
   return null;
 }
 
@@ -99,4 +103,5 @@ export { FastwebMobileScraper } from './fastweb.ts';
 export { SkywifiMobileScraper } from './skywifi.ts';
 export { PostemobileMobileScraper } from './postemobile.ts';
 export { HoMobileScraper } from './ho.ts';
+export { KenaMobileScraper } from './kena.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';
