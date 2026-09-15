@@ -133,6 +133,9 @@ function buildSource(
   if (live && operatore === 'kena' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.kenamobile.it/offerte-mobile' };
   }
+  if (live && operatore === 'very' && commodity === 'mobile') {
+    return { kind: 'live', url: 'https://verymobile.it/offerte' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
