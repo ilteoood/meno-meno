@@ -125,7 +125,7 @@ function buildSource(
     return { kind: 'live', url: 'https://www.fastweb.it/adsl-fibra-ottica/offerta-mobile' };
   }
   if (live && operatore === 'skywifi' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.sky.it/wifi' };
+    return { kind: 'live', url: 'https://www.sky.it/mobile' };
   }
   if (live && operatore === 'postemobile' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.postemobile.it/privati/offerte-telefonia-mobile' };
