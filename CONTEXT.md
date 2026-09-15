@@ -26,21 +26,28 @@
 
 - **--doctor** — sub-command CLI invocato dalla skill come `Skill: meno-meno doctor`, lancia `runDoctor()` per diagnosticare la salute degli scraper (vedi ADR 0007).
 - **--live** — flag che forza scrape live contro gli operatori, ignorando le fixture HTML committate. Gate in CI per PR che toccano `src/scrapers/**/*.ts` o `fixtures/**/*.html` (vedi ADR 0006).
+- **live-correctness** — `npm run scrape -- --operatore <op> --commodity <c> --live` ritorna `count >= 1` con exit 0 per tutte le 24 coppie (op, c). È ciò che v2 destination reached misura (issue #90). Da non confondere con fixture-compliance.
 - **aggregator** — modulo `src/aggregator.ts` che unisce i risultati di più scraper in un `AggregateResult` con `bundle: readonly OffertaBundle[]`. Punto di ingresso unificato per i formatters.
 - **bundle** — entità `OffertaBundle`, first-class sister di `Offerta`. NON è union member di `Offerta`: i due tipi convivono come entità distinte nel modello dati.
 - **commodity** — tipo letterale `'luce' | 'gas' | 'mobile' | 'fisso'`. Lo schema input del CLI accetta una sola commodity per invocazione, ridotto da un precedente schema multi-commodity.
+- **destination reached** — concetto che misura shape-of-done di un wayfinder map. Per v1 significava "24/24 fixture-compliance verde" (vedi ADR 0008 per l'erratum); per v2 significa "24/24 live-correctness verde con test strutturali" (issue #90).
 - **doctor** — comando per diagnosticare la salute degli scraper: esegue scrape live + parse + verifica HTTP status per ogni operatore v1. Produce un report Markdown.
 - **fixture** — snapshot HTML committato in `fixtures/<operatore>/<commodity>.html` per test mock deterministici. Aggiornato settimanalmente dalla GitHub Action (ADR 0006).
+- **fixture-compliance** — verde-ness del test suite misurata su fixture (sintetiche o reali). È ciò che v1 destination reached misurava. In v2 le fixture sintetiche sono sostituite da snapshot reali, atomicamente per operatore (v2 map #90).
 - **formatter** — modulo `src/formatters/{markdown,csv,json}.ts` che produce output da `Offerta[]` + `OffertaBundle[]`. CSV: righe_bundle con discriminatore `tipo`. JSON: struttura nested `offerte.singole` + `offerte.bundle`. Markdown: sezione `## Bundle luce+gas` dopo le singole.
 - **green flag** — vedi §1.1. Nel progetto è anche nome del campo discriminatore dell'entità offerta, popolato dagli scraper.
+- **hardcoded assert** — filosofia test di v1: assert letterali su nomi commerciali e prezzi offerta. Locks i test al contenuto della fixture. Superseduta da structural assert in v2 (ADR 0009).
 - **Offerta** — tipo discriminato union per commodity: `OffertaLuce | OffertaGas | OffertaMobile | OffertaFisso`. Provenance garantita dai campi `operatore_id + codice_offerta + url_sorgente + scraped_at`.
 - **OffertaBundle** — entità first-class con `componenti: (Offerta | ComponenteServizio)[]` e `sconto_bundle_euro_anno`. Sister entity di `Offerta`, non suo membro.
 - **playwright** — lazy import opt-in riservato ai soli scraper Edison e WindTre (vedi ADR 0004). Tutti gli altri operatori usano cheerio puro sul DOM statico.
 - **render-examples** — script `scripts/render-examples.ts` che rigenera `examples/*.md,csv,json` a partire dalle fixture, con timestamp deterministico per output riproducibile.
 - **Scraper** — interface `src/scrapers/types.ts` con metodo `scrape()` async che restituisce `ScrapeResult` discriminato (ok/fail). Un modulo TS per operatore (vedi ADR 0001).
+- **scraper rewrite** — azione per-operatore in v2 (issue #90): riscrittura `src/scrapers/<op>.ts` contro selettori reali, swap di `fixtures/<op>/<commodity>.html` con snapshot reale, refactor del test in structurale, cancellazione della fixture sintetica. Tutto stesso PR (atomic swap).
 - **Soft signal** — segnale non-deterministico (es. green flag) usato come peso nel ranking LLM, NON come filtro hard. Da non confondere con gli hard exclude (green flag = D).
+- **structural assert** — filosofia test canonical per v2 (ADR 0009): `count >= 1` + campi richiesti non vuoti su `OffertaMobile` / `OffertaFisso` / `OffertaBundle`. Robusto a fixture churn; signal per-offerta più debole di hardcoded assert. Trade-off codificato in ADR 0009.
 - **subagent** — istanza Claude spawnata via Paseo MCP (`create_agent`) per eseguire un singolo ticket wayfinder in autonomia. Ciclo di vita: dispacciata con prompt iniziale, monitorata via notification.
 - **ticket** — Wayfinder child issue del map #1, etichettato `wayfinder:<tipo>`. Tipi: `research`, `prototype`, `grilling`, `task`.
+- **v2 map** — issue #90 (`wayfinder:map`) per "Live scraping correctness". Tickets: #91 ADR 0006 commit, #92 ADR 0009 grilling, #93 fastweb PoC, #94 mobile fan-out, #95 luce+gas fan-out, #96 doctor --live, #97 ADR 0006 update. Catena di blocking: #91 + #92 → #93 → #94, #95 → #96, #97.
 
 ## §2 ADR (single source of truth: docs/adr/)
 
@@ -51,3 +58,5 @@
 - [ADR 0005 — Schema OffertaMobile + OffertaFisso](docs/adr/0005-schema-offerta-mobile-fisso.md): aggiunta discriminazione mobile/fisso allo schema `Offerta` (union a 4 membri).
 - [ADR 0006 — Fixture refresh settimanale via GitHub Action](docs/adr/0006-fixture-refresh-weekly-github-action.md): lunedì 06:00 UTC + manual dispatch, PR automatica su drift tra fixture e live.
 - [ADR 0007 — Skill doctor: CLI standalone + sub-skill Claude Code](docs/adr/0007-skill-doctor-cli-e-sub-skill.md): comando per diagnosticare salute scraper; doppio entry point CLI + sub-skill.
+- [ADR 0008 — Scraping `--live` non funzionante: fixture sintetiche ≠ siti reali](docs/adr/0008-scraping-live-non-funzionante-fixture-sintetiche.md): 12/12 mobile live scraper sono rotti per disallineamento architetturale al bootstrap; fix demandato a v2 (issue #90).
+- [ADR 0009 — Test strutturali vs hardcoded](docs/adr/0009-test-strutturali-vs-hardcoded.md): filosofia test canonical per v2 — `count >= 1` + campi richiesti non vuoti su `OffertaLuce | OffertaGas | OffertaMobile | OffertaFisso | OffertaBundle`. Lista field-required demandata ai singoli per-operatore PR (#93+).
