@@ -8,7 +8,7 @@ import type {
 } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
 
-const DIMENSIONE_MOBILE_URL = 'https://www.dimensione.it/offerte-mobile';
+const DIMENSIONE_MOBILE_URL = 'https://speednetweb.it/';
 const SCRAPER_TIMEOUT_MS = 15_000;
 
 const DESKTOP_UA =

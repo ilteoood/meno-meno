@@ -29,5 +29,5 @@ export const V1_FIXTURE_SOURCES: readonly V1FixtureSource[] = [
   { operatore: 'kena', commodity: 'mobile', url: 'https://www.kenamobile.it/offerte/', playwright: false },
   { operatore: 'very', commodity: 'mobile', url: 'https://verymobile.it/offerte', playwright: false },
   { operatore: 'tiscali', commodity: 'mobile', url: 'https://casa.tiscali.it/mobile/', playwright: false },
-  { operatore: 'dimensione', commodity: 'mobile', url: 'https://www.dimensione.it/offerte-mobile', playwright: false },
+  { operatore: 'dimensione', commodity: 'mobile', url: 'https://speednetweb.it/', playwright: false },
 ];
