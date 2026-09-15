@@ -134,7 +134,7 @@ function buildSource(
     return { kind: 'live', url: 'https://www.ho-mobile.it/tutte-le-offerte' };
   }
   if (live && operatore === 'kena' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.kenamobile.it/offerte-mobile' };
+    return { kind: 'live', url: 'https://www.kenamobile.it/offerte/' };
   }
   if (live && operatore === 'very' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://verymobile.it/offerte' };

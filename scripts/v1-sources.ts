@@ -26,7 +26,7 @@ export const V1_FIXTURE_SOURCES: readonly V1FixtureSource[] = [
   { operatore: 'skywifi', commodity: 'mobile', url: 'https://www.sky.it/mobile', playwright: false },
   { operatore: 'postemobile', commodity: 'mobile', url: 'https://www.postemobile.it/privati/offerte-telefonia-mobile', playwright: false },
   { operatore: 'ho', commodity: 'mobile', url: 'https://www.ho-mobile.it/tutte-le-offerte', playwright: false },
-  { operatore: 'kena', commodity: 'mobile', url: 'https://www.kenamobile.it/offerte-mobile', playwright: false },
+  { operatore: 'kena', commodity: 'mobile', url: 'https://www.kenamobile.it/offerte/', playwright: false },
   { operatore: 'very', commodity: 'mobile', url: 'https://verymobile.it/offerte', playwright: false },
   { operatore: 'tiscali', commodity: 'mobile', url: 'https://casa.tiscali.it/mobile/', playwright: false },
   { operatore: 'dimensione', commodity: 'mobile', url: 'https://www.dimensione.it/offerte-mobile', playwright: false },
