@@ -19,6 +19,7 @@ import { SkywifiMobileScraper } from './skywifi.ts';
 import { PostemobileMobileScraper } from './postemobile.ts';
 import { HoMobileScraper } from './ho.ts';
 import { KenaMobileScraper } from './kena.ts';
+import { VeryMobileScraper } from './very.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -82,6 +83,9 @@ export function createScraper(
   if (operatoreId === 'kena' && commodity === 'mobile') {
     return new KenaMobileScraper(source);
   }
+  if (operatoreId === 'very' && commodity === 'mobile') {
+    return new VeryMobileScraper(source);
+  }
   return null;
 }
 
@@ -104,4 +108,5 @@ export { SkywifiMobileScraper } from './skywifi.ts';
 export { PostemobileMobileScraper } from './postemobile.ts';
 export { HoMobileScraper } from './ho.ts';
 export { KenaMobileScraper } from './kena.ts';
+export { VeryMobileScraper } from './very.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';
