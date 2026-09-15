@@ -51,10 +51,10 @@ test('runDoctor parses the enel fixture and marks parse_ok=true', async () => {
   assert.equal(row.note, 'OK');
 });
 
-test('doctor CLI exits 0 for an unregistered operator (no live network needed)', async () => {
+test('doctor CLI exits 1 for an unregistered operator (no live network needed)', async () => {
   const proc = spawn(
     'node',
-    ['--experimental-strip-types', 'src/cli/doctor-cli.ts', '--operatore', 'edison'],
+    ['--experimental-strip-types', 'src/cli/doctor-cli.ts', '--operatore', 'fakeoperator'],
     { stdio: ['ignore', 'pipe', 'pipe'] },
   );
   const exitCode = await new Promise<number>((resolveRun, reject) => {
@@ -81,7 +81,7 @@ test('doctor CLI exits 0 for an unregistered operator (no live network needed)',
       }
     });
   });
-  assert.equal(exitCode, 0);
+  assert.equal(exitCode, 1);
 });
 
 test('doctor CLI exits 2 on an unknown flag', async () => {
