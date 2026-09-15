@@ -1,4 +1,4 @@
-import { load } from 'cheerio';
+import { load, type Cheerio, type CheerioAPI } from 'cheerio';
 import { readFile } from 'node:fs/promises';
 import type {
   Commodity as CommodityType,
@@ -33,36 +33,71 @@ async function fetchHtml(url: string, signal: AbortSignal): Promise<string> {
   return await response.text();
 }
 
-function parsePriceEur(text: string): number | null {
-  const match = text.match(/(\d{1,4}(?:[.,]\d{2})?)/);
-  if (!match) return null;
-  return Number(match[1].replace(',', '.'));
+function priceFromCents(cents: string): number | null {
+  const n = Number(cents);
+  if (!Number.isFinite(n) || n <= 0) return null;
+  return Math.round(n) / 100;
 }
 
-function parseGb(text: string): number {
-  const lower = text.toLowerCase();
-  if (lower.includes('illimitat')) return -1;
-  const parsed = parsePriceEur(text);
-  return parsed ?? 0;
+function gbFromQty(qty: string | undefined): number {
+  if (!qty) return 0;
+  const match = qty.match(/(-?\d+(?:[.,]\d+)?)\s*(GB|MB|KB)/i);
+  if (!match) return 0;
+  const n = Number(match[1]!.replace(',', '.'));
+  const unit = (match[2] || '').toUpperCase();
+  if (!Number.isFinite(n)) return 0;
+  if (unit === 'TB') return n * 1000;
+  if (unit === 'GB') return n;
+  if (unit === 'MB') return Math.max(0, n / 1000);
+  if (unit === 'KB') return 0;
+  return n;
 }
 
-function parseMinuti(text: string): number {
-  if (text.toLowerCase().includes('illimitat')) return -1;
-  const parsed = parsePriceEur(text);
-  return parsed ?? 0;
+function minutiFromQty(voiceQty: string | undefined, smsQty: string | undefined): number {
+  if (voiceQty === '-1') return -1;
+  const v = Number(voiceQty ?? 'NaN');
+  if (!Number.isFinite(v)) return -1;
+  return v;
 }
 
-function parseTecnologia(text: string): TecnologiaMobile {
-  const value = text.trim().toUpperCase();
-  if (value === '5G+' || value === '5G PLUS') return '5G+';
-  if (value === '5G') return '5G';
-  return '4G';
+function isTecnologia5G($card: Cheerio<any>): boolean {
+  return $card.find('.notice.5g').length > 0;
+}
+
+function tecnologiaFromCard($card: Cheerio<any>): TecnologiaMobile {
+  return isTecnologia5G($card) ? '5G' : '4G';
 }
 
 function velocitaPerTecnologia(tech: TecnologiaMobile): number {
   if (tech === '5G+') return 2000;
   if (tech === '5G') return 1000;
   return 150;
+}
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function slugFromHref(href: string | undefined, fallback: string): string {
+  if (href && !href.startsWith('javascript:')) {
+    try {
+      const url = new URL(href, ILIAD_MOBILE_URL);
+      const cleaned = url.pathname.replace(/\/$/, '');
+      const segments = cleaned.split('/').filter(Boolean);
+      // Offer hrefs are /mobile/<slug> or /privati/mobile/<slug>; skip generic /supporto/<id>/
+      if (segments.length >= 2 && !segments.includes('supporto')) {
+        return slugify(segments[segments.length - 1]!.replace(/\.html$/, ''));
+      }
+    } catch {
+      // fall through
+    }
+  }
+  return slugify(fallback);
 }
 
 interface ParsedCard {
@@ -78,24 +113,31 @@ function parseOfferCards(html: string): readonly ParsedCard[] {
   const $ = load(html);
   const cards: ParsedCard[] = [];
 
-  $('article[data-offer]').each((_, el) => {
+  $('.commercial-offer-tile').each((_, el) => {
     const $el = $(el);
-    const codice = $el.attr('data-offer-code');
-    const nome = $el.find('.offer-name, h3').first().text().trim();
-    const prezzoText = $el.find('.offer-price, .price').first().text();
-    const gbText = $el.find('.offer-gb').first().text();
-    const minutiText = $el.find('.offer-minuti').first().text();
-    const techText = $el.find('.offer-tech').first().text();
-    if (!codice || !nome) return;
-    const prezzo = parsePriceEur(prezzoText);
+    const nome = $el.find('.offer-title').first().text().trim();
+    if (!nome) return;
+
+    const priceAttr = $el.find('i-packshot-price').attr('price');
+    const prezzo = priceFromCents(priceAttr ?? '');
     if (prezzo === null) return;
-    const tecnologia = parseTecnologia(techText);
+
+    const dataQty = $el.find('i-packshot-data').attr('data-qty');
+    const voiceQty = $el.find('i-packshot-data').attr('voice-qty');
+    const smsQty = $el.find('i-packshot-data').attr('sms-qty');
+
+    const gb = gbFromQty(dataQty);
+    const minuti = minutiFromQty(voiceQty, smsQty);
+    const tecnologia = tecnologiaFromCard($el);
+
+    const href = $el.find('a[href]').first().attr('href');
+
     cards.push({
-      codice_offerta: codice,
+      codice_offerta: slugFromHref(href, nome),
       nome_commerciale: nome,
       prezzo_effettivo_euro_mese: prezzo,
-      gb: parseGb(gbText),
-      minuti: parseMinuti(minutiText),
+      gb,
+      minuti,
       tecnologia,
     });
   });
