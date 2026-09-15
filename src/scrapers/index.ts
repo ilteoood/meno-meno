@@ -21,6 +21,7 @@ import { HoMobileScraper } from './ho.ts';
 import { KenaMobileScraper } from './kena.ts';
 import { VeryMobileScraper } from './very.ts';
 import { TiscaliMobileScraper } from './tiscali.ts';
+import { DimensioneMobileScraper } from './dimensione.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -90,6 +91,9 @@ export function createScraper(
   if (operatoreId === 'tiscali' && commodity === 'mobile') {
     return new TiscaliMobileScraper(source);
   }
+  if (operatoreId === 'dimensione' && commodity === 'mobile') {
+    return new DimensioneMobileScraper(source);
+  }
   return null;
 }
 
@@ -114,4 +118,5 @@ export { HoMobileScraper } from './ho.ts';
 export { KenaMobileScraper } from './kena.ts';
 export { VeryMobileScraper } from './very.ts';
 export { TiscaliMobileScraper } from './tiscali.ts';
+export { DimensioneMobileScraper } from './dimensione.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';
