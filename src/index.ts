@@ -143,7 +143,7 @@ function buildSource(
     return { kind: 'live', url: 'https://casa.tiscali.it/mobile/' };
   }
   if (live && operatore === 'dimensione' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.dimensione.it/offerte-mobile' };
+    return { kind: 'live', url: 'https://speednetweb.it/' };
   }
   if (live && operatore === 'windtre' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.windtre.it/offerte-mobile' };
