@@ -29,7 +29,7 @@ test('runDoctor({ operatore: "enel" }) returns the enel/luce row only', async ()
 });
 
 test('unregistered operators carry parse_ok=false and the v1 note', async () => {
-  const report = await runDoctor({ operatore: 'edison', source: enelFixture() });
+  const report = await runDoctor({ operatore: 'windtre', source: enelFixture() });
   assert.equal(report.rows.length, 1);
   const row = report.rows[0]!;
   assert.equal(row.http_status, null);
