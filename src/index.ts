@@ -127,6 +127,9 @@ function buildSource(
   if (live && operatore === 'postemobile' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.postemobile.it/privati/offerte-telefonia-mobile' };
   }
+  if (live && operatore === 'ho' && commodity === 'mobile') {
+    return { kind: 'live', url: 'https://www.ho-mobile.it/tutte-le-offerte' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
