@@ -1,4 +1,4 @@
-import { load } from 'cheerio';
+import { load, type Cheerio, type CheerioAPI } from 'cheerio';
 import { readFile } from 'node:fs/promises';
 import type {
   Commodity as CommodityType,
@@ -40,22 +40,25 @@ function parsePriceEur(text: string): number | null {
 }
 
 function parseGb(text: string): number {
-  const lower = text.toLowerCase();
-  if (lower.includes('illimitat')) return -1;
+  if (/illimitat/i.test(text)) return -1;
   const parsed = parsePriceEur(text);
   return parsed ?? 0;
 }
 
 function parseMinuti(text: string): number {
-  if (text.toLowerCase().includes('illimitat')) return -1;
+  if (text.trim() === '') return -1;
+  if (/illimitat/i.test(text)) return -1;
   const parsed = parsePriceEur(text);
-  return parsed ?? 0;
+  return parsed ?? -1;
 }
 
-function parseTecnologia(text: string): TecnologiaMobile {
-  const value = text.trim().toUpperCase();
-  if (value === '5G+' || value === '5G PLUS') return '5G+';
-  if (value === '5G') return '5G';
+function isTecnologia5G(cardText: string, $card: Cheerio<any>): boolean {
+  return $card.find('.logo5g').length > 0 || /5G\+?\b/.test(cardText);
+}
+
+function tecnologiaFromCard($card: Cheerio<any>, cardText: string): TecnologiaMobile {
+  if (/5G\+/i.test(cardText)) return '5G+';
+  if (isTecnologia5G(cardText, $card)) return '5G';
   return '4G';
 }
 
@@ -63,6 +66,13 @@ function velocitaPerTecnologia(tech: TecnologiaMobile): number {
   if (tech === '5G+') return 2000;
   if (tech === '5G') return 1000;
   return 150;
+}
+
+function slugFromHref(href: string | undefined, pageUrl: string): string {
+  if (!href) return pageUrl;
+  const cleaned = href.split('?')[0].replace(/\/$/, '');
+  const segments = cleaned.split('/').filter(Boolean);
+  return segments.length > 0 ? segments[segments.length - 1] : cleaned;
 }
 
 interface ParsedCard {
@@ -78,25 +88,31 @@ function parseOfferCards(html: string): readonly ParsedCard[] {
   const $ = load(html);
   const cards: ParsedCard[] = [];
 
-  $('article[data-offer]').each((_, el) => {
+  $('.item.offer_card').each((_, el) => {
     const $el = $(el);
-    const codice = $el.attr('data-offer-code');
-    const nome = $el.find('.offer-name, h3').first().text().trim();
-    const prezzoText = $el.find('.offer-price, .price').first().text();
-    const gbText = $el.find('.offer-gb').first().text();
-    const minutiText = $el.find('.offer-minuti').first().text();
-    const techText = $el.find('.offer-tech').first().text();
-    if (!codice || !nome) return;
+    const $name = $el.find('.oname').first();
+    $name.find('svg, .labelhdr').remove();
+    const nome = $name.text().trim();
+    const prezzoText = $el.find('.pricebox .price').first().text();
+    const firstLiText = $el.find('ul li').first().text();
+    const minutiText = $el.find('ul li .minill').first().text();
+    const cardText = $el.text();
+    const offerHref = $el.find('.pricebox a[href]').filter((_, a) => {
+      const h = $(a).attr('href') ?? '';
+      return !h.includes('/dettagli/');
+    }).first().attr('href');
+
+    if (!nome) return;
     const prezzo = parsePriceEur(prezzoText);
     if (prezzo === null) return;
-    const tecnologia = parseTecnologia(techText);
+
     cards.push({
-      codice_offerta: codice,
+      codice_offerta: slugFromHref(offerHref, nome),
       nome_commerciale: nome,
       prezzo_effettivo_euro_mese: prezzo,
-      gb: parseGb(gbText),
+      gb: parseGb(firstLiText),
       minuti: parseMinuti(minutiText),
-      tecnologia,
+      tecnologia: tecnologiaFromCard($el, cardText),
     });
   });
 
