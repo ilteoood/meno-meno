@@ -20,6 +20,7 @@ import { PostemobileMobileScraper } from './postemobile.ts';
 import { HoMobileScraper } from './ho.ts';
 import { KenaMobileScraper } from './kena.ts';
 import { VeryMobileScraper } from './very.ts';
+import { TiscaliMobileScraper } from './tiscali.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -86,6 +87,9 @@ export function createScraper(
   if (operatoreId === 'very' && commodity === 'mobile') {
     return new VeryMobileScraper(source);
   }
+  if (operatoreId === 'tiscali' && commodity === 'mobile') {
+    return new TiscaliMobileScraper(source);
+  }
   return null;
 }
 
@@ -109,4 +113,5 @@ export { PostemobileMobileScraper } from './postemobile.ts';
 export { HoMobileScraper } from './ho.ts';
 export { KenaMobileScraper } from './kena.ts';
 export { VeryMobileScraper } from './very.ts';
+export { TiscaliMobileScraper } from './tiscali.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';
