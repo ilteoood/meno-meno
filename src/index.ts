@@ -101,7 +101,7 @@ function buildSource(
     return { kind: 'live', url: 'https://www.sorgenia.it/sites/default/themes/sorgenia/modules/preprod_dynamic_card.php?offert=43124&commodity=ELE&consume=medium' };
   }
   if (live && operatore === 'illumia' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.illumia.it/offerte-luce' };
+    return { kind: 'live', url: 'https://www.illumia.it/casa/luce/' };
   }
   if (live && operatore === 'engie' && commodity === 'luce') {
     return { kind: 'live', url: 'https://www.engie.it/casa/offerte-luce-gas/' };
