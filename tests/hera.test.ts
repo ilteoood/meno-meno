@@ -5,28 +5,66 @@ import { HeraLuceScraper } from '../src/scrapers/hera.ts';
 
 const fixturePath = resolve(import.meta.dirname, '..', 'fixtures', 'hera', 'luce.html');
 
-test('HeraLuceScraper parses fixture HTML into offerte', async () => {
+const MECCANISMO_TIPI = ['fisso', 'PUN'] as const;
+const GREEN_FLAGS = ['A', 'B', 'C', 'D'] as const;
+
+test('HeraLuceScraper parses real luce offers into OffertaLuce (ADR 0009 structural)', async () => {
   const scraper = new HeraLuceScraper({ kind: 'fixture', path: fixturePath });
   const result = await scraper.scrape();
 
   assert.equal(result.ok, true);
   if (!result.ok) return;
 
-  assert.equal(result.offerte.length, 3);
+  assert.ok(
+    result.offerte.length >= 1,
+    `expected at least 1 offerta, got ${result.offerte.length}`,
+  );
+
   for (const o of result.offerte) {
     assert.equal(o.commodity, 'luce');
     assert.equal(o.operatore_id, 'hera');
     assert.ok(typeof o.codice_offerta === 'string' && o.codice_offerta.length > 0);
-    assert.ok(o.prezzo_effettivo_euro_kwh > 0);
-    assert.ok(o.quota_fissa_euro_anno > 0);
-    assert.ok(['fisso', 'PUN'].includes(o.meccanismo_prezzo.tipo));
+    assert.ok(typeof o.nome_commerciale === 'string' && o.nome_commerciale.length > 0);
+    assert.ok(typeof o.url_sorgente === 'string' && o.url_sorgente.length > 0);
+    assert.ok(typeof o.scraped_at === 'string' && o.scraped_at.length > 0);
+    assert.ok(
+      typeof o.prezzo_effettivo_euro_kwh === 'number'
+        && Number.isFinite(o.prezzo_effettivo_euro_kwh)
+        && o.prezzo_effettivo_euro_kwh > 0,
+    );
+    assert.ok(
+      typeof o.quota_fissa_euro_anno === 'number'
+        && Number.isFinite(o.quota_fissa_euro_anno)
+        && o.quota_fissa_euro_anno > 0,
+    );
+    assert.ok(
+      MECCANISMO_TIPI.includes(o.meccanismo_prezzo.tipo),
+      `meccanismo_prezzo.tipo must be one of ${MECCANISMO_TIPI.join(', ')}`,
+    );
+    if (o.meccanismo_prezzo.tipo === 'fisso') {
+      assert.equal(
+        (o.meccanismo_prezzo as { spread_euro_kwh?: unknown }).spread_euro_kwh,
+        undefined,
+        'fisso offerte must not carry spread_euro_kwh',
+      );
+    }
+    if (o.meccanismo_prezzo.tipo === 'PUN') {
+      const spread = (o.meccanismo_prezzo as { spread_euro_kwh: number }).spread_euro_kwh;
+      assert.ok(
+        typeof spread === 'number' && Number.isFinite(spread) && spread > 0,
+        'PUN offerte must carry a positive spread_euro_kwh',
+      );
+    }
+    assert.ok(
+      GREEN_FLAGS.includes(o.green_flag),
+      `green_flag must be one of ${GREEN_FLAGS.join(', ')}`,
+    );
+    assert.equal(
+      (o as { quota_fissa_euro_smc?: unknown }).quota_fissa_euro_smc,
+      undefined,
+      'luce offerte must not carry gas quota_fissa_euro_smc',
+    );
   }
-
-  const fix = result.offerte.find((o) => o.nome_commerciale === 'Hera Fix Luce');
-  assert.ok(fix, 'expected Hera Fix Luce offer');
-  assert.equal(fix!.meccanismo_prezzo.tipo, 'fisso');
-  assert.equal(fix!.prezzo_effettivo_euro_kwh, 0.13);
-  assert.equal(fix!.quota_fissa_euro_anno, 90);
 });
 
 test('HeraLuceScraper returns ok=false when fixture path is missing', async () => {
