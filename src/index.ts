@@ -98,7 +98,7 @@ function buildSource(
     return { kind: 'live', url: 'https://www.aceaenergia.it/elenco-offerte' };
   }
   if (live && operatore === 'sorgenia' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.sorgenia.it/offerte-luce-e-gas-casa' };
+    return { kind: 'live', url: 'https://www.sorgenia.it/sites/default/themes/sorgenia/modules/preprod_dynamic_card.php?offert=43124&commodity=ELE&consume=medium' };
   }
   if (live && operatore === 'illumia' && commodity === 'luce') {
     return { kind: 'live', url: 'https://www.illumia.it/offerte-luce' };

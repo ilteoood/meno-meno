@@ -13,7 +13,7 @@ export const V1_FIXTURE_SOURCES: readonly V1FixtureSource[] = [
   { operatore: 'iren', commodity: 'luce', url: 'https://www.irenlucegas.it/casa/offerte-luce', playwright: false },
   { operatore: 'a2a', commodity: 'luce', url: 'https://www.a2a.it/casa/offerte-luce-gas', playwright: false },
   { operatore: 'acea', commodity: 'luce', url: 'https://www.aceaenergia.it/elenco-offerte', playwright: false },
-  { operatore: 'sorgenia', commodity: 'luce', url: 'https://www.sorgenia.it/offerte-luce-e-gas-casa', playwright: false },
+  { operatore: 'sorgenia', commodity: 'luce', url: 'https://www.sorgenia.it/sites/default/themes/sorgenia/modules/preprod_dynamic_card.php?offert=43124&commodity=ELE&consume=medium', playwright: false },
   { operatore: 'illumia', commodity: 'luce', url: 'https://www.illumia.it/offerte-luce', playwright: false },
   { operatore: 'engie', commodity: 'luce', url: 'https://www.engie.it/casa/offerte-luce-gas/', playwright: false },
   { operatore: 'octopus', commodity: 'luce', url: 'https://octopusenergy.it/offerta/tariffe', playwright: false },
