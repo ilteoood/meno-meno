@@ -39,7 +39,7 @@
 - **hardcoded assert** — filosofia test di v1: assert letterali su nomi commerciali e prezzi offerta. Locks i test al contenuto della fixture. Superseduta da structural assert in v2 (ADR 0009).
 - **Offerta** — tipo discriminato union per commodity: `OffertaLuce | OffertaGas | OffertaMobile | OffertaFisso`. Provenance garantita dai campi `operatore_id + codice_offerta + url_sorgente + scraped_at`.
 - **OffertaBundle** — entità first-class con `componenti: (Offerta | ComponenteServizio)[]` e `sconto_bundle_euro_anno`. Sister entity di `Offerta`, non suo membro.
-- **playwright** — lazy import opt-in riservato ai soli scraper Edison e WindTre (vedi ADR 0004). Tutti gli altri operatori usano cheerio puro sul DOM statico.
+- **playwright** — lazy import opt-in riservato ai soli scraper Edison, WindTre e Vodafone (vedi ADR 0004 + ADR 0006 §Supported transports). Tutti gli altri operatori usano cheerio puro sul DOM statico.
 - **render-examples** — script `scripts/render-examples.ts` che rigenera `examples/*.md,csv,json` a partire dalle fixture, con timestamp deterministico per output riproducibile.
 - **Scraper** — interface `src/scrapers/types.ts` con metodo `scrape()` async che restituisce `ScrapeResult` discriminato (ok/fail). Un modulo TS per operatore (vedi ADR 0001).
 - **scraper rewrite** — azione per-operatore in v2 (issue #90): riscrittura `src/scrapers/<op>.ts` contro selettori reali, swap di `fixtures/<op>/<commodity>.html` con snapshot reale, refactor del test in structurale, cancellazione della fixture sintetica. Tutto stesso PR (atomic swap).
