@@ -7,7 +7,7 @@ export interface V1FixtureSource {
 
 export const V1_FIXTURE_SOURCES: readonly V1FixtureSource[] = [
   { operatore: 'enel', commodity: 'luce', url: 'https://www.enel.it/it-it/luce-gas/offerte-luce', playwright: false },
-  { operatore: 'edison', commodity: 'luce', url: 'https://www.edison.it/it-it/luce-gas/offerte-luce', playwright: true },
+  { operatore: 'edison', commodity: 'luce', url: 'https://www.edisonenergia.it/edison/casa/luce', playwright: true },
   { operatore: 'plenitude', commodity: 'luce', url: 'https://eniplenitude.com/offerta/casa/gas-e-luce/offerte-energia-elettrica', playwright: false },
   { operatore: 'hera', commodity: 'luce', url: 'https://heracomm.gruppohera.it/casa/offerte-luce-gas', playwright: false },
   { operatore: 'iren', commodity: 'luce', url: 'https://www.irenlucegas.it/casa/offerte-luce', playwright: false },
