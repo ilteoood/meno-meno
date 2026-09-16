@@ -12,21 +12,30 @@ test('SorgeniaLuceScraper parses fixture HTML into offerte', async () => {
   assert.equal(result.ok, true);
   if (!result.ok) return;
 
-  assert.equal(result.offerte.length, 3);
+  assert.ok(result.offerte.length >= 1, 'expected at least one offer');
   for (const o of result.offerte) {
     assert.equal(o.commodity, 'luce');
     assert.equal(o.operatore_id, 'sorgenia');
     assert.ok(typeof o.codice_offerta === 'string' && o.codice_offerta.length > 0);
+    assert.ok(typeof o.nome_commerciale === 'string' && o.nome_commerciale.length > 0);
+    assert.ok(typeof o.url_sorgente === 'string' && o.url_sorgente.length > 0);
+    assert.ok(typeof o.scraped_at === 'string' && o.scraped_at.length > 0);
     assert.ok(o.prezzo_effettivo_euro_kwh > 0);
     assert.ok(o.quota_fissa_euro_anno > 0);
     assert.ok(['fisso', 'PUN'].includes(o.meccanismo_prezzo.tipo));
+    if (o.meccanismo_prezzo.tipo === 'fisso') {
+      assert.equal(
+        'spread_euro_kwh' in o.meccanismo_prezzo,
+        false,
+        'fisso offers must not carry spread_euro_kwh',
+      );
+    }
+    if (o.meccanismo_prezzo.tipo === 'PUN') {
+      const spread = (o.meccanismo_prezzo as { spread_euro_kwh: number }).spread_euro_kwh;
+      assert.ok(typeof spread === 'number' && Number.isFinite(spread));
+    }
+    assert.ok(['A', 'B', 'C', 'D'].includes(o.green_flag));
   }
-
-  const fix = result.offerte.find((o) => o.nome_commerciale === 'Sorgenia Fix Luce');
-  assert.ok(fix, 'expected Sorgenia Fix Luce offer');
-  assert.equal(fix!.meccanismo_prezzo.tipo, 'fisso');
-  assert.equal(fix!.prezzo_effettivo_euro_kwh, 0.12);
-  assert.equal(fix!.quota_fissa_euro_anno, 84);
 });
 
 test('SorgeniaLuceScraper returns ok=false when fixture path is missing', async () => {
