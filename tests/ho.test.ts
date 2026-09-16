@@ -38,6 +38,14 @@ test('HoMobileScraper parses fixture HTML into one or more offerte mobile', asyn
       undefined,
       'mobile offerte must not carry luce/gas quota_fissa_euro_anno',
     );
+
+    if (o.tecnologia === '4G') {
+      assert.equal(
+        o.velocita_mbps,
+        60,
+        `4G offerte must carry ho. Mobile documented speed (60 Mbps), got ${o.velocita_mbps}`,
+      );
+    }
   }
 });
 

@@ -59,7 +59,7 @@ function tecnologiaFromCard($card: Cheerio<any>, cardText: string): TecnologiaMo
 function velocitaPerTecnologia(tech: TecnologiaMobile): number {
   if (tech === '5G+') return 2000;
   if (tech === '5G') return 1000;
-  return 150;
+  return 60;
 }
 
 function slugify(input: string): string {
