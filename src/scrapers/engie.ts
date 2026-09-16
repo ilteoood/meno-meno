@@ -1,6 +1,11 @@
-import { load } from 'cheerio';
+import { load, type Cheerio } from 'cheerio';
 import { readFile } from 'node:fs/promises';
-import type { OffertaLuce, Commodity } from '../types/offerta.ts';
+import type {
+  Commodity as CommodityType,
+  GreenFlag,
+  MeccanismoPrezzo,
+  OffertaLuce,
+} from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
 
 const ENGIE_LUCE_URL = 'https://www.engie.it/casa/offerte-luce-gas/';
@@ -28,10 +33,56 @@ async function fetchHtml(url: string, signal: AbortSignal): Promise<string> {
   return await response.text();
 }
 
-function parsePriceEur(text: string): number | null {
-  const match = text.match(/(\d{1,4}(?:[.,]\d{2})?)/);
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function slugFromHref(href: string | undefined): string | null {
+  if (!href) return null;
+  try {
+    const url = new URL(href, ENGIE_LUCE_URL);
+    const segments = url.pathname.replace(/\/$/, '').split('/').filter(Boolean);
+    if (segments.length === 0) return null;
+    return slugify(segments[segments.length - 1] ?? '');
+  } catch {
+    return null;
+  }
+}
+
+function parseNumericEuro(text: string): number | null {
+  const match = text.match(/(\d{1,4}(?:[.,]\d{1,4})?)/);
   if (!match) return null;
-  return Number(match[1].replace(',', '.'));
+  const raw = (match[1] ?? '').replace('.', '').replace(',', '.');
+  const n = Number(raw);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+function parseSpreadEur(text: string): number | null {
+  const match = text.match(/PUN\s*\+\s*(\d+(?:[.,]\d+)?)/i);
+  if (!match) return null;
+  const raw = (match[1] ?? '').replace(',', '.');
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : null;
+}
+
+function fasciaText($fascia: Cheerio<any>): string {
+  return $fascia.find('.originalPrice').first().text().trim();
+}
+
+function pickFasciaByLabelPrefix(
+  $fasce: Cheerio<any>,
+  prefix: string,
+): string | null {
+  for (let i = 0; i < $fasce.length; i++) {
+    const label = $fasce.eq(i).find('.dettaglio-offerta__fascia-name').first().text().trim();
+    if (label.startsWith(prefix)) return fasciaText($fasce.eq(i));
+  }
+  return null;
 }
 
 interface ParsedCard {
@@ -39,29 +90,67 @@ interface ParsedCard {
   nome_commerciale: string;
   prezzo_effettivo_euro_kwh: number;
   quota_fissa_euro_anno: number;
-  tipo_indicizzazione: 'fisso' | 'PUN';
+  meccanismo_prezzo: MeccanismoPrezzo;
+  green_flag: GreenFlag;
+}
+
+function detectGreenFlag(features: readonly string[]): GreenFlag {
+  for (const f of features) {
+    if (/100\s*%\s*rinnovabile|rinnovabile/i.test(f)) return 'A';
+  }
+  return 'C';
 }
 
 function parseOfferCards(html: string): readonly ParsedCard[] {
   const $ = load(html);
   const cards: ParsedCard[] = [];
 
-  $('article[data-offer]').each((_, el) => {
+  $('.card-offerte-esplosa').each((_, el) => {
     const $el = $(el);
-    const codice = $el.attr('data-offer-code');
-    const nome = $el.find('.offer-name, h3').first().text().trim();
-    const prezzoText = $el.find('.offer-price, .price').first().text();
-    const quotaText = $el.find('.offer-fee, .fee').first().text();
-    if (!codice || !nome) return;
-    const prezzo = parsePriceEur(prezzoText);
-    const quota = parsePriceEur(quotaText);
-    if (prezzo === null || quota === null) return;
+    const nome = $el.find('.card-offerte-esplosa__heading h3').first().text().trim();
+    if (!nome) return;
+
+    const $luce = $el.find('.dettaglio-offerta[data-title="Luce"]');
+    if ($luce.length === 0) return;
+
+    const $fasce = $luce.find('.dettaglio-offerta__fascia');
+    const quotaText = pickFasciaByLabelPrefix($fasce, 'Corrispettivo annuo');
+    const f1Text = pickFasciaByLabelPrefix($fasce, 'Corrispettivo per il consumo F1');
+
+    if (!quotaText || !f1Text) return;
+
+    const quota = parseNumericEuro(quotaText);
+    if (quota === null) return;
+
+    let meccanismo: MeccanismoPrezzo;
+    let prezzo: number;
+    if (/PUN\s*\+/i.test(f1Text)) {
+      const spread = parseSpreadEur(f1Text);
+      meccanismo = { tipo: 'PUN', spread_euro_kwh: spread ?? 0 };
+      prezzo = spread ?? 0;
+    } else {
+      const fixed = parseNumericEuro(f1Text);
+      if (fixed === null) return;
+      meccanismo = { tipo: 'fisso' };
+      prezzo = fixed;
+    }
+    if (prezzo <= 0) return;
+
+    const href = $el.find('a.btn-link.card-offerte-esplosa__cta').first().attr('href');
+    const codice = slugFromHref(href) ?? slugify(nome);
+
+    const features = $el
+      .find('.card-offerte-esplosa__feature')
+      .map((_, fEl) => $(fEl).text().trim())
+      .get();
+
     cards.push({
       codice_offerta: codice,
       nome_commerciale: nome,
       prezzo_effettivo_euro_kwh: prezzo,
       quota_fissa_euro_anno: quota,
-      tipo_indicizzazione: nome.toLowerCase().includes('fix') ? 'fisso' : 'PUN',
+      meccanismo_prezzo: meccanismo,
+      green_flag: detectGreenFlag(features),
     });
   });
 
@@ -74,7 +163,7 @@ function toOffertaLuce(
   scrapedAt: string,
 ): OffertaLuce {
   return {
-    commodity: 'luce' satisfies Commodity,
+    commodity: 'luce' satisfies CommodityType,
     operatore_id: 'engie',
     codice_offerta: card.codice_offerta,
     nome_commerciale: card.nome_commerciale,
@@ -82,17 +171,14 @@ function toOffertaLuce(
     scraped_at: scrapedAt,
     prezzo_effettivo_euro_kwh: card.prezzo_effettivo_euro_kwh,
     quota_fissa_euro_anno: card.quota_fissa_euro_anno,
-    meccanismo_prezzo:
-      card.tipo_indicizzazione === 'fisso'
-        ? { tipo: 'fisso' }
-        : { tipo: 'PUN', spread_euro_kwh: 0 },
-    green_flag: 'C',
+    meccanismo_prezzo: card.meccanismo_prezzo,
+    green_flag: card.green_flag,
   };
 }
 
 export class EngieLuceScraper implements Scraper {
   readonly operatoreId = 'engie';
-  readonly commodity: Commodity = 'luce';
+  readonly commodity: CommodityType = 'luce';
   readonly source: ScrapeSource;
 
   constructor(source: ScrapeSource) {
