@@ -237,7 +237,7 @@ test('renderRankedSections: top3 vuoto quando tutte D-flagged', () => {
   assert.match(sections.top3, /Nessuna offerta eleggibile/);
 });
 
-test('Enel fixture reale: rank top-3 include Enel Fix Web Luce', async () => {
+test('Enel fixture reale: rank top-3 sono 3 offerte enel ordinate per costo annuo (ADR 0009 structural)', async () => {
   const fixturePath = resolve(import.meta.dirname, '..', 'fixtures', 'enel', 'luce.html');
   const scraper = new EnelLuceScraper({ kind: 'fixture', path: fixturePath });
   const result = await scraper.scrape();
@@ -245,6 +245,14 @@ test('Enel fixture reale: rank top-3 include Enel Fix Web Luce', async () => {
   if (!result.ok) return;
   const rank = rankOfferte({ commodity: 'luce', offerte: result.offerte });
   assert.equal(rank.top.length, 3);
-  assert.equal(rank.top[0].offerta.nome_commerciale, 'Enel Fix Web Luce');
-  assert.ok(rank.top[0].costo_annuo_stimato_euro > 0);
+  for (const s of rank.top) {
+    assert.equal(s.offerta.operatore_id, 'enel');
+    assert.ok(s.costo_annuo_stimato_euro > 0);
+  }
+  for (let i = 1; i < rank.top.length; i++) {
+    assert.ok(
+      rank.top[i]!.costo_annuo_stimato_euro >= rank.top[i - 1]!.costo_annuo_stimato_euro,
+      'top deve essere ordinato per costo annuo crescente',
+    );
+  }
 });

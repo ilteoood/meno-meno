@@ -77,7 +77,7 @@ function buildSource(
     return { kind: 'fixture', path: resolve(fixture) };
   }
   if (live && operatore === 'enel' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.enel.it/it-it/luce-gas/offerte-luce' };
+    return { kind: 'live', url: 'https://www.enel.it/it-it/offerte-luce' };
   }
   if (live && operatore === 'edison' && commodity === 'luce') {
     return { kind: 'live', url: 'https://www.edisonenergia.it/edison/casa/luce' };
