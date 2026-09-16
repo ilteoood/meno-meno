@@ -89,7 +89,7 @@ function buildSource(
     return { kind: 'live', url: 'https://www.a2a.it/casa/offerte-luce-gas' };
   }
   if (live && operatore === 'iren' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.irenlucegas.it/casa' };
+    return { kind: 'live', url: 'https://www.irenlucegas.it/casa/offerte-luce' };
   }
   if (live && operatore === 'hera' && commodity === 'luce') {
     return { kind: 'live', url: 'https://heracomm.gruppohera.it/casa/offerte-luce-gas' };

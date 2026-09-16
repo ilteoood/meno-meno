@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import type { OffertaLuce, Commodity } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
 
-const IREN_LUCE_URL = 'https://www.irenlucegas.it/casa';
+const IREN_LUCE_URL = 'https://www.irenlucegas.it/casa/offerte-luce';
 const SCRAPER_TIMEOUT_MS = 15_000;
 
 const DESKTOP_UA =
@@ -28,10 +28,39 @@ async function fetchHtml(url: string, signal: AbortSignal): Promise<string> {
   return await response.text();
 }
 
-function parsePriceEur(text: string): number | null {
-  const match = text.match(/(\d{1,4}(?:[.,]\d{2})?)/);
+function parseEurPerKwh(text: string): number | null {
+  const match = text.match(/(\d{1,4}(?:[.,]\d{1,6})?)\s*€\s*\/\s*kWh/i);
   if (!match) return null;
-  return Number(match[1].replace(',', '.'));
+  const n = Number((match[1] ?? '').replace('.', '').replace(',', '.'));
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+function parseEurPerMonth(text: string): number | null {
+  const match = text.match(/(\d{1,5}(?:[.,]\d{1,2})?)\s*€\s*al\s*mese/i);
+  if (!match) return null;
+  const n = Number((match[1] ?? '').replace('.', '').replace(',', '.'));
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function slugFromHref(href: string | undefined): string | null {
+  if (!href) return null;
+  try {
+    const url = new URL(href, IREN_LUCE_URL);
+    const segments = url.pathname.replace(/\/$/, '').split('/').filter(Boolean);
+    if (segments.length === 0) return null;
+    return slugify(segments[segments.length - 1] ?? '');
+  } catch {
+    return null;
+  }
 }
 
 interface ParsedCard {
@@ -40,28 +69,39 @@ interface ParsedCard {
   prezzo_effettivo_euro_kwh: number;
   quota_fissa_euro_anno: number;
   tipo_indicizzazione: 'fisso' | 'PUN';
+  spread_euro_kwh: number;
 }
 
 function parseOfferCards(html: string): readonly ParsedCard[] {
   const $ = load(html);
   const cards: ParsedCard[] = [];
 
-  $('article[data-offer]').each((_, el) => {
+  $('.no-product.offer').each((_, el) => {
     const $el = $(el);
-    const codice = $el.attr('data-offer-code');
-    const nome = $el.find('.offer-name, h3').first().text().trim();
-    const prezzoText = $el.find('.offer-price, .price').first().text();
-    const quotaText = $el.find('.offer-fee, .fee').first().text();
-    if (!codice || !nome) return;
-    const prezzo = parsePriceEur(prezzoText);
-    const quota = parsePriceEur(quotaText);
-    if (prezzo === null || quota === null) return;
+    const filterType = $el.attr('data-filter-type');
+    const nome = $el.find('h3.title').first().text().trim();
+    if (!nome) return;
+
+    const kwhTexts = $el.find('.price').map((_, p) => $(p).text()).get();
+    const kwh = kwhTexts.map(parseEurPerKwh).find((n): n is number => n !== null);
+    if (kwh === undefined) return;
+
+    const labelTexts = $el.find('.price-label').map((_, p) => $(p).text()).get();
+    const monthly = labelTexts.map(parseEurPerMonth).find((n): n is number => n !== null);
+    if (monthly === undefined) return;
+
+    const href = $el.find('.container-button a[href]').first().attr('href');
+    const codice = slugFromHref(href) ?? slugify(nome);
+
+    const isVariabile = filterType === 'variabile';
+
     cards.push({
       codice_offerta: codice,
       nome_commerciale: nome,
-      prezzo_effettivo_euro_kwh: prezzo,
-      quota_fissa_euro_anno: quota,
-      tipo_indicizzazione: nome.toLowerCase().includes('fix') ? 'fisso' : 'PUN',
+      prezzo_effettivo_euro_kwh: kwh,
+      quota_fissa_euro_anno: monthly * 12,
+      tipo_indicizzazione: isVariabile ? 'PUN' : 'fisso',
+      spread_euro_kwh: isVariabile ? kwh : 0,
     });
   });
 
@@ -85,7 +125,7 @@ function toOffertaLuce(
     meccanismo_prezzo:
       card.tipo_indicizzazione === 'fisso'
         ? { tipo: 'fisso' }
-        : { tipo: 'PUN', spread_euro_kwh: 0 },
+        : { tipo: 'PUN', spread_euro_kwh: card.spread_euro_kwh },
     green_flag: 'C',
   };
 }
