@@ -1,6 +1,6 @@
 import { load } from 'cheerio';
 import { readFile } from 'node:fs/promises';
-import type { OffertaLuce, Commodity } from '../types/offerta.ts';
+import type { Commodity, OffertaLuce } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
 
 const OCTOPUS_LUCE_URL = 'https://octopusenergy.it/offerta/tariffe';
@@ -8,6 +8,8 @@ const SCRAPER_TIMEOUT_MS = 15_000;
 
 const DESKTOP_UA =
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
+
+const MONTHS_PER_YEAR = 12;
 
 function nowIso(): string {
   return new Date().toISOString();
@@ -28,10 +30,21 @@ async function fetchHtml(url: string, signal: AbortSignal): Promise<string> {
   return await response.text();
 }
 
-function parsePriceEur(text: string): number | null {
-  const match = text.match(/(\d{1,4}(?:[.,]\d{2})?)/);
+function parseDecimalEur(text: string): number | null {
+  const match = text.match(/(\d{1,4}(?:[.,]\d{1,4})?)/);
   if (!match) return null;
-  return Number(match[1].replace(',', '.'));
+  const raw = match[1]!.replace(',', '.');
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : null;
+}
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
 }
 
 interface ParsedCard {
@@ -39,29 +52,59 @@ interface ParsedCard {
   nome_commerciale: string;
   prezzo_effettivo_euro_kwh: number;
   quota_fissa_euro_anno: number;
-  tipo_indicizzazione: 'fisso' | 'PUN';
+  meccanismo_prezzo: OffertaLuce['meccanismo_prezzo'];
+}
+
+function extractLuceSection(cardText: string): {
+  lucePriceText: string;
+  luceQuotaText: string;
+  hasPunLabel: boolean;
+} | null {
+  const luceIdx = cardText.toLowerCase().indexOf('materia prima luce');
+  if (luceIdx === -1) return null;
+  const gasIdx = cardText.toLowerCase().indexOf('materia prima gas', luceIdx);
+  const luceEnd = gasIdx === -1 ? cardText.length : gasIdx;
+  const luceSection = cardText.slice(luceIdx, luceEnd);
+  const priceMatch = luceSection.match(/(\d{1,4}(?:[.,]\d{1,4})?)\s*€\s*\/\s*kWh/i);
+  if (!priceMatch) return null;
+  const afterPrice = luceSection.slice(priceMatch.index! + priceMatch[0].length);
+  const quotaMatch = afterPrice.match(/(\d{1,4}(?:[.,]\d{1,4})?)\s*€\s*\/\s*mese/i);
+  if (!quotaMatch) return null;
+  const hasPunLabel = /\bPUN\b/i.test(luceSection.slice(0, priceMatch.index!));
+  return {
+    lucePriceText: priceMatch[1]!,
+    luceQuotaText: quotaMatch[1]!,
+    hasPunLabel,
+  };
 }
 
 function parseOfferCards(html: string): readonly ParsedCard[] {
   const $ = load(html);
   const cards: ParsedCard[] = [];
 
-  $('article[data-offer]').each((_, el) => {
+  $('[data-testid="offeringCard"]').each((_, el) => {
     const $el = $(el);
-    const codice = $el.attr('data-offer-code');
-    const nome = $el.find('.offer-name, h3').first().text().trim();
-    const prezzoText = $el.find('.offer-price, .price').first().text();
-    const quotaText = $el.find('.offer-fee, .fee').first().text();
-    if (!codice || !nome) return;
-    const prezzo = parsePriceEur(prezzoText);
-    const quota = parsePriceEur(quotaText);
-    if (prezzo === null || quota === null) return;
+    const headingRaw = $el.find('h2').first().text().trim().replace(/\s+/g, ' ');
+    if (!headingRaw) return;
+    const cardText = $el.text();
+    const luce = extractLuceSection(cardText);
+    if (!luce) return;
+
+    const prezzo = parseDecimalEur(luce.lucePriceText);
+    const quotaMese = parseDecimalEur(luce.luceQuotaText);
+    if (prezzo === null || quotaMese === null) return;
+
+    const nome = `${headingRaw} Luce`;
+    const meccanismo_prezzo: OffertaLuce['meccanismo_prezzo'] = luce.hasPunLabel
+      ? { tipo: 'PUN', spread_euro_kwh: prezzo }
+      : { tipo: 'fisso' };
+
     cards.push({
-      codice_offerta: codice,
+      codice_offerta: slugify(nome),
       nome_commerciale: nome,
       prezzo_effettivo_euro_kwh: prezzo,
-      quota_fissa_euro_anno: quota,
-      tipo_indicizzazione: nome.toLowerCase().includes('fix') ? 'fisso' : 'PUN',
+      quota_fissa_euro_anno: quotaMese * MONTHS_PER_YEAR,
+      meccanismo_prezzo,
     });
   });
 
@@ -82,11 +125,8 @@ function toOffertaLuce(
     scraped_at: scrapedAt,
     prezzo_effettivo_euro_kwh: card.prezzo_effettivo_euro_kwh,
     quota_fissa_euro_anno: card.quota_fissa_euro_anno,
-    meccanismo_prezzo:
-      card.tipo_indicizzazione === 'fisso'
-        ? { tipo: 'fisso' }
-        : { tipo: 'PUN', spread_euro_kwh: 0 },
-    green_flag: 'C',
+    meccanismo_prezzo: card.meccanismo_prezzo,
+    green_flag: 'A',
   };
 }
 
