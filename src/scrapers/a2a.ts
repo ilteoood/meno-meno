@@ -260,13 +260,17 @@ export class A2aLuceScraper implements Scraper {
 
       const sourceUrl =
         this.source.kind === 'live' ? this.source.url : `file://${this.source.path}`;
+      const detailResults = await Promise.allSettled(
+        catalog.map((entry) => fetchDetailHtml(this.source, entry, signal)),
+      );
       const offerte: OffertaLuce[] = [];
-      for (const entry of catalog) {
-        const detailHtml = await fetchDetailHtml(this.source, entry, signal);
-        const detail = parseDetail(detailHtml);
-        if (detail === null) continue;
+      catalog.forEach((entry, idx) => {
+        const settled = detailResults[idx];
+        if (settled === undefined || settled.status !== 'fulfilled') return;
+        const detail = parseDetail(settled.value);
+        if (detail === null) return;
         offerte.push(toOffertaLuce(entry, detail, sourceUrl, scrapedAt));
-      }
+      });
 
       if (offerte.length === 0) {
         return {
