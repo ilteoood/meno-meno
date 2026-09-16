@@ -80,7 +80,7 @@ function buildSource(
     return { kind: 'live', url: 'https://www.enel.it/it-it/luce-gas/offerte-luce' };
   }
   if (live && operatore === 'edison' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.edison.it/it-it/luce-gas/offerte-luce' };
+    return { kind: 'live', url: 'https://www.edisonenergia.it/edison/casa/luce' };
   }
   if (live && operatore === 'plenitude' && commodity === 'luce') {
     return { kind: 'live', url: 'https://eniplenitude.com/offerta/casa/gas-e-luce/offerte-energia-elettrica' };
