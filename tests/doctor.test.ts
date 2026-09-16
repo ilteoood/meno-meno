@@ -103,3 +103,99 @@ test('markdown report header carries the operator table', async () => {
   assert.match(md, /\|\s*enel\s*\|\s*luce\s*\|/);
   assert.match(md, /\|\s*edison\s*\|\s*luce\s*\|/);
 });
+
+test('runDoctor default mode resolves each row against its per-operator <op>/<commodity>.html fixture', async () => {
+  const report = await runDoctor();
+  assert.equal(report.rows.length, 24);
+  const expectedDegraded = new Set(['acea', 'nen']);
+  let parsedOkCount = 0;
+  for (const row of report.rows) {
+    assert.notEqual(row.note, 'scraper not yet registered for v1', `${row.operatore_id}/${row.commodity} not registered`);
+    if (expectedDegraded.has(row.operatore_id)) {
+      assert.equal(row.parse_ok, false, `${row.operatore_id}/${row.commodity} should be degraded in default fixture mode (acea/nen consume JSON fixtures, not <commodity>.html)`);
+      continue;
+    }
+    assert.equal(row.http_status, 200);
+    assert.equal(row.parse_ok, true);
+    assert.ok(row.offerte_count > 0, `${row.operatore_id}/${row.commodity} parsed 0 offers from its fixture`);
+    parsedOkCount += 1;
+  }
+  assert.equal(parsedOkCount, 22);
+  assert.equal(report.ok, false);
+});
+
+test('runDoctor({ live: true, operatore: "enel" }) parses the live v1 URL', async () => {
+  const enelLiveUrl = V1_FIXTURE_SOURCES.find((s) => s.operatore === 'enel')!.url;
+  const report = await runDoctor({ live: true, operatore: 'enel', timeoutMs: 5_000 });
+  assert.equal(report.rows.length, 1);
+  const row = report.rows[0]!;
+  if (row.note.startsWith('timeout')) return;
+  assert.equal(row.http_status, 200);
+  assert.equal(row.parse_ok, true);
+  assert.ok(row.offerte_count > 0);
+  assert.equal(enelLiveUrl, 'https://www.enel.it/it-it/offerte-luce');
+});
+
+test('runDoctor({ operatore: "fakeoperator" }) yields zero rows and ok=false', async () => {
+  const report = await runDoctor({ operatore: 'fakeoperator' });
+  assert.equal(report.rows.length, 0);
+  assert.equal(report.ok, false);
+});
+
+test('runDoctor({ source: ... }) keeps the documented richer DoctorRow schema', async () => {
+  const report = await runDoctor({ source: enelFixture() });
+  const row = report.rows[0]!;
+  for (const key of ['operatore_id', 'commodity', 'http_status', 'offerte_count', 'parse_ok', 'note'] as const) {
+    assert.ok(key in row, `DoctorRow missing field: ${key}`);
+  }
+});
+
+test('doctor CLI --live spawns runDoctor in live mode for a single operator', async () => {
+  const proc = spawn(
+    'node',
+    ['--experimental-strip-types', 'src/cli/doctor-cli.ts', '--operatore', 'enel', '--live', '--json'],
+    { stdio: ['ignore', 'pipe', 'pipe'] },
+  );
+  let stdout = '';
+  proc.stdout.on('data', (chunk: Buffer) => {
+    stdout += chunk.toString('utf8');
+  });
+  const exitCode = await new Promise<number>((resolveRun, reject) => {
+    let settled = false;
+    const timer = setTimeout(() => {
+      if (!settled) {
+        settled = true;
+        proc.kill();
+        reject(new Error('cli --live spawn timeout'));
+      }
+    }, 20_000);
+    proc.on('error', (err) => {
+      if (!settled) {
+        settled = true;
+        clearTimeout(timer);
+        reject(err);
+      }
+    });
+    proc.on('exit', (code) => {
+      if (!settled) {
+        settled = true;
+        clearTimeout(timer);
+        resolveRun(code ?? 1);
+      }
+    });
+  });
+  const payload = JSON.parse(stdout) as {
+    ok: boolean;
+    rows: { operatore_id: string; offerte_count: number; parse_ok: boolean; note: string }[];
+  };
+  assert.equal(payload.rows.length, 1);
+  assert.equal(payload.rows[0]!.operatore_id, 'enel');
+  if (payload.rows[0]!.note.startsWith('timeout')) {
+    assert.equal(exitCode, 1);
+    return;
+  }
+  assert.equal(payload.rows[0]!.parse_ok, true);
+  assert.ok(payload.rows[0]!.offerte_count > 0);
+  assert.equal(payload.ok, true);
+  assert.equal(exitCode, 0);
+});

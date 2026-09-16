@@ -8,6 +8,7 @@ interface ParsedArgs {
   readonly operatore: string | null;
   readonly output: string | null;
   readonly json: boolean;
+  readonly live: boolean;
 }
 
 interface ParseFailure {
@@ -21,6 +22,7 @@ function parseArgs(argv: readonly string[]): ParseResult {
   let operatore: string | null = null;
   let output: string | null = null;
   let json = false;
+  let live = false;
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     switch (arg) {
@@ -39,16 +41,21 @@ function parseArgs(argv: readonly string[]): ParseResult {
       case '--json':
         json = true;
         break;
+      case '--live':
+        live = true;
+        break;
       case '--help':
       case '-h':
-        process.stdout.write('Usage: doctor [--operatore <id>] [--output <path>] [--json]\n');
+        process.stdout.write(
+          'Usage: doctor [--operatore <id>] [--live] [--output <path>] [--json]\n\n--live   scrape live from operator site (default: per-operator fixture)\n',
+        );
         process.exit(0);
         break;
       default:
         return { exit: 2, message: `unknown flag: ${arg}` };
     }
   }
-  return { ok: true, args: { operatore, output, json } };
+  return { ok: true, args: { operatore, output, json, live } };
 }
 
 function defaultOutputPath(): string {
@@ -80,13 +87,16 @@ async function main(argv: readonly string[]): Promise<number> {
     process.stderr.write(`${parsed.message}\n`);
     return parsed.exit;
   }
-  const report = await runDoctor({ operatore: parsed.args.operatore ?? undefined });
+  const report = await runDoctor({
+    operatore: parsed.args.operatore ?? undefined,
+    live: parsed.args.live,
+  });
   if (parsed.args.json) {
     await emitJson(report, parsed.args.output);
   } else {
     await emitMarkdown(report, parsed.args.output);
   }
-  return report.rows.length === 0 ? 1 : 0;
+  return report.ok ? 0 : 1;
 }
 
 if (
