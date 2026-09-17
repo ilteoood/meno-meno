@@ -182,7 +182,7 @@ function renderTop3Fields(scored: ScoredOfferta): string {
     case 'gas':
       return `${costo}, Verde: [${o.green_flag}], Fissità: [${o.meccanismo_prezzo.tipo}]`;
     case 'mobile':
-      return `${costo}, GB inclusi: ${o.gb}, Velocità: ${o.velocita_mbps} Mbps`;
+      return `${costo}, GB inclusi: ${o.gb}, Rete: ${o.tecnologia}`;
     case 'fisso':
       return `${costo}, Tecnologia: [${o.tecnologia}], Velocità: ${o.velocita_mbps} Mbps`;
   }

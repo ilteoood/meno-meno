@@ -21,14 +21,21 @@ function tableHeader(commodity: Commodity): string {
     case 'gas':
       return '| Operatore | Offerta | €/Smc | Quota fissa €/anno | Verde | Meccanismo |';
     case 'mobile':
-      return '| Operatore | Offerta | €/mese | GB | Minuti | Velocità |';
+      return '| Operatore | Offerta | €/mese | GB | Minuti |';
     case 'fisso':
       return '| Operatore | Offerta | €/mese | Tecnologia | Velocità Mbps |';
   }
 }
 
-function separator(): string {
-  return '| --- | --- | --- | --- | --- | --- |';
+function separator(commodity: Commodity): string {
+  switch (commodity) {
+    case 'mobile':
+      return '| --- | --- | --- | --- | --- |';
+    case 'luce':
+    case 'gas':
+    case 'fisso':
+      return '| --- | --- | --- | --- | --- | --- |';
+  }
 }
 
 function rowFor(o: Offerta): string {
@@ -38,7 +45,7 @@ function rowFor(o: Offerta): string {
     case 'gas':
       return `| ${csvSafe(o.operatore_id)} | ${csvSafe(o.nome_commerciale)} | ${formatPrice(o.prezzo_effettivo_euro_smc)} | ${formatPrice(o.quota_fissa_euro_anno)} | [${o.green_flag}] | ${o.meccanismo_prezzo.tipo} |`;
     case 'mobile':
-      return `| ${csvSafe(o.operatore_id)} | ${csvSafe(o.nome_commerciale)} | ${formatPrice(o.prezzo_effettivo_euro_mese)} | ${o.gb} | ${o.minuti === -1 ? 'ILLIMITATO' : o.minuti} | ${o.velocita_mbps} |`;
+      return `| ${csvSafe(o.operatore_id)} | ${csvSafe(o.nome_commerciale)} | ${formatPrice(o.prezzo_effettivo_euro_mese)} | ${o.gb} | ${o.minuti === -1 ? 'ILLIMITATO' : o.minuti} |`;
     case 'fisso':
       return `| ${csvSafe(o.operatore_id)} | ${csvSafe(o.nome_commerciale)} | ${formatPrice(o.prezzo_effettivo_euro_mese)} | ${o.tecnologia} | ${o.velocita_mbps} |`;
   }
@@ -66,7 +73,7 @@ export function toMarkdown(input: MarkdownInput): string {
   const parts: string[] = [header(input.commodity, input.scrapedAt), ''];
   parts.push('## Tabella completa', '');
   parts.push(tableHeader(input.commodity));
-  parts.push(separator());
+  parts.push(separator(input.commodity));
   for (const o of input.offerte) parts.push(rowFor(o));
   parts.push('');
 
