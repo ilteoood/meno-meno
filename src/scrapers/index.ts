@@ -14,7 +14,7 @@ import { OctopusLuceScraper } from './octopus.ts';
 import { NenLuceScraper } from './nen.ts';
 import { TimMobileScraper, TimFissoScraper } from './tim.ts';
 import { VodafoneMobileScraper, VodafoneFissoScraper } from './vodafone.ts';
-import { IliadMobileScraper } from './iliad.ts';
+import { IliadMobileScraper, IliadFissoScraper } from './iliad.ts';
 import { FastwebMobileScraper, FastwebFissoScraper } from './fastweb.ts';
 import { SkywifiMobileScraper } from './skywifi.ts';
 import { PostemobileMobileScraper } from './postemobile.ts';
@@ -82,6 +82,9 @@ export function createScraper(
   if (operatoreId === 'iliad' && commodity === 'mobile') {
     return new IliadMobileScraper(source);
   }
+  if (operatoreId === 'iliad' && commodity === 'fisso') {
+    return new IliadFissoScraper(source);
+  }
   if (operatoreId === 'fastweb' && commodity === 'mobile') {
     return new FastwebMobileScraper(source);
   }
@@ -133,7 +136,7 @@ export { NenLuceScraper } from './nen.ts';
 export { TimMobileScraper } from './tim.ts';
 export { TimFissoScraper } from './tim.ts';
 export { VodafoneMobileScraper, VodafoneFissoScraper } from './vodafone.ts';
-export { IliadMobileScraper } from './iliad.ts';
+export { IliadMobileScraper, IliadFissoScraper } from './iliad.ts';
 export { FastwebMobileScraper, FastwebFissoScraper } from './fastweb.ts';
 export { SkywifiMobileScraper } from './skywifi.ts';
 export { PostemobileMobileScraper } from './postemobile.ts';
