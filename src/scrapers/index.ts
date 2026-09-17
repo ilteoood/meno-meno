@@ -26,6 +26,7 @@ import { TiscaliMobileScraper, TiscaliFissoScraper } from './tiscali.ts';
 import { DimensioneMobileScraper } from './dimensione.ts';
 import { WindtreMobileScraper } from './windtre.ts';
 import { WindtreFissoScraper } from './windtre.ts';
+import { LinkemFissoScraper } from './linkem.ts';
 
 export function createScraper(
   operatoreId: string,
@@ -128,6 +129,9 @@ export function createScraper(
   if (operatoreId === 'windtre' && commodity === 'fisso') {
     return new WindtreFissoScraper(source);
   }
+  if (operatoreId === 'linkem' && commodity === 'fisso') {
+    return new LinkemFissoScraper(source);
+  }
   return null;
 }
 
@@ -157,4 +161,5 @@ export { VeryMobileScraper } from './very.ts';
 export { TiscaliMobileScraper, TiscaliFissoScraper } from './tiscali.ts';
 export { DimensioneMobileScraper } from './dimensione.ts';
 export { WindtreMobileScraper, WindtreFissoScraper } from './windtre.ts';
+export { LinkemFissoScraper } from './linkem.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';

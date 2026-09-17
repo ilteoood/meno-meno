@@ -172,6 +172,9 @@ function buildSource(
   if (live && operatore === 'windtre' && commodity === 'fisso') {
     return { kind: 'live', url: 'https://www.windtre.it/offerte-fibra' };
   }
+  if (live && operatore === 'linkem' && commodity === 'fisso') {
+    return { kind: 'live', url: 'https://www.linkem.com/' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
