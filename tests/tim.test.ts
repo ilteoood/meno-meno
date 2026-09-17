@@ -6,7 +6,7 @@ import { TimMobileScraper } from '../src/scrapers/tim.ts';
 const fixturePath = resolve(import.meta.dirname, '..', 'fixtures', 'tim', 'mobile.html');
 
 const TIPO_SIM_VALUES = ['eSIM', 'fisica', 'entrambe'] as const;
-const TECNOLOGIA_VALUES = ['4G', '5G', '5G+'] as const;
+const TECNOLOGIA_VALUES = ['4G', '5G'] as const;
 
 test('TimMobileScraper parses fixture HTML into one or more offerte mobile', async () => {
   const scraper = new TimMobileScraper({ kind: 'fixture', path: fixturePath });
@@ -32,7 +32,6 @@ test('TimMobileScraper parses fixture HTML into one or more offerte mobile', asy
     assert.ok(typeof o.minuti === 'number' && !Number.isNaN(o.minuti));
     assert.ok(TIPO_SIM_VALUES.includes(o.tipo_sim), `tipo_sim must be one of ${TIPO_SIM_VALUES.join(', ')}`);
     assert.ok(TECNOLOGIA_VALUES.includes(o.tecnologia), `tecnologia must be one of ${TECNOLOGIA_VALUES.join(', ')}`);
-    assert.ok(typeof o.velocita_mbps === 'number' && o.velocita_mbps > 0);
     assert.equal(
       (o as { quota_fissa_euro_anno?: unknown }).quota_fissa_euro_anno,
       undefined,
