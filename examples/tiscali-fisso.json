@@ -1,0 +1,58 @@
+{
+  "commodity": "fisso",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 4,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "fisso",
+        "operatore_id": "tiscali",
+        "codice_offerta": "casa-fibra-power",
+        "nome_commerciale": "Casa Fibra Power",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tiscali/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 19.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tiscali",
+        "codice_offerta": "casa-fibra-power-home-safe",
+        "nome_commerciale": "Casa Fibra Power Home Safe",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tiscali/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 22.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tiscali",
+        "codice_offerta": "casa-fibra-power-home-safe-mobile-350-giga-5G",
+        "nome_commerciale": "Casa Fibra Power Home Safe + Mobile 350 5G Pro",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tiscali/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 23.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tiscali",
+        "codice_offerta": "casa-fibra-power-home-safe-mobile-200-giga",
+        "nome_commerciale": "Casa Fibra Power Home Safe + Mobile 200 Pro",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tiscali/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 23.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      }
+    ],
+    "bundle": []
+  }
+}

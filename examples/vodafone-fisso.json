@@ -1,0 +1,70 @@
+{
+  "commodity": "fisso",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 5,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "fisso",
+        "operatore_id": "vodafone",
+        "codice_offerta": "casa-start",
+        "nome_commerciale": "L’offerta base per Internet a casa",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/vodafone/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 27.95,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 0,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "vodafone",
+        "codice_offerta": "internet-unlimited-fw",
+        "nome_commerciale": "Internet a casa senza limiti",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/vodafone/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 27.95,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 0,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "vodafone",
+        "codice_offerta": "wifi-da-te-pro",
+        "nome_commerciale": "Internet veloce e vantaggi speciali",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/vodafone/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 29.95,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 0,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "vodafone",
+        "codice_offerta": "casa-pro",
+        "nome_commerciale": "Internet veloce e casa al sicuro",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/vodafone/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 29.95,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 0,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "vodafone",
+        "codice_offerta": "wifi-da-te-ultra",
+        "nome_commerciale": "Massima potenza e vantaggi extra",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/vodafone/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 36.95,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 0,
+        "costo_attivazione_euro": 0
+      }
+    ],
+    "bundle": []
+  }
+}

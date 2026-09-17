@@ -1,0 +1,34 @@
+{
+  "commodity": "fisso",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 2,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "fisso",
+        "operatore_id": "skywifi",
+        "codice_offerta": "fisso-non-sei-ancora-cliente-tv",
+        "nome_commerciale": "Non sei ancora cliente TV?",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/skywifi/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 29.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 1000,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "skywifi",
+        "codice_offerta": "fisso-sei-gia-cliente-tv",
+        "nome_commerciale": "Sei già cliente TV?",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/skywifi/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 20.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 1000,
+        "costo_attivazione_euro": 0
+      }
+    ],
+    "bundle": []
+  }
+}

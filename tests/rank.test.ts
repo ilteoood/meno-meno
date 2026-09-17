@@ -110,6 +110,47 @@ function mobileFixtures(): readonly Offerta[] {
   ];
 }
 
+function fissoFixtures(): readonly Offerta[] {
+  return [
+    {
+      commodity: 'fisso',
+      operatore_id: 'tim',
+      codice_offerta: 'TIM-WIFI-CASA-001',
+      nome_commerciale: 'TIM WiFi Casa',
+      url_sorgente: 'https://www.tim.it/fisso-e-mobile/fibra-e-adsl',
+      scraped_at: '2026-09-13T10:00:00.000Z',
+      prezzo_effettivo_euro_mese: 31.9,
+      tecnologia: 'FTTH',
+      velocita_mbps: 2500,
+      costo_attivazione_euro: 0,
+    },
+    {
+      commodity: 'fisso',
+      operatore_id: 'eolo',
+      codice_offerta: 'EOLO-CASA-001',
+      nome_commerciale: 'EOLO Casa',
+      url_sorgente: 'https://www.eolo.it/',
+      scraped_at: '2026-09-13T10:00:00.000Z',
+      prezzo_effettivo_euro_mese: 24.9,
+      tecnologia: 'FWA',
+      velocita_mbps: 100,
+      costo_attivazione_euro: 0,
+    },
+    {
+      commodity: 'fisso',
+      operatore_id: 'linkem',
+      codice_offerta: 'LINKEM-FWA-5G-001',
+      nome_commerciale: 'Casa FWA 5G',
+      url_sorgente: 'https://www.linkem.com/',
+      scraped_at: '2026-09-13T10:00:00.000Z',
+      prezzo_effettivo_euro_mese: 25.9,
+      tecnologia: 'FWA',
+      velocita_mbps: 0,
+      costo_attivazione_euro: 0,
+    },
+  ];
+}
+
 test('costoAnnuoStimato luce: prezzo × consumo tipo + quota fissa', () => {
   const o = luceEnelFixture()[0];
   assert.equal(costoAnnuoStimato(o), 0.12 * CONSUMO_TIPO_KWH_LUCE + 84);
@@ -223,6 +264,47 @@ test('renderRankedSections: mobile usa GB inclusi invece di verde/fissità', () 
   const sections = renderRankedSections(rank);
   assert.match(sections.top3, /GB inclusi: /);
   assert.doesNotMatch(sections.top3, /Verde:/);
+});
+
+test('costoAnnuoStimato fisso: prezzo × 12 + costo attivazione (ADR 0011)', () => {
+  const fisso = fissoFixtures()[0];
+  const actual = costoAnnuoStimato(fisso);
+  const expected = 31.9 * 12;
+  assert.ok(
+    Math.abs(actual - expected) < 1e-9,
+    `expected ${expected}, got ${actual}`,
+  );
+  const fissoWithAttivazione: Offerta = { ...fisso, costo_attivazione_euro: 39 };
+  assert.equal(
+    costoAnnuoStimato(fissoWithAttivazione),
+    actual + 39,
+  );
+});
+
+test('rankOfferte fisso: top-3 ordinate per costo annuo crescente, filtra altre commodity', () => {
+  const mixed: readonly Offerta[] = [
+    ...fissoFixtures(),
+    mobileFixtures()[0],
+  ];
+  const rank = rankOfferte({ commodity: 'fisso', offerte: mixed });
+  assert.equal(rank.top.length, 3);
+  for (const s of rank.top) assert.equal(s.offerta.commodity, 'fisso');
+  assert.equal(rank.top[0]!.offerta.operatore_id, 'eolo');
+  for (let i = 1; i < rank.top.length; i++) {
+    assert.ok(
+      rank.top[i]!.costo_annuo_stimato_euro >= rank.top[i - 1]!.costo_annuo_stimato_euro,
+      'top fisso deve essere ordinato per costo annuo crescente',
+    );
+  }
+});
+
+test('renderRankedSections: fisso usa Tecnologia e Velocità invece di verde/fissità', () => {
+  const rank = rankOfferte({ commodity: 'fisso', offerte: fissoFixtures() });
+  const sections = renderRankedSections(rank);
+  assert.match(sections.top3, /Tecnologia: \[/);
+  assert.match(sections.top3, /Velocità: \d+ Mbps/);
+  assert.doesNotMatch(sections.top3, /Verde:/);
+  assert.doesNotMatch(sections.top3, /GB inclusi:/);
 });
 
 test('renderRankedSections: top3 vuoto quando tutte D-flagged', () => {

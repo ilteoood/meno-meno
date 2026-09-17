@@ -1,0 +1,10 @@
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,fisso,tim,tim-wifi-casa,,TIM WiFi Casa,31.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tim/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tim,tim-wifi-casa-timvision-s,,TIM WiFi Casa + TIMVISION S,46.89,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tim/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tim,tim-wifi-casa-timvision-xs,,TIM WiFi Casa + TIMVISION XS,40.89,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tim/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tim,fibra-wifi-casa,,TIM WiFi Casa con opzione 10 Giga,36.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tim/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tim,fibra-solo-online,,TIM WiFi Digital,26.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tim/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tim,seconde-case,,Scopri le offerte WiFi di TIM per la tua Seconda Casa,14.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tim/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tim,wifi-portatile,,TIM WiFi Go,29.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tim/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tim,fibra-young-gaming,,TIM WiFi Casa per Gamers,28.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tim/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tim,premium-12-fibra,,PREMIUM 12 Fibra,34.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tim/fisso.html,2026-09-13T10:00:00.000Z

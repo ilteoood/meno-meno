@@ -1,0 +1,5 @@
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,fisso,tiscali,casa-fibra-power,,Casa Fibra Power,19.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tiscali/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tiscali,casa-fibra-power-home-safe,,Casa Fibra Power Home Safe,22.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tiscali/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tiscali,casa-fibra-power-home-safe-mobile-350-giga-5G,,Casa Fibra Power Home Safe + Mobile 350 5G Pro,23.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tiscali/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,tiscali,casa-fibra-power-home-safe-mobile-200-giga,,Casa Fibra Power Home Safe + Mobile 200 Pro,23.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/tiscali/fisso.html,2026-09-13T10:00:00.000Z

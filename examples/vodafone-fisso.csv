@@ -1,0 +1,6 @@
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,fisso,vodafone,casa-start,,L’offerta base per Internet a casa,27.95,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/vodafone/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,vodafone,internet-unlimited-fw,,Internet a casa senza limiti,27.95,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/vodafone/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,vodafone,wifi-da-te-pro,,Internet veloce e vantaggi speciali,29.95,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/vodafone/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,vodafone,casa-pro,,Internet veloce e casa al sicuro,29.95,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/vodafone/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,vodafone,wifi-da-te-ultra,,Massima potenza e vantaggi extra,36.95,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/vodafone/fisso.html,2026-09-13T10:00:00.000Z

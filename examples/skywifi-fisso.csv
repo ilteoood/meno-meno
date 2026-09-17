@@ -1,0 +1,3 @@
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,fisso,skywifi,fisso-non-sei-ancora-cliente-tv,,Non sei ancora cliente TV?,29.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/skywifi/fisso.html,2026-09-13T10:00:00.000Z
+Offerta,fisso,skywifi,fisso-sei-gia-cliente-tv,,Sei già cliente TV?,20.9,EUR/mese,undefined,,,,,,FTTH,0,,,file:///root/workspaces/meno-meno/fixtures/skywifi/fisso.html,2026-09-13T10:00:00.000Z
