@@ -82,6 +82,9 @@ function buildSource(
   if (live && operatore === 'edison' && commodity === 'luce') {
     return { kind: 'live', url: 'https://www.edisonenergia.it/edison/casa/luce' };
   }
+  if (live && operatore === 'eolo' && commodity === 'fisso') {
+    return { kind: 'live', url: 'https://www.eolo.it/' };
+  }
   if (live && operatore === 'plenitude' && commodity === 'luce') {
     return { kind: 'live', url: 'https://eniplenitude.com/offerta/casa/gas-e-luce/offerte-energia-elettrica' };
   }
