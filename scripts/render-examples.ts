@@ -675,11 +675,10 @@ function parseTimFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'tim',
@@ -692,7 +691,6 @@ function parseTimFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -735,11 +733,10 @@ function parseVodafoneFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'vodafone',
@@ -752,7 +749,6 @@ function parseVodafoneFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -795,11 +791,10 @@ function parseIliadFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'iliad',
@@ -812,7 +807,6 @@ function parseIliadFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -855,11 +849,10 @@ function parseFastwebFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'fastweb',
@@ -872,7 +865,6 @@ function parseFastwebFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -915,11 +907,10 @@ function parseSkywifiFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'skywifi',
@@ -932,7 +923,6 @@ function parseSkywifiFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -975,11 +965,10 @@ function parsePostemobileFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'postemobile',
@@ -992,7 +981,6 @@ function parsePostemobileFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -1035,11 +1023,10 @@ function parseHoFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'ho',
@@ -1052,7 +1039,6 @@ function parseHoFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -1095,11 +1081,10 @@ function parseKenaFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'kena',
@@ -1112,7 +1097,6 @@ function parseKenaFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -1155,11 +1139,10 @@ function parseVeryFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'very',
@@ -1172,7 +1155,6 @@ function parseVeryFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -1215,11 +1197,10 @@ function parseTiscaliFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'tiscali',
@@ -1232,7 +1213,6 @@ function parseTiscaliFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -1275,11 +1255,10 @@ function parseDimensioneFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'dimensione',
@@ -1292,7 +1271,6 @@ function parseDimensioneFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
@@ -1335,11 +1313,10 @@ function parseWindtreFixture(html: string): readonly Offerta[] {
     const minuti = isIllimitato(minutiText) ? -1 : Number(minutiText.match(/(\d+)/)?.[1] ?? '0');
     const tecnologia = (() => {
       const v = techText.trim().toUpperCase();
-      if (v === '5G+' || v === '5G PLUS') return '5G+' as const;
-      if (v === '5G') return '5G' as const;
+      if (v.startsWith('5G')) return '5G' as const;
+      return '4G' as const;
       return '4G' as const;
     })();
-    const velocita = tecnologia === '5G+' ? 2000 : tecnologia === '5G' ? 1000 : 150;
     cards.push({
       commodity: 'mobile' satisfies Commodity,
       operatore_id: 'windtre',
@@ -1352,7 +1329,6 @@ function parseWindtreFixture(html: string): readonly Offerta[] {
       minuti,
       tipo_sim: 'entrambe',
       tecnologia,
-      velocita_mbps: velocita,
     });
   });
   return cards;
