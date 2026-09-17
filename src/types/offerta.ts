@@ -5,7 +5,7 @@ export type Commodity = 'luce' | 'gas' | 'mobile' | 'fisso';
 export type GreenFlag = 'A' | 'B' | 'C' | 'D';
 export type TipoSim = 'eSIM' | 'fisica' | 'entrambe';
 
-export type TecnologiaMobile = '4G' | '5G' | '5G+';
+export type TecnologiaMobile = '4G' | '5G';
 export type TecnologiaFisso = 'FTTH' | 'FTTC' | 'ADSL';
 
 export type MeccanismoPrezzo =
@@ -50,7 +50,6 @@ export interface OffertaMobile extends OffertaBase {
   tipo_sim: TipoSim;
   costo_attivazione_euro?: number;
   tecnologia: TecnologiaMobile;
-  velocita_mbps: number;
 }
 
 export interface OffertaFisso extends OffertaBase {

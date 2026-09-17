@@ -16,7 +16,6 @@ const COLUMNS = [
   'minuti',
   'tipo_sim',
   'tecnologia',
-  'velocita_mbps',
   'costo_attivazione_euro',
   'durata_mesi',
   'sconto_bundle_euro_anno',
@@ -40,12 +39,11 @@ const IDX = {
   minuti: 12,
   tipo_sim: 13,
   tecnologia: 14,
-  velocita_mbps: 15,
-  costo_attivazione_euro: 16,
-  durata_mesi: 17,
-  sconto_bundle_euro_anno: 18,
-  url_sorgente: 19,
-  scraped_at: 20,
+  costo_attivazione_euro: 15,
+  durata_mesi: 16,
+  sconto_bundle_euro_anno: 17,
+  url_sorgente: 18,
+  scraped_at: 19,
 } as const;
 
 function escapeCsv(value: string | number | undefined): string {
@@ -87,7 +85,6 @@ function rowFor(o: Offerta): readonly string[] {
       out[IDX.minuti] = String(o.minuti);
       out[IDX.tipo_sim] = o.tipo_sim;
       out[IDX.tecnologia] = o.tecnologia;
-      out[IDX.velocita_mbps] = String(o.velocita_mbps);
       if (o.costo_attivazione_euro !== undefined) {
         out[IDX.costo_attivazione_euro] = String(o.costo_attivazione_euro);
       }
@@ -96,7 +93,6 @@ function rowFor(o: Offerta): readonly string[] {
       out[IDX.prezzo_effettivo] = String(o.prezzo_effettivo_euro_mese);
       out[IDX.unita_prezzo] = 'EUR/mese';
       out[IDX.tecnologia] = o.tecnologia;
-      out[IDX.velocita_mbps] = String(o.velocita_mbps);
       if (o.costo_attivazione_euro !== undefined) {
         out[IDX.costo_attivazione_euro] = String(o.costo_attivazione_euro);
       }

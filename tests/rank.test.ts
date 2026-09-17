@@ -91,8 +91,7 @@ function mobileFixtures(): readonly Offerta[] {
       gb: 300,
       minuti: -1,
       tipo_sim: 'eSIM',
-      tecnologia: '5G+',
-      velocita_mbps: 1500,
+      tecnologia: '5G',
     },
     {
       commodity: 'mobile',
