@@ -22,6 +22,7 @@ export const V1_FIXTURE_SOURCES: readonly V1FixtureSource[] = [
   { operatore: 'tim', commodity: 'fisso', url: 'https://www.tim.it/fisso-e-mobile/fibra-e-adsl', playwright: false },
   { operatore: 'windtre', commodity: 'mobile', url: 'https://www.windtre.it/offerte-mobile', playwright: true },
   { operatore: 'vodafone', commodity: 'mobile', url: 'https://privati.vodafone.it/mobile/telefonia-mobile', playwright: true },
+  { operatore: 'vodafone', commodity: 'fisso', url: 'https://privati.vodafone.it/casa/fibra', playwright: true },
   { operatore: 'iliad', commodity: 'mobile', url: 'https://www.iliad.it/offerte-iliad-mobile.html', playwright: false },
   { operatore: 'fastweb', commodity: 'mobile', url: 'https://www.fastweb.it/adsl-fibra-ottica/offerta-mobile', playwright: false },
   { operatore: 'fastweb', commodity: 'fisso', url: 'https://www.fastweb.it/adsl-fibra-ottica/', playwright: false },
