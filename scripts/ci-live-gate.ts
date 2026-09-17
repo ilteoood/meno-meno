@@ -24,13 +24,16 @@ export function extractAffectedOperators(files: readonly string[]): Set<string> 
   return ids;
 }
 
-export function requiresPlaywright(operatorId: string): boolean {
-  return V1_FIXTURE_SOURCES.some((s) => s.operatore === operatorId && s.playwright);
+export function requiresPlaywright(operatorId: string, commodity?: string): boolean {
+  return V1_FIXTURE_SOURCES.some((s) =>
+    s.operatore === operatorId &&
+    (commodity === undefined || s.commodity === commodity) &&
+    s.playwright,
+  );
 }
 
-function lookupCommodity(operatorId: string): string | null {
-  const source = V1_FIXTURE_SOURCES.find((s) => s.operatore === operatorId);
-  return source ? source.commodity : null;
+function lookupCommodities(operatorId: string): readonly string[] {
+  return V1_FIXTURE_SOURCES.filter((s) => s.operatore === operatorId).map((s) => s.commodity);
 }
 
 function runLive(operatorId: string, commodity: string): Promise<{ exitCode: number; stdout: string; stderr: string }> {
@@ -95,23 +98,25 @@ async function main(): Promise<void> {
 
   let anyFailed = false;
   for (const id of sortedOperators) {
-    const commodity = lookupCommodity(id);
-    if (commodity === null) {
+    const commodities = lookupCommodities(id);
+    if (commodities.length === 0) {
       process.stdout.write(`ci-live-gate: skip ${id} (not in v1 operator registry)\n`);
       continue;
     }
-    if (requiresPlaywright(id)) {
-      process.stdout.write(`ci-live-gate: skip ${id}/${commodity} (Playwright required, Chromium not downloaded in CI)\n`);
-      continue;
-    }
-    process.stdout.write(`\n--- ci-live-gate: ${id}/${commodity} ---\n`);
-    const { exitCode, stderr } = await runLive(id, commodity);
-    if (exitCode !== 0) {
-      if (DRIFT_ERROR_RE.test(stderr)) {
-        process.stderr.write(`ci-live-gate: drift ${id}/${commodity} — live page shape differs from fixture contract; refresh fixture (ADR 0006)\n`);
-      } else {
-        process.stderr.write(`ci-live-gate: FAILED ${id}/${commodity} (exit ${exitCode}); stderr: ${stderr.trim() || '<empty>'}\n`);
-        anyFailed = true;
+    for (const commodity of commodities) {
+      if (requiresPlaywright(id, commodity)) {
+        process.stdout.write(`ci-live-gate: skip ${id}/${commodity} (Playwright required, Chromium not downloaded in CI)\n`);
+        continue;
+      }
+      process.stdout.write(`\n--- ci-live-gate: ${id}/${commodity} ---\n`);
+      const { exitCode, stderr } = await runLive(id, commodity);
+      if (exitCode !== 0) {
+        if (DRIFT_ERROR_RE.test(stderr)) {
+          process.stderr.write(`ci-live-gate: drift ${id}/${commodity} — live page shape differs from fixture contract; refresh fixture (ADR 0006)\n`);
+        } else {
+          process.stderr.write(`ci-live-gate: FAILED ${id}/${commodity} (exit ${exitCode}); stderr: ${stderr.trim() || '<empty>'}\n`);
+          anyFailed = true;
+        }
       }
     }
   }

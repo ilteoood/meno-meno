@@ -13,10 +13,12 @@ const enelFixture = (): { kind: 'fixture'; path: string } => ({
 test('runDoctor returns one row per v1 operator+commodity', async () => {
   const report = await runDoctor({ source: enelFixture() });
   assert.equal(report.rows.length, V1_FIXTURE_SOURCES.length);
-  assert.equal(report.rows.length, 24);
+  assert.equal(report.rows.length, 25);
   for (const src of V1_FIXTURE_SOURCES) {
-    const row = report.rows.find((r) => r.operatore_id === src.operatore);
-    assert.ok(row, `missing row for ${src.operatore}`);
+    const row = report.rows.find(
+      (r) => r.operatore_id === src.operatore && r.commodity === src.commodity,
+    );
+    assert.ok(row, `missing row for ${src.operatore}/${src.commodity}`);
     assert.equal(row!.commodity, src.commodity);
   }
 });
@@ -106,7 +108,7 @@ test('markdown report header carries the operator table', async () => {
 
 test('runDoctor default mode resolves each row against its per-operator <op>/<commodity>.html fixture', async () => {
   const report = await runDoctor();
-  assert.equal(report.rows.length, 24);
+  assert.equal(report.rows.length, 25);
   const expectedDegraded = new Set(['acea', 'nen']);
   let parsedOkCount = 0;
   for (const row of report.rows) {
@@ -120,7 +122,7 @@ test('runDoctor default mode resolves each row against its per-operator <op>/<co
     assert.ok(row.offerte_count > 0, `${row.operatore_id}/${row.commodity} parsed 0 offers from its fixture`);
     parsedOkCount += 1;
   }
-  assert.equal(parsedOkCount, 22);
+  assert.equal(parsedOkCount, 23);
   assert.equal(report.ok, false);
 });
 

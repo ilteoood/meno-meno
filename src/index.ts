@@ -124,6 +124,9 @@ function buildSource(
   if (live && operatore === 'fastweb' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.fastweb.it/adsl-fibra-ottica/offerta-mobile' };
   }
+  if (live && operatore === 'fastweb' && commodity === 'fisso') {
+    return { kind: 'live', url: 'https://www.fastweb.it/adsl-fibra-ottica/' };
+  }
   if (live && operatore === 'skywifi' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.sky.it/mobile' };
   }

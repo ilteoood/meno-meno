@@ -2,13 +2,16 @@ import { load, type Cheerio, type CheerioAPI } from 'cheerio';
 import { readFile } from 'node:fs/promises';
 import type {
   Commodity as CommodityType,
+  OffertaFisso,
   OffertaMobile,
+  TecnologiaFisso,
   TecnologiaMobile,
   TipoSim,
 } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
 
 const FASTWEB_MOBILE_URL = 'https://www.fastweb.it/adsl-fibra-ottica/offerta-mobile';
+const FASTWEB_FISSO_URL = 'https://www.fastweb.it/adsl-fibra-ottica/';
 const SCRAPER_TIMEOUT_MS = 15_000;
 
 const DESKTOP_UA =
@@ -161,6 +164,129 @@ export class FastwebMobileScraper implements Scraper {
 
       const url = this.source.kind === 'live' ? this.source.url : `file://${this.source.path}`;
       const offerte = cards.map((c) => toOffertaMobile(c, url, scrapedAt));
+      return { ok: true, source: this.source, scrapedAt, offerte };
+    } catch (err) {
+      return {
+        ok: false,
+        source: this.source,
+        scrapedAt,
+        error: err instanceof Error ? err.message : String(err),
+      };
+    }
+  }
+}
+
+interface ParsedFissoCard {
+  codice_offerta: string;
+  nome_commerciale: string;
+  prezzo_effettivo_euro_mese: number;
+  detailUrl: string;
+}
+
+function parseFissoOfferCards(html: string, pageUrl: string): readonly ParsedFissoCard[] {
+  const $ = load(html);
+  const cards: ParsedFissoCard[] = [];
+
+  $('.item.offer_card').each((_, el) => {
+    const $el = $(el);
+    const $name = $el.find('.oname').first().clone();
+    $name.find('svg, .labelhdr').remove();
+    const nome = $name.text().trim();
+    if (!nome) return;
+
+    const prezzoText = $el.find('.pricebox .price').first().text();
+    const prezzo = parsePriceEur(prezzoText);
+    if (prezzo === null) return;
+
+    const href = $el.find('.pricebox a[href]')
+      .filter((_, a) => {
+        const h = $(a).attr('href') ?? '';
+        return !h.includes('/dettagli/') && h.includes('fastweb-casa-');
+      })
+      .first()
+      .attr('href');
+    if (!href) return;
+
+    const detailUrl = href.startsWith('http') ? href : new URL(href, pageUrl).toString();
+    cards.push({
+      codice_offerta: slugFromHref(href, nome),
+      nome_commerciale: nome,
+      prezzo_effettivo_euro_mese: prezzo,
+      detailUrl,
+    });
+  });
+
+  return cards;
+}
+
+function parseVelocitaMbps(html: string): number {
+  const text = load(html)('body').text();
+  const gbps = text.match(/fino a (\d+(?:[.,]\d+)?)\s*Gigabit\/s/i);
+  if (gbps) return Math.round(Number(gbps[1]!.replace(',', '.')) * 1000);
+  const mbps = text.match(/fino a (\d+(?:[.,]\d+)?)\s*Megabit\/s/i);
+  if (mbps) return Math.round(Number(mbps[1]!.replace(',', '.')));
+  return 0;
+}
+
+function toOffertaFisso(
+  card: ParsedFissoCard,
+  velocita_mbps: number,
+  url: string,
+  scrapedAt: string,
+): OffertaFisso {
+  return {
+    commodity: 'fisso' satisfies CommodityType,
+    operatore_id: 'fastweb',
+    codice_offerta: card.codice_offerta,
+    nome_commerciale: card.nome_commerciale,
+    url_sorgente: url,
+    scraped_at: scrapedAt,
+    prezzo_effettivo_euro_mese: card.prezzo_effettivo_euro_mese,
+    tecnologia: 'FTTH' satisfies TecnologiaFisso,
+    velocita_mbps,
+    costo_attivazione_euro: 0,
+  };
+}
+
+export class FastwebFissoScraper implements Scraper {
+  readonly operatoreId = 'fastweb';
+  readonly commodity: CommodityType = 'fisso';
+  readonly source: ScrapeSource;
+
+  constructor(source: ScrapeSource) {
+    this.source = source;
+  }
+
+  async scrape(): Promise<ScrapeResult> {
+    const scrapedAt = nowIso();
+    try {
+      const html =
+        this.source.kind === 'fixture'
+          ? await readFile(this.source.path, 'utf8')
+          : await fetchHtml(this.source.url, AbortSignal.timeout(SCRAPER_TIMEOUT_MS));
+      const pageUrl = this.source.kind === 'live' ? this.source.url : `file://${this.source.path}`;
+      const cards = parseFissoOfferCards(html, pageUrl);
+      if (cards.length === 0) {
+        return {
+          ok: false,
+          source: this.source,
+          scrapedAt,
+          error: 'no offer cards parsed from source',
+        };
+      }
+
+      const velocitaMbpsPerCard = await Promise.all(cards.map(async (c) => {
+        if (this.source.kind === 'fixture') return 0;
+        try {
+          const detailHtml = await fetchHtml(c.detailUrl, AbortSignal.timeout(SCRAPER_TIMEOUT_MS));
+          return parseVelocitaMbps(detailHtml);
+        } catch {
+          return 0;
+        }
+      }));
+
+      const url = pageUrl;
+      const offerte = cards.map((c, i) => toOffertaFisso(c, velocitaMbpsPerCard[i] ?? 0, url, scrapedAt));
       return { ok: true, source: this.source, scrapedAt, offerte };
     } catch (err) {
       return {
