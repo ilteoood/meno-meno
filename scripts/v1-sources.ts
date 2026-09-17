@@ -35,5 +35,6 @@ export const V1_FIXTURE_SOURCES: readonly V1FixtureSource[] = [
   { operatore: 'kena', commodity: 'mobile', url: 'https://www.kenamobile.it/offerte/', playwright: false },
   { operatore: 'very', commodity: 'mobile', url: 'https://verymobile.it/offerte', playwright: false },
   { operatore: 'tiscali', commodity: 'mobile', url: 'https://casa.tiscali.it/mobile/', playwright: false },
+  { operatore: 'tiscali', commodity: 'fisso', url: 'https://casa.tiscali.it/', playwright: false },
   { operatore: 'dimensione', commodity: 'mobile', url: 'https://www.dimensione.com/portale/sim-mobile/index.php', playwright: false },
 ];
