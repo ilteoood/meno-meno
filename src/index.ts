@@ -157,6 +157,9 @@ function buildSource(
   if (live && operatore === 'windtre' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.windtre.it/offerte-mobile' };
   }
+  if (live && operatore === 'windtre' && commodity === 'fisso') {
+    return { kind: 'live', url: 'https://www.windtre.it/offerte-fibra' };
+  }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
 }
 
