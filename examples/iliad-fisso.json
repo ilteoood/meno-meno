@@ -1,0 +1,22 @@
+{
+  "commodity": "fisso",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 1,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "fisso",
+        "operatore_id": "iliad",
+        "codice_offerta": "fibra-super-iliadbox",
+        "nome_commerciale": "Iliadbox Super",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/iliad/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 22.99,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 5000,
+        "costo_attivazione_euro": 0
+      }
+    ],
+    "bundle": []
+  }
+}

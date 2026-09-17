@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { load } from 'cheerio';
 import type { Commodity, Offerta, OffertaBundle } from '../src/types/offerta.ts';
 import { format } from '../src/formatters/index.ts';
+import { createScraper } from '../src/scrapers/index.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -32,6 +33,14 @@ const VERY_FIXTURE = resolve(ROOT, 'fixtures/very/mobile.html');
 const TISCALI_FIXTURE = resolve(ROOT, 'fixtures/tiscali/mobile.html');
 const DIMENSIONE_FIXTURE = resolve(ROOT, 'fixtures/dimensione/mobile.html');
 const WINDTRE_FIXTURE = resolve(ROOT, 'fixtures/windtre/mobile.html');
+const TIM_FISSO_FIXTURE = resolve(ROOT, 'fixtures/tim/fisso.html');
+const VODAFONE_FISSO_FIXTURE = resolve(ROOT, 'fixtures/vodafone/fisso.html');
+const ILIAD_FISSO_FIXTURE = resolve(ROOT, 'fixtures/iliad/fisso.html');
+const SKYWIFI_FISSO_FIXTURE = resolve(ROOT, 'fixtures/skywifi/fisso.html');
+const TISCALI_FISSO_FIXTURE = resolve(ROOT, 'fixtures/tiscali/fisso.html');
+const WINDTRE_FISSO_FIXTURE = resolve(ROOT, 'fixtures/windtre/fisso.html');
+const EOLO_FISSO_FIXTURE = resolve(ROOT, 'fixtures/eolo/fisso.html');
+const LINKEM_FISSO_FIXTURE = resolve(ROOT, 'fixtures/linkem/fisso.html');
 const BUNDLES_FIXTURE = resolve(ROOT, 'fixtures/bundles/luce-gas.json');
 const SCRAPED_AT = '2026-09-13T10:00:00.000Z';
 
@@ -1349,32 +1358,67 @@ async function renderWindtreExample(): Promise<void> {
   process.stdout.write(`rendered examples/windtre-mobile.{md,csv,json} (${offerte.length} offerte)\n`);
 }
 
+// ponytail: deterministic timestamp requires post-scrape override; scraper assigns nowIso() at runtime.
+async function renderFissoExample(operatore: string, fixturePath: string): Promise<void> {
+  const scraper = createScraper(operatore, 'fisso', { kind: 'fixture', path: fixturePath });
+  if (!scraper) throw new Error(`no scraper registered for ${operatore}/fisso`);
+  const result = await scraper.scrape();
+  if (!result.ok) throw new Error(`scrape failed for ${operatore}/fisso: ${result.error}`);
+  const offerte = result.offerte.map((o) => ({ ...o, scraped_at: SCRAPED_AT }));
+  const output = format({
+    commodity: 'fisso',
+    scrapedAt: SCRAPED_AT,
+    offerte,
+    bundle: [],
+    warnings: [],
+    sourceCount: { ok: 1, total: 1 },
+  });
+  await writeExample(`${operatore}-fisso`, output);
+  process.stdout.write(`rendered examples/${operatore}-fisso.{md,csv,json} (${offerte.length} offerte)\n`);
+}
+
+async function safeRender(label: string, fn: () => Promise<void>): Promise<void> {
+  try {
+    await fn();
+  } catch (err) {
+    process.stderr.write(`skip ${label}: ${(err as Error).message}\n`);
+  }
+}
+
 async function main(): Promise<void> {
-  await renderEnelExample();
-  await renderEdisonExample();
-  await renderPlenitudeExample();
-  await renderA2aExample();
-  await renderIrenExample();
-  await renderHeraExample();
-  await renderAceaExample();
-  await renderSorgeniaExample();
-  await renderIllumiaExample();
-  await renderEngieExample();
-  await renderOctopusExample();
-  await renderNenExample();
-  await renderTimExample();
-  await renderVodafoneExample();
-  await renderIliadExample();
-  await renderFastwebExample();
-  await renderSkywifiExample();
-  await renderPostemobileExample();
-  await renderHoExample();
-  await renderKenaExample();
-  await renderVeryExample();
-  await renderTiscaliExample();
-  await renderDimensioneExample();
-  await renderWindtreExample();
-  await renderBundleExample();
+  await safeRender('enel-luce', renderEnelExample);
+  await safeRender('edison-luce', renderEdisonExample);
+  await safeRender('plenitude-luce', renderPlenitudeExample);
+  await safeRender('a2a-luce', renderA2aExample);
+  await safeRender('iren-luce', renderIrenExample);
+  await safeRender('hera-luce', renderHeraExample);
+  await safeRender('acea-luce', renderAceaExample);
+  await safeRender('sorgenia-luce', renderSorgeniaExample);
+  await safeRender('illumia-luce', renderIllumiaExample);
+  await safeRender('engie-luce', renderEngieExample);
+  await safeRender('octopus-luce', renderOctopusExample);
+  await safeRender('nen-luce', renderNenExample);
+  await safeRender('tim-mobile', renderTimExample);
+  await safeRender('vodafone-mobile', renderVodafoneExample);
+  await safeRender('iliad-mobile', renderIliadExample);
+  await safeRender('fastweb-mobile', renderFastwebExample);
+  await safeRender('skywifi-mobile', renderSkywifiExample);
+  await safeRender('postemobile-mobile', renderPostemobileExample);
+  await safeRender('ho-mobile', renderHoExample);
+  await safeRender('kena-mobile', renderKenaExample);
+  await safeRender('very-mobile', renderVeryExample);
+  await safeRender('tiscali-mobile', renderTiscaliExample);
+  await safeRender('dimensione-mobile', renderDimensioneExample);
+  await safeRender('windtre-mobile', renderWindtreExample);
+  await safeRender('tim-fisso', () => renderFissoExample('tim', TIM_FISSO_FIXTURE));
+  await safeRender('vodafone-fisso', () => renderFissoExample('vodafone', VODAFONE_FISSO_FIXTURE));
+  await safeRender('iliad-fisso', () => renderFissoExample('iliad', ILIAD_FISSO_FIXTURE));
+  await safeRender('skywifi-fisso', () => renderFissoExample('skywifi', SKYWIFI_FISSO_FIXTURE));
+  await safeRender('tiscali-fisso', () => renderFissoExample('tiscali', TISCALI_FISSO_FIXTURE));
+  await safeRender('windtre-fisso', () => renderFissoExample('windtre', WINDTRE_FISSO_FIXTURE));
+  await safeRender('eolo-fisso', () => renderFissoExample('eolo', EOLO_FISSO_FIXTURE));
+  await safeRender('linkem-fisso', () => renderFissoExample('linkem', LINKEM_FISSO_FIXTURE));
+  await safeRender('luce-gas-bundle', renderBundleExample);
 }
 
 void main();

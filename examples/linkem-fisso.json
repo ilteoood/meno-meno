@@ -1,0 +1,34 @@
+{
+  "commodity": "fisso",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 2,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "fisso",
+        "operatore_id": "linkem",
+        "codice_offerta": "casa-fwa-5g",
+        "nome_commerciale": "Casa FWA 5G",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/linkem/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 25.9,
+        "tecnologia": "FWA",
+        "velocita_mbps": 0,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "linkem",
+        "codice_offerta": "casa-fibra-power",
+        "nome_commerciale": "Casa Fibra Power",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/linkem/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 25.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      }
+    ],
+    "bundle": []
+  }
+}

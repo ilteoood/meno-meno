@@ -1,0 +1,118 @@
+{
+  "commodity": "fisso",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 9,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "fisso",
+        "operatore_id": "tim",
+        "codice_offerta": "tim-wifi-casa",
+        "nome_commerciale": "TIM WiFi Casa",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tim/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 31.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tim",
+        "codice_offerta": "tim-wifi-casa-timvision-s",
+        "nome_commerciale": "TIM WiFi Casa + TIMVISION S",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tim/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 46.89,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tim",
+        "codice_offerta": "tim-wifi-casa-timvision-xs",
+        "nome_commerciale": "TIM WiFi Casa + TIMVISION XS",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tim/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 40.89,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tim",
+        "codice_offerta": "fibra-wifi-casa",
+        "nome_commerciale": "TIM WiFi Casa con opzione 10 Giga",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tim/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 36.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 10000,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tim",
+        "codice_offerta": "fibra-solo-online",
+        "nome_commerciale": "TIM WiFi Digital",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tim/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 26.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tim",
+        "codice_offerta": "seconde-case",
+        "nome_commerciale": "Scopri le offerte WiFi di TIM per la tua Seconda Casa",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tim/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 14.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 0,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tim",
+        "codice_offerta": "wifi-portatile",
+        "nome_commerciale": "TIM WiFi Go",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tim/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 29.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 300,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tim",
+        "codice_offerta": "fibra-young-gaming",
+        "nome_commerciale": "TIM WiFi Casa per Gamers",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tim/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 28.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "tim",
+        "codice_offerta": "premium-12-fibra",
+        "nome_commerciale": "PREMIUM 12 Fibra",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/tim/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 34.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 1000,
+        "costo_attivazione_euro": 0
+      }
+    ],
+    "bundle": []
+  }
+}

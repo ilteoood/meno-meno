@@ -1,0 +1,58 @@
+{
+  "commodity": "fisso",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 4,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "fisso",
+        "operatore_id": "eolo",
+        "codice_offerta": "eolo-casa",
+        "nome_commerciale": "EOLO Casa",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/eolo/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 24.9,
+        "tecnologia": "FWA",
+        "velocita_mbps": 100,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "eolo",
+        "codice_offerta": "eolo-casa-plus",
+        "nome_commerciale": "EOLO Casa Plus",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/eolo/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 29.9,
+        "tecnologia": "FWA",
+        "velocita_mbps": 200,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "eolo",
+        "codice_offerta": "eolo-casa-max",
+        "nome_commerciale": "EOLO Casa Max",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/eolo/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 34.9,
+        "tecnologia": "FWA",
+        "velocita_mbps": 300,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "eolo",
+        "codice_offerta": "internet-1-giga",
+        "nome_commerciale": "EOLO Casa Max",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/eolo/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 34.9,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 0,
+        "costo_attivazione_euro": 0
+      }
+    ],
+    "bundle": []
+  }
+}

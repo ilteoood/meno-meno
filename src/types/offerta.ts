@@ -6,7 +6,7 @@ export type GreenFlag = 'A' | 'B' | 'C' | 'D';
 export type TipoSim = 'eSIM' | 'fisica' | 'entrambe';
 
 export type TecnologiaMobile = '4G' | '5G';
-export type TecnologiaFisso = 'FTTH' | 'FTTC' | 'ADSL';
+export type TecnologiaFisso = 'FTTH' | 'FTTC' | 'ADSL' | 'FWA';
 
 export type MeccanismoPrezzo =
   | { tipo: 'fisso' }

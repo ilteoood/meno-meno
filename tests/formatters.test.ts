@@ -130,3 +130,81 @@ test('json nests bundles under offerte.bundle', () => {
   assert.equal(parsed.offerte.bundle[0].sconto_bundle_euro_anno, 80);
   assert.equal(parsed.offerte.singole.length, 1);
 });
+
+const sampleFissoOfferte: readonly Offerta[] = [
+  {
+    commodity: 'fisso',
+    operatore_id: 'tim',
+    codice_offerta: 'TIM-WIFI-CASA-001',
+    nome_commerciale: 'TIM WiFi Casa',
+    url_sorgente: 'https://www.tim.it/fisso-e-mobile/fibra-e-adsl',
+    scraped_at: '2026-09-13T10:00:00.000Z',
+    prezzo_effettivo_euro_mese: 31.9,
+    tecnologia: 'FTTH',
+    velocita_mbps: 2500,
+    costo_attivazione_euro: 0,
+  },
+  {
+    commodity: 'fisso',
+    operatore_id: 'eolo',
+    codice_offerta: 'EOLO-CASA-001',
+    nome_commerciale: 'EOLO Casa',
+    url_sorgente: 'https://www.eolo.it/',
+    scraped_at: '2026-09-13T10:00:00.000Z',
+    prezzo_effettivo_euro_mese: 24.9,
+    tecnologia: 'FWA',
+    velocita_mbps: 100,
+    costo_attivazione_euro: 0,
+  },
+];
+
+const fissoInput = {
+  commodity: 'fisso' as const,
+  scrapedAt: '2026-09-13T10:00:00.000Z',
+  offerte: sampleFissoOfferte,
+  bundle: [] as readonly OffertaBundle[],
+  warnings: [] as readonly string[],
+  sourceCount: { ok: 1, total: 2 },
+};
+
+test('format emits fisso markdown with Tecnologia and Velocità Mbps columns', () => {
+  const out = format(fissoInput);
+  assert.match(out.markdown, /^# Confronto fisso — /m);
+  assert.match(out.markdown, /\| Operatore \| Offerta \| €/);
+  assert.match(out.markdown, /Tecnologia \| Velocità Mbps \|/);
+  assert.match(out.markdown, /\| tim \| TIM WiFi Casa \|/);
+  assert.match(out.markdown, /\| eolo \| EOLO Casa \|/);
+  assert.match(out.markdown, /FTTH/);
+  assert.match(out.markdown, /FWA/);
+});
+
+test('format emits fisso csv with tecnologia, costo_attivazione_euro cells', () => {
+  const out = format(fissoInput);
+  assert.match(out.csv, /Offerta,fisso,tim,TIM-WIFI-CASA-001/);
+  assert.match(out.csv, /Offerta,fisso,eolo,EOLO-CASA-001/);
+  assert.match(out.csv, /FTTH/);
+  assert.match(out.csv, /FWA/);
+  const timRow = out.csv.split('\n').find((l) => l.includes('TIM-WIFI-CASA-001'));
+  assert.ok(timRow);
+  assert.match(timRow!, /,31\.9,/);
+  assert.match(timRow!, /,FTTH,/);
+  assert.match(timRow!, /,0,/);
+  const eoloRow = out.csv.split('\n').find((l) => l.includes('EOLO-CASA-001'));
+  assert.ok(eoloRow);
+  assert.match(eoloRow!, /,FWA,/);
+});
+
+test('format emits fisso JSON with commodity=fisso and FWA tecnologia preserved', () => {
+  const out = format(fissoInput);
+  const parsed = JSON.parse(out.json);
+  assert.equal(parsed.commodity, 'fisso');
+  assert.equal(parsed.count, 2);
+  const tim = parsed.offerte.singole.find((o: Offerta) => o.operatore_id === 'tim');
+  const eolo = parsed.offerte.singole.find((o: Offerta) => o.operatore_id === 'eolo');
+  assert.ok(tim);
+  assert.ok(eolo);
+  assert.equal(tim.tecnologia, 'FTTH');
+  assert.equal(tim.velocita_mbps, 2500);
+  assert.equal(eolo.tecnologia, 'FWA');
+  assert.equal(eolo.velocita_mbps, 100);
+});

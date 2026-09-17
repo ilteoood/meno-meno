@@ -1,0 +1,58 @@
+{
+  "commodity": "fisso",
+  "scraped_at": "2026-09-13T10:00:00.000Z",
+  "count": 4,
+  "offerte": {
+    "singole": [
+      {
+        "commodity": "fisso",
+        "operatore_id": "windtre",
+        "codice_offerta": "W3-FIBRA-001",
+        "nome_commerciale": "Super Fibra",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/windtre/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 24.99,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 1000,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "windtre",
+        "codice_offerta": "W3-FIBRA-002",
+        "nome_commerciale": "Super Fibra Plus",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/windtre/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 29.99,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 2500,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "windtre",
+        "codice_offerta": "W3-FIBRA-003",
+        "nome_commerciale": "Super Fibra Young",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/windtre/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 19.99,
+        "tecnologia": "FTTH",
+        "velocita_mbps": 1000,
+        "costo_attivazione_euro": 0
+      },
+      {
+        "commodity": "fisso",
+        "operatore_id": "windtre",
+        "codice_offerta": "W3-FIBRA-004",
+        "nome_commerciale": "Super ADSL",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/windtre/fisso.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 22.99,
+        "tecnologia": "ADSL",
+        "velocita_mbps": 20,
+        "costo_attivazione_euro": 0
+      }
+    ],
+    "bundle": []
+  }
+}
