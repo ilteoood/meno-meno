@@ -50,7 +50,7 @@ interface ParsedFissoCard {
 }
 
 function tecnologiaFromVelocityHint(text: string): TecnologiaFisso {
-  if (/FWA/i.test(text)) return 'FTTH';
+  if (/FWA/i.test(text)) return 'FWA';
   if (/FTTH/i.test(text)) return 'FTTH';
   if (/Fibra/i.test(text)) return 'FTTH';
   if (/FTTC/i.test(text)) return 'FTTC';

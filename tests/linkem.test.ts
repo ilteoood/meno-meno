@@ -5,7 +5,7 @@ import { LinkemFissoScraper } from '../src/scrapers/linkem.ts';
 
 const fissoFixturePath = resolve(import.meta.dirname, '..', 'fixtures', 'linkem', 'fisso.html');
 
-const TECNOLOGIA_FISSO_VALUES = ['FTTH', 'FTTC', 'ADSL'] as const;
+const TECNOLOGIA_FISSO_VALUES = ['FTTH', 'FTTC', 'ADSL', 'FWA'] as const;
 
 test('LinkemFissoScraper parses fixture HTML into one or more offerte fisso', async () => {
   const scraper = new LinkemFissoScraper({ kind: 'fixture', path: fissoFixturePath });

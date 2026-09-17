@@ -5,7 +5,7 @@ import { EoloFissoScraper } from '../src/scrapers/eolo.ts';
 
 const fissoFixturePath = resolve(import.meta.dirname, '..', 'fixtures', 'eolo', 'fisso.html');
 
-const TECNOLOGIA_FISSO_VALUES = ['FTTH', 'FTTC', 'ADSL'] as const;
+const TECNOLOGIA_FISSO_VALUES = ['FTTH', 'FTTC', 'ADSL', 'FWA'] as const;
 
 test('EoloFissoScraper parses fixture HTML into one or more offerte fisso', async () => {
   const scraper = new EoloFissoScraper({ kind: 'fixture', path: fissoFixturePath });
