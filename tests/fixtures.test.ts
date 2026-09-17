@@ -2,8 +2,8 @@ import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { V1_FIXTURE_SOURCES } from '../scripts/v1-sources.ts';
 
-test('V1 fixture sources cover exactly 30 entries: 18 single-commodity (12 luce + 6 telco mobile) + 12 multi-commodity (fastweb, tim, vodafone, windtre, iliad, skywifi — each mobile+fisso)', () => {
-  assert.equal(V1_FIXTURE_SOURCES.length, 30);
+test('V1 fixture sources cover exactly 31 entries: 17 single-commodity (12 luce + 5 telco mobile) + 14 multi-commodity (fastweb, tim, vodafone, windtre, iliad, skywifi, tiscali — each mobile+fisso)', () => {
+  assert.equal(V1_FIXTURE_SOURCES.length, 31);
   const ids = new Set(V1_FIXTURE_SOURCES.map((s) => s.operatore));
   assert.equal(ids.size, 24, 'duplicate operatore entries');
 });
@@ -15,10 +15,10 @@ test('Playwright-flagged sources match ADR 0006 §Supported transports (Edison +
   assert.deepEqual(playwrightIds, ['edison/luce', 'vodafone/fisso', 'vodafone/mobile', 'windtre/fisso', 'windtre/mobile']);
 });
 
-test('Luce+gas operators are pinned to luce, telco to mobile (fastweb + tim + vodafone + windtre + iliad + skywifi are multi-commodity)', () => {
+test('Luce+gas operators are pinned to luce, telco to mobile (fastweb + tim + vodafone + windtre + iliad + skywifi + tiscali are multi-commodity)', () => {
   const luceGas = ['enel', 'edison', 'plenitude', 'hera', 'iren', 'a2a', 'acea', 'sorgenia', 'illumia', 'engie', 'octopus', 'nen'];
-  const mobileTelco = ['postemobile', 'ho', 'kena', 'very', 'tiscali', 'dimensione'];
-  const multiCommodityTelco: Record<string, readonly string[]> = { fastweb: ['mobile', 'fisso'], tim: ['mobile', 'fisso'], vodafone: ['mobile', 'fisso'], windtre: ['mobile', 'fisso'], iliad: ['mobile', 'fisso'], skywifi: ['mobile', 'fisso'] };
+  const mobileTelco = ['postemobile', 'ho', 'kena', 'very', 'dimensione'];
+  const multiCommodityTelco: Record<string, readonly string[]> = { fastweb: ['mobile', 'fisso'], tim: ['mobile', 'fisso'], vodafone: ['mobile', 'fisso'], windtre: ['mobile', 'fisso'], iliad: ['mobile', 'fisso'], skywifi: ['mobile', 'fisso'], tiscali: ['mobile', 'fisso'] };
   for (const spec of V1_FIXTURE_SOURCES) {
     if (luceGas.includes(spec.operatore)) {
       assert.equal(spec.commodity, 'luce', `${spec.operatore} should map to luce`);

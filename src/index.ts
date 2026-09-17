@@ -157,6 +157,9 @@ function buildSource(
   if (live && operatore === 'tiscali' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://casa.tiscali.it/mobile/' };
   }
+  if (live && operatore === 'tiscali' && commodity === 'fisso') {
+    return { kind: 'live', url: 'https://casa.tiscali.it/' };
+  }
   if (live && operatore === 'dimensione' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.dimensione.com/portale/sim-mobile/index.php' };
   }

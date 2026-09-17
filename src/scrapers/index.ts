@@ -21,7 +21,7 @@ import { PostemobileMobileScraper } from './postemobile.ts';
 import { HoMobileScraper } from './ho.ts';
 import { KenaMobileScraper } from './kena.ts';
 import { VeryMobileScraper } from './very.ts';
-import { TiscaliMobileScraper } from './tiscali.ts';
+import { TiscaliMobileScraper, TiscaliFissoScraper } from './tiscali.ts';
 import { DimensioneMobileScraper } from './dimensione.ts';
 import { WindtreMobileScraper } from './windtre.ts';
 import { WindtreFissoScraper } from './windtre.ts';
@@ -112,6 +112,9 @@ export function createScraper(
   if (operatoreId === 'tiscali' && commodity === 'mobile') {
     return new TiscaliMobileScraper(source);
   }
+  if (operatoreId === 'tiscali' && commodity === 'fisso') {
+    return new TiscaliFissoScraper(source);
+  }
   if (operatoreId === 'dimensione' && commodity === 'mobile') {
     return new DimensioneMobileScraper(source);
   }
@@ -146,7 +149,7 @@ export { PostemobileMobileScraper } from './postemobile.ts';
 export { HoMobileScraper } from './ho.ts';
 export { KenaMobileScraper } from './kena.ts';
 export { VeryMobileScraper } from './very.ts';
-export { TiscaliMobileScraper } from './tiscali.ts';
+export { TiscaliMobileScraper, TiscaliFissoScraper } from './tiscali.ts';
 export { DimensioneMobileScraper } from './dimensione.ts';
 export { WindtreMobileScraper, WindtreFissoScraper } from './windtre.ts';
 export type { ScrapeResult, ScrapeSource, Scraper } from './types.ts';
