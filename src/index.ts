@@ -115,6 +115,9 @@ function buildSource(
   if (live && operatore === 'tim' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.tim.it/fisso-e-mobile/mobile' };
   }
+  if (live && operatore === 'tim' && commodity === 'fisso') {
+    return { kind: 'live', url: 'https://www.tim.it/fisso-e-mobile/fibra-e-adsl' };
+  }
   if (live && operatore === 'vodafone' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://privati.vodafone.it/mobile/telefonia-mobile' };
   }
