@@ -16,7 +16,7 @@ import { TimMobileScraper, TimFissoScraper } from './tim.ts';
 import { VodafoneMobileScraper, VodafoneFissoScraper } from './vodafone.ts';
 import { IliadMobileScraper, IliadFissoScraper } from './iliad.ts';
 import { FastwebMobileScraper, FastwebFissoScraper } from './fastweb.ts';
-import { SkywifiMobileScraper } from './skywifi.ts';
+import { SkywifiMobileScraper, SkywifiFissoScraper } from './skywifi.ts';
 import { PostemobileMobileScraper } from './postemobile.ts';
 import { HoMobileScraper } from './ho.ts';
 import { KenaMobileScraper } from './kena.ts';
@@ -94,6 +94,9 @@ export function createScraper(
   if (operatoreId === 'skywifi' && commodity === 'mobile') {
     return new SkywifiMobileScraper(source);
   }
+  if (operatoreId === 'skywifi' && commodity === 'fisso') {
+    return new SkywifiFissoScraper(source);
+  }
   if (operatoreId === 'postemobile' && commodity === 'mobile') {
     return new PostemobileMobileScraper(source);
   }
@@ -138,7 +141,7 @@ export { TimFissoScraper } from './tim.ts';
 export { VodafoneMobileScraper, VodafoneFissoScraper } from './vodafone.ts';
 export { IliadMobileScraper, IliadFissoScraper } from './iliad.ts';
 export { FastwebMobileScraper, FastwebFissoScraper } from './fastweb.ts';
-export { SkywifiMobileScraper } from './skywifi.ts';
+export { SkywifiMobileScraper, SkywifiFissoScraper } from './skywifi.ts';
 export { PostemobileMobileScraper } from './postemobile.ts';
 export { HoMobileScraper } from './ho.ts';
 export { KenaMobileScraper } from './kena.ts';
