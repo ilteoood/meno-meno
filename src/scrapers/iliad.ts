@@ -2,13 +2,16 @@ import { load, type Cheerio, type CheerioAPI } from 'cheerio';
 import { readFile } from 'node:fs/promises';
 import type {
   Commodity as CommodityType,
+  OffertaFisso,
   OffertaMobile,
+  TecnologiaFisso,
   TecnologiaMobile,
   TipoSim,
 } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
 
 const ILIAD_MOBILE_URL = 'https://www.iliad.it/offerte-iliad-mobile.html';
+const ILIAD_FISSO_URL = 'https://www.iliad.it/offerte-iliad-fibra.html';
 const SCRAPER_TIMEOUT_MS = 15_000;
 
 const DESKTOP_UA =
@@ -188,6 +191,149 @@ export class IliadMobileScraper implements Scraper {
 
       const url = this.source.kind === 'live' ? this.source.url : `file://${this.source.path}`;
       const offerte = cards.map((c) => toOffertaMobile(c, url, scrapedAt));
+      return { ok: true, source: this.source, scrapedAt, offerte };
+    } catch (err) {
+      return {
+        ok: false,
+        source: this.source,
+        scrapedAt,
+        error: err instanceof Error ? err.message : String(err),
+      };
+    }
+  }
+}
+
+interface IliadFissoTracking {
+  offer_id?: string;
+  offer_variant?: string;
+  price_eur?: string;
+}
+
+const ILIAD_FIBRA_OFFER_NAME = new Map<string, string>([['iliadbox', 'iliadbox']]);
+
+function slugifyFisso(input: string): string {
+  return input
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function parseIliadFissoPriceEur(priceEur: string | undefined): number | null {
+  if (!priceEur) return null;
+  const value = Number(priceEur.replace(',', '.'));
+  if (!Number.isFinite(value) || value <= 0) return null;
+  return value;
+}
+
+function parseIliadFissoVelocitaMbps(html: string): number {
+  const $ = load(html);
+  const bodyText = $('body').text();
+  const download = bodyText.match(/fino a (\d+(?:[.,]\d+)?)\s*Gigabit\/s|download fino a (\d+(?:[.,]\d+)?)\s*G?bit\/s/i);
+  if (download) {
+    const raw = (download[1] ?? download[2] ?? '').replace(',', '.');
+    return Math.round(Number(raw) * 1000);
+  }
+  const mbps = bodyText.match(/fino a (\d+(?:[.,]\d+)?)\s*Megabit\/s|Mbps/i);
+  if (mbps && mbps[1]) return Math.round(Number(mbps[1].replace(',', '.')));
+  return 0;
+}
+
+interface ParsedFissoCard {
+  codice_offerta: string;
+  nome_commerciale: string;
+  prezzo_effettivo_euro_mese: number;
+}
+
+function parseFissoOfferCards(html: string): readonly ParsedFissoCard[] {
+  const $ = load(html);
+  const cards: ParsedFissoCard[] = [];
+  const seen = new Set<string>();
+
+  $('[data-cta-tracking]').each((_, el) => {
+    const $el = $(el);
+    const raw = $el.attr('data-cta-tracking');
+    if (!raw) return;
+    let decoded: string;
+    try {
+      decoded = raw.replace(/&quot;/g, '"').replace(/&#x7B;/g, '{').replace(/&#x7D;/g, '}');
+    } catch {
+      return;
+    }
+    let tracking: IliadFissoTracking;
+    try {
+      tracking = JSON.parse(decoded) as IliadFissoTracking;
+    } catch {
+      return;
+    }
+    if (!tracking.offer_id || !tracking.offer_id.startsWith('fibra')) return;
+    if (seen.has(tracking.offer_id)) return;
+    const prezzo = parseIliadFissoPriceEur(tracking.price_eur);
+    if (prezzo === null) return;
+    const variant = tracking.offer_variant ?? 'iliadbox';
+    const nome = ILIAD_FIBRA_OFFER_NAME.get(variant) ?? variant;
+    seen.add(tracking.offer_id);
+    cards.push({
+      codice_offerta: slugifyFisso(`${tracking.offer_id}-${variant}`),
+      nome_commerciale: `${nome.charAt(0).toUpperCase()}${nome.slice(1)} Super`,
+      prezzo_effettivo_euro_mese: prezzo,
+    });
+  });
+
+  return cards;
+}
+
+function toOffertaFisso(
+  card: ParsedFissoCard,
+  velocita_mbps: number,
+  url: string,
+  scrapedAt: string,
+): OffertaFisso {
+  return {
+    commodity: 'fisso' satisfies CommodityType,
+    operatore_id: 'iliad',
+    codice_offerta: card.codice_offerta,
+    nome_commerciale: card.nome_commerciale,
+    url_sorgente: url,
+    scraped_at: scrapedAt,
+    prezzo_effettivo_euro_mese: card.prezzo_effettivo_euro_mese,
+    tecnologia: 'FTTH' satisfies TecnologiaFisso,
+    velocita_mbps,
+    costo_attivazione_euro: 0,
+  };
+}
+
+export class IliadFissoScraper implements Scraper {
+  readonly operatoreId = 'iliad';
+  readonly commodity: CommodityType = 'fisso';
+  readonly source: ScrapeSource;
+
+  constructor(source: ScrapeSource) {
+    this.source = source;
+  }
+
+  async scrape(): Promise<ScrapeResult> {
+    const scrapedAt = nowIso();
+    try {
+      const html =
+        this.source.kind === 'fixture'
+          ? await readFile(this.source.path, 'utf8')
+          : await fetchHtml(this.source.url, AbortSignal.timeout(SCRAPER_TIMEOUT_MS));
+
+      const cards = parseFissoOfferCards(html);
+      if (cards.length === 0) {
+        return {
+          ok: false,
+          source: this.source,
+          scrapedAt,
+          error: 'no offer cards parsed from source',
+        };
+      }
+
+      const url = this.source.kind === 'live' ? this.source.url : `file://${this.source.path}`;
+      const velocitaMbpsPerCard = cards.map(() => parseIliadFissoVelocitaMbps(html));
+      const offerte = cards.map((c, i) => toOffertaFisso(c, velocitaMbpsPerCard[i] ?? 0, url, scrapedAt));
       return { ok: true, source: this.source, scrapedAt, offerte };
     } catch (err) {
       return {
