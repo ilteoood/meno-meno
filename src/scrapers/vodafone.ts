@@ -56,12 +56,6 @@ function tecnologiaFrom5G(has5G: boolean): TecnologiaMobile {
   return has5G ? '5G' : '4G';
 }
 
-function velocitaPerTecnologia(tech: TecnologiaMobile): number {
-  if (tech === '5G+') return 2000;
-  if (tech === '5G') return 1000;
-  return 150;
-}
-
 interface RawOffer {
   slug?: string;
   label?: string;
@@ -157,7 +151,6 @@ function toOffertaMobile(
     minuti: -1,
     tipo_sim: 'entrambe' satisfies TipoSim,
     tecnologia: card.tecnologia,
-    velocita_mbps: velocitaPerTecnologia(card.tecnologia),
   };
 }
 
