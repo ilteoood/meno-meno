@@ -121,6 +121,9 @@ function buildSource(
   if (live && operatore === 'vodafone' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://privati.vodafone.it/mobile/telefonia-mobile' };
   }
+  if (live && operatore === 'vodafone' && commodity === 'fisso') {
+    return { kind: 'live', url: 'https://privati.vodafone.it/casa/fibra' };
+  }
   if (live && operatore === 'iliad' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.iliad.it/offerte-iliad-mobile.html' };
   }
