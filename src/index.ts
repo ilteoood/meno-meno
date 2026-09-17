@@ -139,6 +139,9 @@ function buildSource(
   if (live && operatore === 'skywifi' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.sky.it/mobile' };
   }
+  if (live && operatore === 'skywifi' && commodity === 'fisso') {
+    return { kind: 'live', url: 'https://www.sky.it/sky-wifi-fibra' };
+  }
   if (live && operatore === 'postemobile' && commodity === 'mobile') {
     return { kind: 'live', url: 'https://www.postemobile.it/privati/offerte-telefonia-mobile' };
   }
