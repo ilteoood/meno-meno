@@ -2,13 +2,16 @@ import { load, type Cheerio, type CheerioAPI } from 'cheerio';
 import { readFile } from 'node:fs/promises';
 import type {
   Commodity as CommodityType,
+  OffertaFisso,
   OffertaMobile,
+  TecnologiaFisso,
   TecnologiaMobile,
   TipoSim,
 } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
 
 const TIM_MOBILE_URL = 'https://www.tim.it/fisso-e-mobile/mobile';
+const TIM_FISSO_URL = 'https://www.tim.it/fisso-e-mobile/fibra-e-adsl';
 const SCRAPER_TIMEOUT_MS = 15_000;
 
 const DESKTOP_UA =
@@ -184,6 +187,114 @@ export class TimMobileScraper implements Scraper {
 
       const url = this.source.kind === 'live' ? this.source.url : `file://${this.source.path}`;
       const offerte = cards.map((c) => toOffertaMobile(c, url, scrapedAt));
+      return { ok: true, source: this.source, scrapedAt, offerte };
+    } catch (err) {
+      return {
+        ok: false,
+        source: this.source,
+        scrapedAt,
+        error: err instanceof Error ? err.message : String(err),
+      };
+    }
+  }
+}
+
+function parseVelocitaMbpsFromFeature(text: string): number {
+  const gbps = text.match(/(\d+(?:[.,]\d+)?)\s*(?:Gigabit\/s|Gbps)/i);
+  if (gbps && gbps[1]) return Math.round(Number(gbps[1].replace(',', '.')) * 1000);
+  const mbps = text.match(/(\d+(?:[.,]\d+)?)\s*(?:Megabit\/s|Mbps)/i);
+  if (mbps && mbps[1]) return Math.round(Number(mbps[1].replace(',', '.')));
+  return 0;
+}
+
+interface ParsedFissoCard {
+  codice_offerta: string;
+  nome_commerciale: string;
+  prezzo_effettivo_euro_mese: number;
+  velocita_mbps: number;
+}
+
+function parseFissoOfferCards(html: string): readonly ParsedFissoCard[] {
+  const $ = load(html);
+  const cards: ParsedFissoCard[] = [];
+
+  $('.tm-tile--offerta').each((_, el) => {
+    const $el = $(el);
+    const nameRaw = $el.find('.tm-tile__title h3').first().text();
+    const nome = nameRaw.replace(/\s+/g, ' ').trim();
+    if (!nome) return;
+
+    const priceText = $el.find('.tm-tile__price').text();
+    const prezzo = parsePriceEur(priceText);
+    if (prezzo === null) return;
+
+    const firstFeature = $el.find('.ta-feature__text').first().text();
+    const velocita_mbps = parseVelocitaMbpsFromFeature(firstFeature);
+
+    const href = $el.find('a[href]').filter((_, a) => {
+      const h = $(a).attr('href') ?? '';
+      return h && !h.startsWith('javascript:') && !h.startsWith('#');
+    }).first().attr('href');
+
+    cards.push({
+      codice_offerta: slugFromHref(href, nome),
+      nome_commerciale: nome,
+      prezzo_effettivo_euro_mese: prezzo,
+      velocita_mbps,
+    });
+  });
+
+  return cards;
+}
+
+function toOffertaFisso(
+  card: ParsedFissoCard,
+  url: string,
+  scrapedAt: string,
+): OffertaFisso {
+  return {
+    commodity: 'fisso' satisfies CommodityType,
+    operatore_id: 'tim',
+    codice_offerta: card.codice_offerta,
+    nome_commerciale: card.nome_commerciale,
+    url_sorgente: url,
+    scraped_at: scrapedAt,
+    prezzo_effettivo_euro_mese: card.prezzo_effettivo_euro_mese,
+    tecnologia: 'FTTH' satisfies TecnologiaFisso,
+    velocita_mbps: card.velocita_mbps,
+    costo_attivazione_euro: 0,
+  };
+}
+
+export class TimFissoScraper implements Scraper {
+  readonly operatoreId = 'tim';
+  readonly commodity: CommodityType = 'fisso';
+  readonly source: ScrapeSource;
+
+  constructor(source: ScrapeSource) {
+    this.source = source;
+  }
+
+  async scrape(): Promise<ScrapeResult> {
+    const scrapedAt = nowIso();
+    try {
+      const html =
+        this.source.kind === 'fixture'
+          ? await readFile(this.source.path, 'utf8')
+          : await fetchHtml(this.source.url, AbortSignal.timeout(SCRAPER_TIMEOUT_MS));
+
+      const cards = parseFissoOfferCards(html);
+      if (cards.length === 0) {
+        return {
+          ok: false,
+          source: this.source,
+          scrapedAt,
+          error: 'no offer cards parsed from source',
+        };
+      }
+
+      const url = this.source.kind === 'live' ? this.source.url : `file://${this.source.path}`;
+      const offerte = cards.map((c) => toOffertaFisso(c, url, scrapedAt));
       return { ok: true, source: this.source, scrapedAt, offerte };
     } catch (err) {
       return {

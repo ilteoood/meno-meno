@@ -12,7 +12,7 @@ import { IllumiaLuceScraper } from './illumia.ts';
 import { EngieLuceScraper } from './engie.ts';
 import { OctopusLuceScraper } from './octopus.ts';
 import { NenLuceScraper } from './nen.ts';
-import { TimMobileScraper } from './tim.ts';
+import { TimMobileScraper, TimFissoScraper } from './tim.ts';
 import { VodafoneMobileScraper } from './vodafone.ts';
 import { IliadMobileScraper } from './iliad.ts';
 import { FastwebMobileScraper, FastwebFissoScraper } from './fastweb.ts';
@@ -69,6 +69,9 @@ export function createScraper(
   if (operatoreId === 'tim' && commodity === 'mobile') {
     return new TimMobileScraper(source);
   }
+  if (operatoreId === 'tim' && commodity === 'fisso') {
+    return new TimFissoScraper(source);
+  }
   if (operatoreId === 'vodafone' && commodity === 'mobile') {
     return new VodafoneMobileScraper(source);
   }
@@ -121,6 +124,7 @@ export { EngieLuceScraper } from './engie.ts';
 export { OctopusLuceScraper } from './octopus.ts';
 export { NenLuceScraper } from './nen.ts';
 export { TimMobileScraper } from './tim.ts';
+export { TimFissoScraper } from './tim.ts';
 export { VodafoneMobileScraper } from './vodafone.ts';
 export { IliadMobileScraper } from './iliad.ts';
 export { FastwebMobileScraper, FastwebFissoScraper } from './fastweb.ts';

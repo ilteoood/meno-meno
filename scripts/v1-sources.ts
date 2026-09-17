@@ -19,6 +19,7 @@ export const V1_FIXTURE_SOURCES: readonly V1FixtureSource[] = [
   { operatore: 'octopus', commodity: 'luce', url: 'https://octopusenergy.it/offerta/tariffe', playwright: false },
   { operatore: 'nen', commodity: 'luce', url: 'https://nen.it/landing/migliore-offerta-luce', playwright: false },
   { operatore: 'tim', commodity: 'mobile', url: 'https://www.tim.it/fisso-e-mobile/mobile', playwright: false },
+  { operatore: 'tim', commodity: 'fisso', url: 'https://www.tim.it/fisso-e-mobile/fibra-e-adsl', playwright: false },
   { operatore: 'windtre', commodity: 'mobile', url: 'https://www.windtre.it/offerte-mobile', playwright: true },
   { operatore: 'vodafone', commodity: 'mobile', url: 'https://privati.vodafone.it/mobile/telefonia-mobile', playwright: true },
   { operatore: 'iliad', commodity: 'mobile', url: 'https://www.iliad.it/offerte-iliad-mobile.html', playwright: false },
