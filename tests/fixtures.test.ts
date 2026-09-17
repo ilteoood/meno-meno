@@ -8,11 +8,11 @@ test('V1 fixture sources cover exactly the 24 v1 operators from G1', () => {
   assert.equal(ids.size, 24, 'duplicate operatore entries');
 });
 
-test('Playwright-flagged sources match ADR 0004 (Edison + WindTre)', () => {
+test('Playwright-flagged sources match ADR 0006 §Supported transports (Edison + WindTre + Vodafone)', () => {
   const playwrightIds = V1_FIXTURE_SOURCES.filter((s) => s.playwright)
     .map((s) => s.operatore)
     .sort();
-  assert.deepEqual(playwrightIds, ['edison', 'windtre']);
+  assert.deepEqual(playwrightIds, ['edison', 'vodafone', 'windtre']);
 });
 
 test('Luce+gas operators are pinned to luce commodity, telco to mobile', () => {

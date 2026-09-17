@@ -45,3 +45,7 @@ Scelta: **(b)**. Edison e WindTre sono abbastanza critici da giustificare un mod
 - Il cap di 3 scraper paralleli (decisione architetturale già presa nella mappa) regge: il launch del browser è serializzato all'interno del modulo Playwright, e solo Edison + WindTre lo pagano.
 - Aggiungere un futuro operatore che richiede Playwright significa importare il modulo `src/browser/playwright.ts` esistente — niente nuova infrastruttura.
 - Se in futuro Edison o WindTre diventano parsabili con cheerio (es. rilasciano una versione statica del sito), lo scraper può migrare indietro rimuovendo l'import Playwright senza toccare il resto della skill.
+
+## Update log
+
+- **2026-09-16 — v2 expansion (ticket #97).** Vodafone mobile è stato aggiunto all'elenco operatori Playwright durante il v2 mobile fan-out (issue #90, ticket #94): il sito Next.js di Vodafone non rende `__NEXT_DATA__` lato server e richiede idratazione JS. Questo ADR resta il rationale storico (Edison + WindTre come eccezione mirata); la tabella **corrente** operatore → trasporto vive in [ADR 0006 §Supported transports](0006-fixture-refresh-weekly-github-action.md#supported-transports) e riflette i 24 (op, c) pair v2.

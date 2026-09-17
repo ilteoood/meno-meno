@@ -46,10 +46,10 @@ test('extractAffectedOperators returns every regex match (registry filtering is 
   assert.ok(ops.has('types'));
 });
 
-test('requiresPlaywright flags edison and windtre, not cheerio operators', () => {
+test('requiresPlaywright flags edison, vodafone, and windtre, not cheerio operators', () => {
   assert.equal(requiresPlaywright('edison'), true);
   assert.equal(requiresPlaywright('windtre'), true);
+  assert.equal(requiresPlaywright('vodafone'), true);
   assert.equal(requiresPlaywright('enel'), false);
-  assert.equal(requiresPlaywright('vodafone'), false);
   assert.equal(requiresPlaywright('unknown'), false);
 });
