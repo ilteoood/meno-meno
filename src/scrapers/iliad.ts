@@ -68,12 +68,6 @@ function tecnologiaFromCard($card: Cheerio<any>): TecnologiaMobile {
   return isTecnologia5G($card) ? '5G' : '4G';
 }
 
-function velocitaPerTecnologia(tech: TecnologiaMobile): number {
-  if (tech === '5G+') return 2000;
-  if (tech === '5G') return 1000;
-  return 150;
-}
-
 function slugify(input: string): string {
   return input
     .toLowerCase()
@@ -162,7 +156,6 @@ function toOffertaMobile(
     minuti: card.minuti,
     tipo_sim: 'entrambe' satisfies TipoSim,
     tecnologia: card.tecnologia,
-    velocita_mbps: velocitaPerTecnologia(card.tecnologia),
   };
 }
 
