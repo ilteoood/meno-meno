@@ -56,15 +56,8 @@ function parseMinuti(text: string): number {
 
 function parseTecnologia(text: string): TecnologiaMobile {
   const value = text.trim().toUpperCase();
-  if (value === '5G+' || value === '5G PLUS') return '5G+';
   if (value === '5G') return '5G';
   return '4G';
-}
-
-function velocitaPerTecnologia(tech: TecnologiaMobile): number {
-  if (tech === '5G+') return 2000;
-  if (tech === '5G') return 1000;
-  return 150;
 }
 
 interface ParsedCard {
@@ -122,7 +115,6 @@ function toOffertaMobile(
     minuti: card.minuti,
     tipo_sim: 'entrambe' satisfies TipoSim,
     tecnologia: card.tecnologia,
-    velocita_mbps: velocitaPerTecnologia(card.tecnologia),
   };
 }
 
