@@ -67,21 +67,30 @@ export interface MarkdownInput {
   readonly bundle?: readonly OffertaBundle[];
   readonly warnings?: readonly string[];
   readonly sourceCount: { readonly ok: number; readonly total: number };
+  readonly filterExpression?: string;
+  readonly ranked?: boolean;
 }
 
 export function toMarkdown(input: MarkdownInput): string {
+  const ranked = input.ranked !== false;
   const parts: string[] = [header(input.commodity, input.scrapedAt), ''];
+
+  if (input.filterExpression) {
+    parts.push(`## Filtro applicato: ${input.filterExpression}`, '');
+  }
+
   parts.push('## Tabella completa', '');
   parts.push(tableHeader(input.commodity));
   parts.push(separator(input.commodity));
   for (const o of input.offerte) parts.push(rowFor(o));
   parts.push('');
 
-  const ranked = rankOfferte({ commodity: input.commodity, offerte: input.offerte });
-  const sections = renderRankedSections(ranked);
-  parts.push(sections.tradeOffs, '', sections.top3);
-
-  if (sections.esclusi.length > 0) parts.push('', sections.esclusi);
+  if (ranked) {
+    const rankedResult = rankOfferte({ commodity: input.commodity, offerte: input.offerte });
+    const sections = renderRankedSections(rankedResult);
+    parts.push(sections.tradeOffs, '', sections.top3);
+    if (sections.esclusi.length > 0) parts.push('', sections.esclusi);
+  }
 
   if (input.warnings && input.warnings.length > 0) {
     parts.push('## Non disponibili', '');

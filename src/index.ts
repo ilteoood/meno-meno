@@ -1,9 +1,10 @@
 import { resolve } from 'node:path';
 import type { Commodity } from './types/offerta.ts';
-import { createScraper } from './scrapers/index.ts';
-import type { ScrapeSource } from './scrapers/types.ts';
+import { createScraper, listOperators } from './scrapers/index.ts';
+import type { Scraper, ScrapeSource } from './scrapers/types.ts';
 import { aggregate } from './aggregator.ts';
 import { format } from './formatters/index.ts';
+import { filterOfferte, validateFilter, type Constraint } from './filter/index.ts';
 
 const VALID_COMMODITIES: readonly Commodity[] = ['luce', 'gas', 'mobile', 'fisso'];
 
@@ -26,6 +27,7 @@ type ParsedArgs = {
   fixture: string | null;
   live: boolean;
   format: OutputFormat;
+  filters: readonly string[];
 };
 
 function parseArgs(argv: readonly string[]): ParsedArgs {
@@ -34,6 +36,7 @@ function parseArgs(argv: readonly string[]): ParsedArgs {
   let fixture: string | null = null;
   let live = false;
   let rawFormat: string | null = null;
+  const filters: string[] = [];
 
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
@@ -53,9 +56,12 @@ function parseArgs(argv: readonly string[]): ParsedArgs {
       case '--format':
         rawFormat = argv[++i] ?? null;
         break;
+      case '--filter':
+        filters.push(argv[++i] ?? '');
+        break;
     }
   }
-  return { operatore, commodity, fixture, live, format: parseFormat(rawFormat) };
+  return { operatore, commodity, fixture, live, format: parseFormat(rawFormat), filters };
 }
 
 function validateCommodity(value: string | null): Commodity {
@@ -67,6 +73,109 @@ function validateCommodity(value: string | null): Commodity {
   return value as Commodity;
 }
 
+function liveUrl(operatore: string, commodity: Commodity): string | null {
+  if (operatore === 'enel' && commodity === 'luce') {
+    return 'https://www.enel.it/it-it/offerte-luce';
+  }
+  if (operatore === 'edison' && commodity === 'luce') {
+    return 'https://www.edisonenergia.it/edison/casa/luce';
+  }
+  if (operatore === 'eolo' && commodity === 'fisso') {
+    return 'https://www.eolo.it/';
+  }
+  if (operatore === 'plenitude' && commodity === 'luce') {
+    return 'https://eniplenitude.com/offerta/casa/gas-e-luce/offerte-energia-elettrica';
+  }
+  if (operatore === 'a2a' && commodity === 'luce') {
+    return 'https://www.a2a.it/casa/offerte-luce-gas';
+  }
+  if (operatore === 'iren' && commodity === 'luce') {
+    return 'https://www.irenlucegas.it/casa/offerte-luce';
+  }
+  if (operatore === 'hera' && commodity === 'luce') {
+    return 'https://heracomm.gruppohera.it/casa/offerte-luce-gas';
+  }
+  if (operatore === 'acea' && commodity === 'luce') {
+    return 'https://www.aceaenergia.it/elenco-offerte';
+  }
+  if (operatore === 'sorgenia' && commodity === 'luce') {
+    return 'https://www.sorgenia.it/sites/default/themes/sorgenia/modules/preprod_dynamic_card.php?offert=43124&commodity=ELE&consume=medium';
+  }
+  if (operatore === 'illumia' && commodity === 'luce') {
+    return 'https://www.illumia.it/casa/luce/';
+  }
+  if (operatore === 'engie' && commodity === 'luce') {
+    return 'https://www.engie.it/casa/offerte-luce-gas/';
+  }
+  if (operatore === 'octopus' && commodity === 'luce') {
+    return 'https://octopusenergy.it/offerta/tariffe';
+  }
+  if (operatore === 'nen' && commodity === 'luce') {
+    return 'https://nen.it/landing/migliore-offerta-luce';
+  }
+  if (operatore === 'tim' && commodity === 'mobile') {
+    return 'https://www.tim.it/fisso-e-mobile/mobile';
+  }
+  if (operatore === 'tim' && commodity === 'fisso') {
+    return 'https://www.tim.it/fisso-e-mobile/fibra-e-adsl';
+  }
+  if (operatore === 'vodafone' && commodity === 'mobile') {
+    return 'https://privati.vodafone.it/mobile/telefonia-mobile';
+  }
+  if (operatore === 'vodafone' && commodity === 'fisso') {
+    return 'https://privati.vodafone.it/casa/fibra';
+  }
+  if (operatore === 'iliad' && commodity === 'mobile') {
+    return 'https://www.iliad.it/offerte-iliad-mobile.html';
+  }
+  if (operatore === 'iliad' && commodity === 'fisso') {
+    return 'https://www.iliad.it/offerte-iliad-fibra.html';
+  }
+  if (operatore === 'fastweb' && commodity === 'mobile') {
+    return 'https://www.fastweb.it/adsl-fibra-ottica/offerta-mobile';
+  }
+  if (operatore === 'fastweb' && commodity === 'fisso') {
+    return 'https://www.fastweb.it/adsl-fibra-ottica/';
+  }
+  if (operatore === 'skywifi' && commodity === 'mobile') {
+    return 'https://www.sky.it/mobile';
+  }
+  if (operatore === 'skywifi' && commodity === 'fisso') {
+    return 'https://www.sky.it/sky-wifi-fibra';
+  }
+  if (operatore === 'postemobile' && commodity === 'mobile') {
+    return 'https://www.postemobile.it/privati/offerte-telefonia-mobile';
+  }
+  if (operatore === 'ho' && commodity === 'mobile') {
+    return 'https://www.ho-mobile.it/tutte-le-offerte';
+  }
+  if (operatore === 'kena' && commodity === 'mobile') {
+    return 'https://www.kenamobile.it/offerte/';
+  }
+  if (operatore === 'very' && commodity === 'mobile') {
+    return 'https://verymobile.it/offerte';
+  }
+  if (operatore === 'tiscali' && commodity === 'mobile') {
+    return 'https://casa.tiscali.it/mobile/';
+  }
+  if (operatore === 'tiscali' && commodity === 'fisso') {
+    return 'https://casa.tiscali.it/';
+  }
+  if (operatore === 'dimensione' && commodity === 'mobile') {
+    return 'https://www.dimensione.com/portale/sim-mobile/index.php';
+  }
+  if (operatore === 'windtre' && commodity === 'mobile') {
+    return 'https://www.windtre.it/offerte-mobile';
+  }
+  if (operatore === 'windtre' && commodity === 'fisso') {
+    return 'https://www.windtre.it/offerte-fibra';
+  }
+  if (operatore === 'linkem' && commodity === 'fisso') {
+    return 'https://www.linkem.com/';
+  }
+  return null;
+}
+
 function buildSource(
   operatore: string,
   commodity: Commodity,
@@ -76,134 +185,69 @@ function buildSource(
   if (fixture) {
     return { kind: 'fixture', path: resolve(fixture) };
   }
-  if (live && operatore === 'enel' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.enel.it/it-it/offerte-luce' };
-  }
-  if (live && operatore === 'edison' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.edisonenergia.it/edison/casa/luce' };
-  }
-  if (live && operatore === 'eolo' && commodity === 'fisso') {
-    return { kind: 'live', url: 'https://www.eolo.it/' };
-  }
-  if (live && operatore === 'plenitude' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://eniplenitude.com/offerta/casa/gas-e-luce/offerte-energia-elettrica' };
-  }
-  if (live && operatore === 'a2a' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.a2a.it/casa/offerte-luce-gas' };
-  }
-  if (live && operatore === 'iren' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.irenlucegas.it/casa/offerte-luce' };
-  }
-  if (live && operatore === 'hera' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://heracomm.gruppohera.it/casa/offerte-luce-gas' };
-  }
-  if (live && operatore === 'acea' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.aceaenergia.it/elenco-offerte' };
-  }
-  if (live && operatore === 'sorgenia' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.sorgenia.it/sites/default/themes/sorgenia/modules/preprod_dynamic_card.php?offert=43124&commodity=ELE&consume=medium' };
-  }
-  if (live && operatore === 'illumia' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.illumia.it/casa/luce/' };
-  }
-  if (live && operatore === 'engie' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://www.engie.it/casa/offerte-luce-gas/' };
-  }
-  if (live && operatore === 'octopus' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://octopusenergy.it/offerta/tariffe' };
-  }
-  if (live && operatore === 'nen' && commodity === 'luce') {
-    return { kind: 'live', url: 'https://nen.it/landing/migliore-offerta-luce' };
-  }
-  if (live && operatore === 'tim' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.tim.it/fisso-e-mobile/mobile' };
-  }
-  if (live && operatore === 'tim' && commodity === 'fisso') {
-    return { kind: 'live', url: 'https://www.tim.it/fisso-e-mobile/fibra-e-adsl' };
-  }
-  if (live && operatore === 'vodafone' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://privati.vodafone.it/mobile/telefonia-mobile' };
-  }
-  if (live && operatore === 'vodafone' && commodity === 'fisso') {
-    return { kind: 'live', url: 'https://privati.vodafone.it/casa/fibra' };
-  }
-  if (live && operatore === 'iliad' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.iliad.it/offerte-iliad-mobile.html' };
-  }
-  if (live && operatore === 'iliad' && commodity === 'fisso') {
-    return { kind: 'live', url: 'https://www.iliad.it/offerte-iliad-fibra.html' };
-  }
-  if (live && operatore === 'fastweb' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.fastweb.it/adsl-fibra-ottica/offerta-mobile' };
-  }
-  if (live && operatore === 'fastweb' && commodity === 'fisso') {
-    return { kind: 'live', url: 'https://www.fastweb.it/adsl-fibra-ottica/' };
-  }
-  if (live && operatore === 'skywifi' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.sky.it/mobile' };
-  }
-  if (live && operatore === 'skywifi' && commodity === 'fisso') {
-    return { kind: 'live', url: 'https://www.sky.it/sky-wifi-fibra' };
-  }
-  if (live && operatore === 'postemobile' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.postemobile.it/privati/offerte-telefonia-mobile' };
-  }
-  if (live && operatore === 'ho' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.ho-mobile.it/tutte-le-offerte' };
-  }
-  if (live && operatore === 'kena' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.kenamobile.it/offerte/' };
-  }
-  if (live && operatore === 'very' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://verymobile.it/offerte' };
-  }
-  if (live && operatore === 'tiscali' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://casa.tiscali.it/mobile/' };
-  }
-  if (live && operatore === 'tiscali' && commodity === 'fisso') {
-    return { kind: 'live', url: 'https://casa.tiscali.it/' };
-  }
-  if (live && operatore === 'dimensione' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.dimensione.com/portale/sim-mobile/index.php' };
-  }
-  if (live && operatore === 'windtre' && commodity === 'mobile') {
-    return { kind: 'live', url: 'https://www.windtre.it/offerte-mobile' };
-  }
-  if (live && operatore === 'windtre' && commodity === 'fisso') {
-    return { kind: 'live', url: 'https://www.windtre.it/offerte-fibra' };
-  }
-  if (live && operatore === 'linkem' && commodity === 'fisso') {
-    return { kind: 'live', url: 'https://www.linkem.com/' };
+  if (live) {
+    const url = liveUrl(operatore, commodity);
+    if (url) return { kind: 'live', url };
   }
   throw new Error(`unknown source for ${operatore}/${commodity}; pass --fixture PATH or --live (live source required)`);
+}
+
+function buildAllSources(
+  commodity: Commodity,
+  live: boolean,
+  fixture: string | null,
+): readonly ScrapeSource[] {
+  const sources: ScrapeSource[] = [];
+  for (const op of listOperators(commodity)) {
+    if (fixture) {
+      sources.push({ kind: 'fixture', path: resolve(fixture) });
+    } else if (live) {
+      const url = liveUrl(op, commodity);
+      if (url) sources.push({ kind: 'live', url });
+    } else {
+      sources.push({ kind: 'fixture', path: resolve(`fixtures/${op}/${commodity}.html`) });
+    }
+  }
+  return sources;
 }
 
 function emit(label: string, content: string): void {
   process.stdout.write(`\n=== ${label} ===\n${content}`);
 }
 
-async function main(argv: readonly string[]): Promise<number> {
-  let args: ParsedArgs;
-  try {
-    args = parseArgs(argv);
-  } catch (err) {
-    process.stderr.write(`${(err as Error).message}\n`);
-    return 2;
+function parseAndValidateFilters(
+  commodity: Commodity,
+  rawFilters: readonly string[],
+): readonly Constraint[] | null {
+  if (rawFilters.length === 0) return [];
+  const all: Constraint[] = [];
+  for (const expr of rawFilters) {
+    const r = validateFilter(commodity, expr);
+    if (!r.ok) {
+      process.stderr.write(`invalid --filter "${expr}": ${r.error}\n`);
+      return null;
+    }
+    for (const c of r.constraints) all.push(c);
   }
-  if (!args.operatore) {
-    process.stderr.write('Missing --operatore\n');
-    return 2;
-  }
-  const commodity = validateCommodity(args.commodity);
+  return all;
+}
+
+function emitFormats(args: { format: OutputFormat }, output: { markdown: string; csv: string; json: string }): void {
+  if (args.format === 'all' || args.format === 'markdown') emit('MARKDOWN', output.markdown);
+  if (args.format === 'all' || args.format === 'csv') emit('CSV', output.csv);
+  if (args.format === 'all' || args.format === 'json') emit('JSON', output.json);
+}
+
+async function runSingle(args: ParsedArgs, commodity: Commodity): Promise<number> {
   let source: ScrapeSource;
   try {
-    source = buildSource(args.operatore, commodity, args.fixture, args.live);
+    source = buildSource(args.operatore!, commodity, args.fixture, args.live);
   } catch (err) {
     process.stderr.write(`${(err as Error).message}\n`);
     return 2;
   }
 
-  const scraper = createScraper(args.operatore, commodity, source);
+  const scraper = createScraper(args.operatore!, commodity, source);
   if (!scraper) {
     process.stderr.write(`no scraper registered for ${args.operatore}/${commodity}\n`);
     return 2;
@@ -224,10 +268,92 @@ async function main(argv: readonly string[]): Promise<number> {
     sourceCount: { ok: result.warnings.length === 0 ? 1 : 0, total: 1 },
   });
 
-  if (args.format === 'all' || args.format === 'markdown') emit('MARKDOWN', output.markdown);
-  if (args.format === 'all' || args.format === 'csv') emit('CSV', output.csv);
-  if (args.format === 'all' || args.format === 'json') emit('JSON', output.json);
+  emitFormats(args, output);
   return 0;
+}
+
+async function runFanOut(
+  args: ParsedArgs,
+  commodity: Commodity,
+  constraints: readonly Constraint[],
+): Promise<number> {
+  const sources = buildAllSources(commodity, args.live, args.fixture);
+  if (sources.length === 0) {
+    process.stderr.write(`fan-out: no operators registered for commodity "${commodity}"\n`);
+    return 2;
+  }
+
+  const ops = listOperators(commodity);
+  const scrapers: Scraper[] = [];
+  for (let i = 0; i < sources.length; i++) {
+    const scraper = createScraper(ops[i]!, commodity, sources[i]!);
+    if (scraper) scrapers.push(scraper);
+  }
+
+  const result = await aggregate({ commodity, scrapers });
+  if (!result.ok) {
+    process.stderr.write(`aggregate failed: ${result.error}\n`);
+    return 1;
+  }
+
+  const filtered = filterOfferte({ commodity, offerte: result.offerte, constraints });
+  const filterExpression = args.filters.length > 0 ? args.filters.join(' & ') : undefined;
+
+  if (args.filters.length > 0 && filtered.length === 0) {
+    process.stderr.write(`0 offerte corrispondono al filtro\n`);
+  }
+
+  const ranked = filtered.length > 0;
+  const okSources = sources.length - result.warnings.length;
+  const output = format({
+    commodity,
+    scrapedAt: result.scrapedAt,
+    offerte: filtered,
+    bundle: result.bundle,
+    warnings: result.warnings,
+    sourceCount: { ok: okSources, total: sources.length },
+    filterExpression,
+    ranked,
+  });
+
+  emitFormats(args, output);
+  return 0;
+}
+
+async function main(argv: readonly string[]): Promise<number> {
+  let args: ParsedArgs;
+  try {
+    args = parseArgs(argv);
+  } catch (err) {
+    process.stderr.write(`${(err as Error).message}\n`);
+    return 2;
+  }
+
+  if (args.filters.length > 0 && args.commodity === null) {
+    process.stderr.write('--filter requires --commodity\n');
+    return 2;
+  }
+
+  if (!args.operatore && !args.commodity) {
+    process.stderr.write('Missing --operatore or --commodity\n');
+    return 2;
+  }
+
+  let commodity: Commodity;
+  try {
+    commodity = validateCommodity(args.commodity);
+  } catch (err) {
+    process.stderr.write(`${(err as Error).message}\n`);
+    return 1;
+  }
+
+  if (args.operatore) {
+    return runSingle(args, commodity);
+  }
+
+  const constraints = parseAndValidateFilters(commodity, args.filters);
+  if (constraints === null) return 2;
+  return runFanOut(args, commodity, constraints);
 }
 
 const exitCode = await main(process.argv.slice(2));
