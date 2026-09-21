@@ -16,6 +16,8 @@ export interface FormatInput {
   readonly bundle?: readonly OffertaBundle[];
   readonly warnings?: readonly string[];
   readonly sourceCount: { readonly ok: number; readonly total: number };
+  readonly filterExpression?: string;
+  readonly ranked?: boolean;
 }
 
 export function format(input: FormatInput): FormattedOutput {
@@ -27,6 +29,8 @@ export function format(input: FormatInput): FormattedOutput {
       bundle: input.bundle,
       warnings: input.warnings,
       sourceCount: input.sourceCount,
+      filterExpression: input.filterExpression,
+      ranked: input.ranked,
     }),
     csv: toCsv(input.offerte, input.commodity, input.bundle),
     json: toJson(input.offerte, input.commodity, input.scrapedAt, input.bundle),
