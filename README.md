@@ -1,14 +1,14 @@
 # meno-meno
 
-Italian utility/telco price comparison Claude Code skill.
+Skill per confrontare le offerte di utility e telco nel mercato italiano.
 
-Status: in planning phase. See [issue #1](https://github.com/ilteoood/meno-meno/issues/1) for the wayfinding map.
+Stato: in fase di pianificazione. Vedi [issue #1](https://github.com/ilteoood/meno-meno/issues/1) per la mappa wayfinding.
 
-## Overview
+## Panoramica
 
-`meno-meno` è una skill Claude Code che confronta le offerte pubblicate dagli operatori italiani di utility (luce, gas) e telco (mobile, fisso). Aggrega i dati per commodity, li normalizza in EUR/kWh, EUR/Smc, e quota fissa, e li emette in Markdown, CSV, e JSON. Non serve un profilo di consumo: ogni offerta è elencata con le sue metriche base così l'utente può ordinare e confrontare senza dover inserire kWh o GB/mese.
+`meno-meno` è una skill che confronta le offerte pubblicate dagli operatori italiani di utility (luce, gas) e telco (mobile, fisso). Aggrega i dati per commodity, li normalizza in EUR/kWh, EUR/Smc, e quota fissa, e li emette in Markdown, CSV, e JSON. Non serve un profilo di consumo: ogni offerta è elencata con le sue metriche base così l'utente può ordinare e confrontare senza dover inserire kWh o GB/mese.
 
-## Installation
+## Installazione
 
 La skill si installa copiando il contenuto della repo nella directory delle skill Claude Code:
 
@@ -21,7 +21,7 @@ cd ~/.claude/skills/meno-meno && npm ci
 
 Dopo l'installazione, la skill è invocabile da Claude Code con `Skill name: meno-meno` (vedi `SKILL.md` per il dettaglio delle flag e degli esempi).
 
-## Usage
+## Utilizzo
 
 Quattro esempi, uno per commodity. Adatta operatore e commodity a quelli che ti interessano.
 
@@ -87,37 +87,28 @@ Operatori: `<`, `<=`, `=`, `>=`, `>`, `!=`. Tolleranza ±0.0001 SOLO sui campi m
 - **Fixture vecchia** (offerte non aggiornate, drift rispetto al sito live) → rigenera le fixture con `scripts/download-fixtures.ts`. Reference: [ADR 0006](docs/adr/0006-fixture-refresh-weekly-github-action.md) e workflow `.github/workflows/fixture-refresh.yml`.
 - **CI live gate fallisce** (drift o regressione live su PR che tocca scraper o fixture) → il workflow `live-gate` gira solo sui PR che toccano `src/scrapers/**/*.ts` o `fixtures/**/*.html`. Per debug locale: `export CI_PR_NUMBER=42 && npm run ci:live-gate`. Reference: [ADR 0002](docs/adr/0002-scraping-live-senza-cache.md).
 
-## Architecture
+## Architettura
 
 Skill NodeJS TypeScript con `--experimental-strip-types`, `cheerio` per il parsing HTML, e `playwright` lazy (opt-in) per Edison + WindTre. Scope v1: 8+ operatori (luce + gas + telco), cap 3 scraper concorrenti, solo test su fixture mock in CI, `--live` gating sui PR agli scraper, degradazione graceful, monitor `skill doctor` schedulato.
 
-Le decisioni di design sono documentate in [`docs/adr/`](docs/adr/) (sette ADR accettate al momento della v1). Eventuale materiale di ricerca di mercato va in `docs/research/` (creato on-demand).
+Le decisioni di design sono documentate in [`docs/adr/`](docs/adr/) (tredici ADR accettate al momento della v6). Eventuale materiale di ricerca di mercato va in `docs/research/` (creato on-demand).
 
-## Architecture (locked)
+## Prossimo passo
 
-- Three ADRs in `docs/adr/`:
-  - `0001-scraper-per-operatore-hardcoded.md`
-  - `0002-scraping-live-senza-cache.md`
-  - `0003-output-multi-formato.md`
-- Stack: NodeJS TypeScript with `--experimental-strip-types`, `cheerio` for HTML parsing.
-- Scope v1: 8+ operatori (luce + gas + telco), cap 3 concurrent scrapers, only mock tests in CI, `--live` gating on scraper PRs, graceful degradation, scheduled `skill doctor` monitor.
-
-## Next step
-
-Follow the wayfinding map at https://github.com/ilteoood/meno-meno/issues/1.
+Segui la mappa wayfinding su https://github.com/ilteoood/meno-meno/issues/1.
 
 ## CI live gate
 
-GitHub Actions runs two workflows on every PR:
+GitHub Actions esegue due workflow a ogni PR:
 
-- `ci` (`.github/workflows/ci.yml`) — runs `npm ci && npm run lint && npm test` against fixture mocks. Must pass before merge.
-- `live-gate` (`.github/workflows/live-gate.yml`) — triggers only when paths match `src/scrapers/**/*.ts` or `fixtures/**/*.html`. For each affected operator, it runs `npm run ci:live-gate`, which extracts operator IDs from PR files via `gh pr view`, then runs `node --experimental-strip-types src/index.ts --operatore <id> --commodity <commodity> --live` for each. Any non-zero exit fails the gate.
+- `ci` (`.github/workflows/ci.yml`) — esegue `npm ci && npm run lint && npm test` sulle fixture mock. Deve passare prima del merge.
+- `live-gate` (`.github/workflows/live-gate.yml`) — si attiva solo quando i path matchano `src/scrapers/**/*.ts` o `fixtures/**/*.html`. Per ogni operatore coinvolto, esegue `npm run ci:live-gate`, che estrae gli ID operatore dai file della PR tramite `gh pr view`, poi esegue `node --experimental-strip-types src/index.ts --operatore <id> --commodity <commodity> --live` per ciascuno. Qualsiasi exit non-zero fa fallire il gate.
 
-Local debug:
+Debug locale:
 
 ```sh
 export CI_PR_NUMBER=42
 npm run ci:live-gate
 ```
 
-Operators without a registered live source (today: every operator except `enel/luce`) are skipped, not failed.
+Operatori senza una sorgente live registrata (oggi: tutti tranne `enel/luce`) vengono skippati, non falliti.

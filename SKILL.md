@@ -1,34 +1,34 @@
 ---
 name: meno-meno
-description: Italian utility and telco market comparison. Compares luce, gas, mobile, and fisso offers from registered operators and outputs EUR/kWh, EUR/Smc, and quota fissa in Markdown, CSV, and JSON. No consumption profile required.
+description: Skill per confrontare le offerte di utility e telco nel mercato italiano. Compara le offerte di luce, gas, mobile e fisso degli operatori registrati ed emette EUR/kWh, EUR/Smc e quota fissa in Markdown, CSV e JSON. Non richiede un profilo di consumo.
 commands:
-  doctor: Run diagnostics against all v1 operators (or one with --operatore). Use this when scrapers fail or fixtures look stale.
+  doctor: Esegue la diagnosi su tutti gli operatori v1 (o su uno solo con --operatore). Usalo quando gli scraper falliscono o le fixture sembrano vecchie.
 ---
 
 # meno-meno
 
 Skill per confrontare le offerte di utility (luce, gas) e telco (mobile, fisso) degli operatori registrati nel mercato italiano. Aggrega i dati pubblicati dai singoli operatori in un formato neutro (Markdown, CSV, JSON) pronto per essere analizzato, ordinato per tier di ranking, o esportato.
 
-## Commands
+## Comandi
 
-### Main command — `Skill name: meno-meno`
+### Comando principale — `Skill name: meno-meno`
 
 Invoca la skill dal prompt di Claude Code con `Skill name: meno-meno` oppure chiedendo direttamente il confronto. La skill gira lo scraper registrato per l'operatore e la commodity richiesti e restituisce l'output formattato in-line. Di default vengono emessi tutti e tre i formati (Markdown, CSV, JSON) nello stesso messaggio.
 
-### Sub-command: `doctor`
+### Sotto-comando: `doctor`
 
-Sub-command `doctor` (T5, #20). Esegue un health check di tutti gli scraper registrati: HTTP status, numero di offerte parsate, parse failures, e drift rispetto all'ultimo run noto. Output come tabella Markdown con una riga per operatore. Operatori senza scraper registrato (oggi 23 su 24, enel è l'unico live) vengono marcati con `scraper not yet registered for v1` invece di un errore — è il comportamento v1 corretto, non un fallimento. Per il reference completo vedi [ADR 0007](docs/adr/0007-skill-doctor-cli-e-sub-skill.md).
+Sotto-comando `doctor` (T5, #20). Esegue un health check di tutti gli scraper registrati: HTTP status, numero di offerte parsate, parse failures, e drift rispetto all'ultimo run noto. Output come tabella Markdown con una riga per operatore. Operatori senza scraper registrato (oggi 23 su 24, enel è l'unico live) vengono marcati con `scraper not yet registered for v1` invece di un errore — è il comportamento v1 corretto, non un fallimento. Per il reference completo vedi [ADR 0007](docs/adr/0007-skill-doctor-cli-e-sub-skill.md).
 
 Invocabile in due modi:
 - Standalone CLI: `node --experimental-strip-types src/cli/doctor-cli.ts [--operatore <id>] [--output <path>] [--json]`
 - Come sub-skill Claude Code: `runSkillDoctor({ operatore: 'enel' })` (vedi `src/skills/doctor.ts`)
 
-## Flags
+## Flag
 
-| Flag | Required | Default | Description |
+| Flag | Obbligatorio | Predefinito | Descrizione |
 |------|----------|---------|-------------|
 | `--operatore` | no* | — | ID operatore registrato (es. `enel`, `edison`, `windtre`). *Richiesto solo per il path mono-operatore; omettendolo con `--commodity` la skill fa fan-out su tutti gli operatori registrati per quella commodity (vedi sotto). |
-| `--commodity` | yes | — | Una tra `luce`, `gas`, `mobile`, `fisso`. |
+| `--commodity` | sì | — | Una tra `luce`, `gas`, `mobile`, `fisso`. |
 | `--fixture` | no | — | Path a un file HTML locale da usare come sorgente di scrape (modalità offline). |
 | `--live` | no | `false` | Esegue scraping live dal sito operatore invece di leggere da fixture. Solo per operatori con sorgente live registrata in `scripts/v1-sources.ts`. |
 | `--format` | no | `all` | Filtra i formati emessi: `all`, `markdown`, `csv`, o `json`. Default `all` emette tutti e tre (Markdown, CSV, JSON) nella stessa invocazione, come da ADR 0003. |
@@ -52,7 +52,7 @@ Senza `--operatore` e con `--commodity` (escludendo il path mono-op di `[ci-live
 | `gas`     | `prezzo`                    | `prezzo_effettivo_euro_smc`   |
 | `gas`     | `costo_commercializzazione` | `quota_fissa_euro_anno`       |
 
-## Examples
+## Esempi
 
 Esempi di invocazione da chat Claude Code. Adatta operatore e commodity a quelli che ti interessano.
 
