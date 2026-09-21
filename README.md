@@ -51,6 +51,36 @@ Usa la skill meno-meno per confrontare le offerte fisso di windtre con --live.
 
 Per la reference completa di flag e formati vedi [SKILL.md](SKILL.md).
 
+## Filtro multi-operatore
+
+Combinando `--commodity` con uno o più `--filter`, senza specificare `--operatore`, la skill fa fan-out su tutti gli operatori registrati per quella commodity, applica il vincolo sulle offerte, e produce l'output con `rankOfferte()` (top-3 + trade-off). Path mono-operatore (`--operatore X`) resta backward-compat.
+
+### Esempi
+
+```sh
+# Offerte mobile con prezzo <= 7 €/mese E (gb >= 50 OR gb = -1 per illimitati)
+npm run start -- --commodity mobile --filter "prezzo<=7" --filter "gb>=50|gb=-1"
+```
+
+```sh
+# Solo offerte mobile con almeno 100 GB (o illimitate)
+npm run start -- --commodity mobile --filter "gb>=100|gb=-1"
+```
+
+### Alias del filtro per commodity
+
+| Commodity | Alias                       | Schema field                  |
+|-----------|-----------------------------|-------------------------------|
+| `mobile`  | `prezzo`                    | `prezzo_effettivo_euro_mese`  |
+| `mobile`  | `gb`                        | `gb`                          |
+| `fisso`   | `prezzo`                    | `prezzo_effettivo_euro_mese`  |
+| `luce`    | `prezzo`                    | `prezzo_effettivo_euro_kwh`   |
+| `luce`    | `costo_commercializzazione` | `quota_fissa_euro_anno`       |
+| `gas`     | `prezzo`                    | `prezzo_effettivo_euro_smc`   |
+| `gas`     | `costo_commercializzazione` | `quota_fissa_euro_anno`       |
+
+Operatori: `<`, `<=`, `=`, `>=`, `>`, `!=`. Tolleranza ±0.0001 SOLO sui campi monetari. AND tra flag distinti, OR entro lo stesso flag via `|`. Nessun match → exit 0 con tabella vuota + warning. `OffertaBundle` è escluso dal filtro (entità separata). Reference completa del DSL: [ADR 0013](docs/adr/0013-filter-dsl.md).
+
 ## Troubleshooting
 
 - **Scraper rotto** (output vuoto, parse failure, HTTP error) → esegui `skill doctor` (sub-skill di T5, #20) per la diagnosi automatica su tutti gli operatori. Reference: [ADR 0007](docs/adr/0007-skill-doctor-cli-e-sub-skill.md).
