@@ -27,13 +27,30 @@ Invocabile in due modi:
 
 | Flag | Required | Default | Description |
 |------|----------|---------|-------------|
-| `--operatore` | yes | — | ID operatore registrato (es. `enel`, `edison`, `windtre`). |
+| `--operatore` | no* | — | ID operatore registrato (es. `enel`, `edison`, `windtre`). *Richiesto solo per il path mono-operatore; omettendolo con `--commodity` la skill fa fan-out su tutti gli operatori registrati per quella commodity (vedi sotto). |
 | `--commodity` | yes | — | Una tra `luce`, `gas`, `mobile`, `fisso`. |
 | `--fixture` | no | — | Path a un file HTML locale da usare come sorgente di scrape (modalità offline). |
 | `--live` | no | `false` | Esegue scraping live dal sito operatore invece di leggere da fixture. Solo per operatori con sorgente live registrata in `scripts/v1-sources.ts`. |
 | `--format` | no | `all` | Filtra i formati emessi: `all`, `markdown`, `csv`, o `json`. Default `all` emette tutti e tre (Markdown, CSV, JSON) nella stessa invocazione, come da ADR 0003. |
+| `--filter` | no | — | Vincolo numerico commodity-aware, ripetibile. Espressione: `alias<op>valore` con `<op>` ∈ `< <= = >= > !=`. AND tra flag, OR entro lo stesso flag via `|` (es. `gb>=50|gb=-1`). Alias: `prezzo`, `gb`, `costo_commercializzazione` (mappati a schema field per commodity — vedi sotto). Solo con `--commodity`. Ignorato nel path mono-operatore implicito via `[ci-live-gate]` per backward compat. Reference: [ADR 0013](docs/adr/0013-filter-dsl.md). |
 
 Exit codes: `0` successo, `1` errore scrape/aggregate, `2` errore di uso (argomento mancante, non valido, o operatore non registrato). Reference completa: [ADR 0003](docs/adr/0003-output-multi-formato.md).
+
+### Multi-operator fan-out
+
+Senza `--operatore` e con `--commodity` (escludendo il path mono-op di `[ci-live-gate]`) la skill itera `aggregate()` su tutti gli operatori registrati per quella commodity, applica `rankOfferte()` (top-3 + trade-off) sui superstiti, ed emette markdown/csv/json con l'espressione del filtro nell'header. Il path mono-operatore (con `--operatore X`) resta bit-identical al precedente — backward compat con ADR 0002 e `[ci-live-gate]`.
+
+### Alias del filtro per commodity
+
+| Commodity | Alias                       | Schema field                  |
+|-----------|-----------------------------|-------------------------------|
+| `mobile`  | `prezzo`                    | `prezzo_effettivo_euro_mese`  |
+| `mobile`  | `gb`                        | `gb`                          |
+| `fisso`   | `prezzo`                    | `prezzo_effettivo_euro_mese`  |
+| `luce`    | `prezzo`                    | `prezzo_effettivo_euro_kwh`   |
+| `luce`    | `costo_commercializzazione` | `quota_fissa_euro_anno`       |
+| `gas`     | `prezzo`                    | `prezzo_effettivo_euro_smc`   |
+| `gas`     | `costo_commercializzazione` | `quota_fissa_euro_anno`       |
 
 ## Examples
 
