@@ -1,12 +1,12 @@
 # meno-meno
 
-Skill Claude Code per confrontare le offerte di utility e telco nel mercato italiano.
+Skill per confrontare le offerte di utility e telco nel mercato italiano.
 
 Stato: in fase di pianificazione. Vedi [issue #1](https://github.com/ilteoood/meno-meno/issues/1) per la mappa wayfinding.
 
 ## Panoramica
 
-`meno-meno` è una skill Claude Code che confronta le offerte pubblicate dagli operatori italiani di utility (luce, gas) e telco (mobile, fisso). Aggrega i dati per commodity, li normalizza in EUR/kWh, EUR/Smc, e quota fissa, e li emette in Markdown, CSV, e JSON. Non serve un profilo di consumo: ogni offerta è elencata con le sue metriche base così l'utente può ordinare e confrontare senza dover inserire kWh o GB/mese.
+`meno-meno` è una skill che confronta le offerte pubblicate dagli operatori italiani di utility (luce, gas) e telco (mobile, fisso). Aggrega i dati per commodity, li normalizza in EUR/kWh, EUR/Smc, e quota fissa, e li emette in Markdown, CSV, e JSON. Non serve un profilo di consumo: ogni offerta è elencata con le sue metriche base così l'utente può ordinare e confrontare senza dover inserire kWh o GB/mese.
 
 ## Installazione
 

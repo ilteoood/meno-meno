@@ -1,6 +1,6 @@
 ---
 name: meno-meno
-description: Skill Claude Code per confrontare le offerte di utility e telco nel mercato italiano. Compara le offerte di luce, gas, mobile e fisso degli operatori registrati ed emette EUR/kWh, EUR/Smc e quota fissa in Markdown, CSV e JSON. Non richiede un profilo di consumo.
+description: Skill per confrontare le offerte di utility e telco nel mercato italiano. Compara le offerte di luce, gas, mobile e fisso degli operatori registrati ed emette EUR/kWh, EUR/Smc e quota fissa in Markdown, CSV e JSON. Non richiede un profilo di consumo.
 commands:
   doctor: Esegue la diagnosi su tutti gli operatori v1 (o su uno solo con --operatore). Usalo quando gli scraper falliscono o le fixture sembrano vecchie.
 ---
