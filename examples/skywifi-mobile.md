@@ -2,31 +2,31 @@
 
 ## Tabella completa
 
-| Operatore | Offerta | €/mese | GB | Minuti | Velocità |
-| --- | --- | --- | --- | --- | --- |
-| skywifi | Sky WiFi Mobile 100 | 6,99 | 100 | ILLIMITATO | 1000 |
-| skywifi | Sky WiFi Mobile 50 | 4,99 | 50 | ILLIMITATO | 1000 |
-| skywifi | Sky WiFi Mobile 20 | 2,99 | 20 | ILLIMITATO | 150 |
+| Operatore | Offerta | €/mese | GB | Minuti |
+| --- | --- | --- | --- | --- |
+| skywifi | Sky Mobile Start | 9,95 | 150 | ILLIMITATO |
+| skywifi | Sky Mobile Pro | 11,95 | 250 | ILLIMITATO |
+| skywifi | Sky Mobile Ultra | 19,95 | -1 | ILLIMITATO |
 
 ## Trade-off per offerta top-3
 
-### skywifi — Sky WiFi Mobile 20
+### skywifi — Sky Mobile Start
 - **Vince su**: nessuna
 - **Perde su**: GB inclusi
 
-### skywifi — Sky WiFi Mobile 50
-- **Vince su**: nessuna
-- **Perde su**: costo annuo, GB inclusi
-
-### skywifi — Sky WiFi Mobile 100
+### skywifi — Sky Mobile Pro
 - **Vince su**: nessuna
 - **Perde su**: costo annuo
+
+### skywifi — Sky Mobile Ultra
+- **Vince su**: nessuna
+- **Perde su**: costo annuo, GB inclusi
 
 
 ## Top-3 motivata
 
-1. **skywifi — Sky WiFi Mobile 20** — €36/anno stimato, GB inclusi: 20, Velocità: 150 Mbps
-2. **skywifi — Sky WiFi Mobile 50** — €60/anno stimato, GB inclusi: 50, Velocità: 1000 Mbps
-3. **skywifi — Sky WiFi Mobile 100** — €84/anno stimato, GB inclusi: 100, Velocità: 1000 Mbps
+1. **skywifi — Sky Mobile Start** — €119/anno stimato, GB inclusi: 150, Rete: 5G
+2. **skywifi — Sky Mobile Pro** — €143/anno stimato, GB inclusi: 250, Rete: 5G
+3. **skywifi — Sky Mobile Ultra** — €239/anno stimato, GB inclusi: -1, Rete: 5G
 
 Fonte: live scrape di 1/1 operatori.

@@ -1,4 +1,3 @@
-tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Offerta,mobile,tiscali,TIS-MOBILE-001,,Tiscali Mobile 100,7.99,EUR/mese,undefined,,,100,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/tiscali/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,tiscali,TIS-MOBILE-002,,Tiscali Mobile 50,5.99,EUR/mese,undefined,,,50,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/tiscali/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,tiscali,TIS-MOBILE-003,,Tiscali Mobile 20,3.99,EUR/mese,undefined,,,20,-1,entrambe,4G,150,,,,file:///root/workspaces/meno-meno/fixtures/tiscali/mobile.html,2026-09-13T10:00:00.000Z
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,mobile,tiscali,mobile-300-5g,,Mobile 300 5G,6.99,EUR/mese,undefined,,,300,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/tiscali/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,tiscali,mobile-400-5g,,Mobile 400 5G,9.99,EUR/mese,undefined,,,400,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/tiscali/mobile.html,2026-09-13T10:00:00.000Z

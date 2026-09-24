@@ -15,8 +15,7 @@
         "gb": 100,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "5G",
-        "velocita_mbps": 1000
+        "tecnologia": "5G"
       },
       {
         "commodity": "mobile",
@@ -29,8 +28,7 @@
         "gb": -1,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "5G",
-        "velocita_mbps": 1000
+        "tecnologia": "5G"
       },
       {
         "commodity": "mobile",
@@ -43,8 +41,7 @@
         "gb": 50,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "5G",
-        "velocita_mbps": 1000
+        "tecnologia": "5G"
       }
     ],
     "bundle": []

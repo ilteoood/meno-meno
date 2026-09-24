@@ -1,5 +1,9 @@
-tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Offerta,luce,enel,EN-FIX-WEB-LUCE-001,,Enel Fix Web Luce,0.12,EUR/kWh,84,fisso,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,enel,EN-MESE-LIGHT-LUCE-002,,Enel Mese Light,0.18,EUR/kWh,120,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,enel,EN-MOVE-LUCE-003,,Enel Move,0.14,EUR/kWh,96,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,enel,EN-MOVE-PLUS-LUCE-004,,Enel Move Plus,0.16,EUR/kWh,108,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,luce,enel,enel-fix-web-luce,,Enel Fix Web Luce,0.139,EUR/kWh,144,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,enel,enel-mese-light-luce,,Enel Mese Light Luce,0.145,EUR/kWh,156,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,enel,enel-flex-control-luce,,Enel Flex Control Luce,0.022,EUR/kWh,180,PUN,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,enel,enel-drive-luce,,Enel Drive Luce,0.154,EUR/kWh,252,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,enel,enel-move-luce,,Enel Move Luce,0.179,EUR/kWh,168,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,enel,placet-consumer-luce-fissa,,Enel Energia PLACET Fissa Luce Consumer,0.204,EUR/kWh,144,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,enel,placet-consumer-luce-variabile,,Enel Energia PLACET Variabile Luce Consumer,0.05,EUR/kWh,144,PUN,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,enel,enel-flex-box,,Enel Flex Box,0.041,EUR/kWh,72,PUN,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/enel/luce.html,2026-09-13T10:00:00.000Z

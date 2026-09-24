@@ -1,4 +1,17 @@
-tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Offerta,mobile,vodafone,VOD-MOBILE-001,,Vodafone Easy Mobile,7.99,EUR/mese,undefined,,,100,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,vodafone,VOD-MOBILE-002,,Vodafone Red Mobile,12.99,EUR/mese,undefined,,,-1,-1,entrambe,5G+,2000,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,vodafone,VOD-MOBILE-003,,Vodafone Smart Mobile,4.99,EUR/mese,undefined,,,30,-1,entrambe,4G,150,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,mobile,vodafone,mobile-start,,150 GIGA,9.95,EUR/mese,undefined,,,150,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-pro,,250 GIGA,11.95,EUR/mese,undefined,,,250,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-pro-cb,,GIGA ILLIMITATI*,11.95,EUR/mese,undefined,,,-1,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-ultra,,GIGA ILLIMITATI*,19.95,EUR/mese,undefined,,,-1,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,under,,150 GIGA,9.95,EUR/mese,undefined,,,150,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-invitato,,150 GIGA,11.95,EUR/mese,undefined,,,150,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-pro-cb-start,,GIGA ILLIMITATI*,11.95,EUR/mese,undefined,,,-1,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-pro-cb-infinito-insieme,,GIGA ILLIMITATI*,11.95,EUR/mese,undefined,,,-1,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-pro-mesi-gratis,,250 GIGA,11.95,EUR/mese,undefined,,,250,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-pro-cb-mesi-gratis,,GIGA ILLIMITATI*,11.95,EUR/mese,undefined,,,-1,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-pro-app-cb,,GIGA ILLIMITATI*,11.95,EUR/mese,undefined,,,-1,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-ultra-addon,,GIGA ILLIMITATI*,19.95,EUR/mese,undefined,,,-1,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-pro-addon,,250 GIGA,11.95,EUR/mese,undefined,,,250,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-pro-cb-start-addon,,GIGA ILLIMITATI*,11.95,EUR/mese,undefined,,,-1,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-pro-cb-addon,,GIGA ILLIMITATI*,11.95,EUR/mese,undefined,,,-1,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,vodafone,mobile-start-addon,,150 GIGA,9.95,EUR/mese,undefined,,,150,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/vodafone/mobile.html,2026-09-13T10:00:00.000Z

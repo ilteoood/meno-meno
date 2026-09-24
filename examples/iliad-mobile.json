@@ -1,50 +1,86 @@
 {
   "commodity": "mobile",
   "scraped_at": "2026-09-13T10:00:00.000Z",
-  "count": 3,
+  "count": 6,
   "offerte": {
     "singole": [
       {
         "commodity": "mobile",
         "operatore_id": "iliad",
-        "codice_offerta": "ILD-MOBILE-001",
-        "nome_commerciale": "Iliad 150",
+        "codice_offerta": "giga-250",
+        "nome_commerciale": "GIGA 250",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/iliad/mobile.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 11.99,
+        "gb": 250,
+        "minuti": -1,
+        "tipo_sim": "entrambe",
+        "tecnologia": "5G"
+      },
+      {
+        "commodity": "mobile",
+        "operatore_id": "iliad",
+        "codice_offerta": "top-230",
+        "nome_commerciale": "TOP 230",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/iliad/mobile.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
         "prezzo_effettivo_euro_mese": 9.99,
-        "gb": 150,
+        "gb": 230,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "5G",
-        "velocita_mbps": 1000
+        "tecnologia": "5G"
       },
       {
         "commodity": "mobile",
         "operatore_id": "iliad",
-        "codice_offerta": "ILD-MOBILE-002",
-        "nome_commerciale": "Iliad 100",
+        "codice_offerta": "giga-150",
+        "nome_commerciale": "GIGA 150",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/iliad/mobile.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
         "prezzo_effettivo_euro_mese": 7.99,
-        "gb": 100,
+        "gb": 150,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "5G",
-        "velocita_mbps": 1000
+        "tecnologia": "4G"
       },
       {
         "commodity": "mobile",
         "operatore_id": "iliad",
-        "codice_offerta": "ILD-MOBILE-003",
-        "nome_commerciale": "Iliad Flash 50",
+        "codice_offerta": "voce",
+        "nome_commerciale": "Voce",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/iliad/mobile.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
         "prezzo_effettivo_euro_mese": 4.99,
-        "gb": 50,
+        "gb": 0.04,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "5G",
-        "velocita_mbps": 1000
+        "tecnologia": "4G"
+      },
+      {
+        "commodity": "mobile",
+        "operatore_id": "iliad",
+        "codice_offerta": "dati-350",
+        "nome_commerciale": "Dati 350",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/iliad/mobile.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 14.99,
+        "gb": 350,
+        "minuti": 0,
+        "tipo_sim": "entrambe",
+        "tecnologia": "5G"
+      },
+      {
+        "commodity": "mobile",
+        "operatore_id": "iliad",
+        "codice_offerta": "domotica",
+        "nome_commerciale": "Domotica",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/iliad/mobile.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_mese": 1.99,
+        "gb": 0.2,
+        "minuti": 50,
+        "tipo_sim": "entrambe",
+        "tecnologia": "4G"
       }
     ],
     "bundle": []

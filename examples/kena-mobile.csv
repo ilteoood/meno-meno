@@ -1,4 +1,10 @@
-tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Offerta,mobile,kena,KNA-MOBILE-001,,Kena Star 100,6.99,EUR/mese,undefined,,,100,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,kena,KNA-MOBILE-002,,Kena Star 50,4.99,EUR/mese,undefined,,,50,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,kena,KNA-MOBILE-003,,Kena 2.99,2.99,EUR/mese,undefined,,,20,-1,entrambe,4G,150,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,mobile,kena,kena-10-giga-4-99,,Kena 10 Giga,4.99,EUR/mese,undefined,,,10,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,kena,kena-150-giga-4-99,,Kena 150 Giga,4.99,EUR/mese,undefined,,,150,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,kena,kena-300-giga-5-99,,Kena 300 Giga,5.99,EUR/mese,undefined,,,300,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,kena,kena-350-giga-7-99,,Kena 350 Giga,7.99,EUR/mese,undefined,,,350,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,kena,kena-450-giga-9-99,,Kena 450 Giga,9.99,EUR/mese,undefined,,,450,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,kena,kena-300-giga-11-99,,Kena 300 Giga,11.99,EUR/mese,undefined,,,300,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,kena,kena-1-giga-2-99,,Kena 1 Giga,2.99,EUR/mese,undefined,,,1,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,kena,kena-1000-giga-9-99,,Kena 1000 Giga,9.99,EUR/mese,undefined,,,1000,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,kena,kena-600-giga-11-99,,Kena 600 Giga,11.99,EUR/mese,undefined,,,600,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/kena/mobile.html,2026-09-13T10:00:00.000Z

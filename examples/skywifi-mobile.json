@@ -7,44 +7,41 @@
       {
         "commodity": "mobile",
         "operatore_id": "skywifi",
-        "codice_offerta": "SKW-MOBILE-001",
-        "nome_commerciale": "Sky WiFi Mobile 100",
+        "codice_offerta": "sky-mobile-start",
+        "nome_commerciale": "Sky Mobile Start",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/skywifi/mobile.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_mese": 6.99,
-        "gb": 100,
+        "prezzo_effettivo_euro_mese": 9.95,
+        "gb": 150,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "5G",
-        "velocita_mbps": 1000
+        "tecnologia": "5G"
       },
       {
         "commodity": "mobile",
         "operatore_id": "skywifi",
-        "codice_offerta": "SKW-MOBILE-002",
-        "nome_commerciale": "Sky WiFi Mobile 50",
+        "codice_offerta": "sky-mobile-pro",
+        "nome_commerciale": "Sky Mobile Pro",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/skywifi/mobile.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_mese": 4.99,
-        "gb": 50,
+        "prezzo_effettivo_euro_mese": 11.95,
+        "gb": 250,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "5G",
-        "velocita_mbps": 1000
+        "tecnologia": "5G"
       },
       {
         "commodity": "mobile",
         "operatore_id": "skywifi",
-        "codice_offerta": "SKW-MOBILE-003",
-        "nome_commerciale": "Sky WiFi Mobile 20",
+        "codice_offerta": "sky-mobile-ultra",
+        "nome_commerciale": "Sky Mobile Ultra",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/skywifi/mobile.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_mese": 2.99,
-        "gb": 20,
+        "prezzo_effettivo_euro_mese": 19.95,
+        "gb": -1,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "4G",
-        "velocita_mbps": 150
+        "tecnologia": "5G"
       }
     ],
     "bundle": []

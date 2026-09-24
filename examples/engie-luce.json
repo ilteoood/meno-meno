@@ -1,52 +1,66 @@
 {
   "commodity": "luce",
   "scraped_at": "2026-09-13T10:00:00.000Z",
-  "count": 3,
+  "count": 4,
   "offerte": {
     "singole": [
       {
         "commodity": "luce",
         "operatore_id": "engie",
-        "codice_offerta": "ENG-FIX-LUCE-001",
-        "nome_commerciale": "Engie Fix Luce",
+        "codice_offerta": "energia-vedochiaro",
+        "nome_commerciale": "Energia VedoChiaro",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/engie/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.14,
-        "quota_fissa_euro_anno": 96,
+        "prezzo_effettivo_euro_kwh": 0.008,
+        "quota_fissa_euro_anno": 59,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0.008
+        },
+        "green_flag": "A"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "engie",
+        "codice_offerta": "taaanta-energia-sera-e-relax",
+        "nome_commerciale": "Taaanta Energia Sera & Relax",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/engie/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.15,
+        "quota_fissa_euro_anno": 114,
         "meccanismo_prezzo": {
           "tipo": "fisso"
         },
-        "green_flag": "C"
+        "green_flag": "A"
       },
       {
         "commodity": "luce",
         "operatore_id": "engie",
-        "codice_offerta": "ENG-INDICE-LUCE-002",
-        "nome_commerciale": "Engie Indicizzata Luce",
+        "codice_offerta": "energia-puntofisso-12mesi",
+        "nome_commerciale": "Energia PuntoFisso 12 Mesi",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/engie/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.16,
-        "quota_fissa_euro_anno": 108,
+        "prezzo_effettivo_euro_kwh": 0.1862,
+        "quota_fissa_euro_anno": 120,
         "meccanismo_prezzo": {
-          "tipo": "PUN",
-          "spread_euro_kwh": 0
+          "tipo": "fisso"
         },
-        "green_flag": "C"
+        "green_flag": "A"
       },
       {
         "commodity": "luce",
         "operatore_id": "engie",
-        "codice_offerta": "ENG-WEB-LUCE-003",
-        "nome_commerciale": "Engie Web Luce",
+        "codice_offerta": "benvenuto-in-engie",
+        "nome_commerciale": "Benvenuto in ENGIE",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/engie/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.12,
-        "quota_fissa_euro_anno": 84,
+        "prezzo_effettivo_euro_kwh": 0.0253,
+        "quota_fissa_euro_anno": 78,
         "meccanismo_prezzo": {
           "tipo": "PUN",
-          "spread_euro_kwh": 0
+          "spread_euro_kwh": 0.0253
         },
-        "green_flag": "C"
+        "green_flag": "A"
       }
     ],
     "bundle": []

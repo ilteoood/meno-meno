@@ -2,31 +2,25 @@
 
 ## Tabella completa
 
-| Operatore | Offerta | €/mese | GB | Minuti | Velocità |
-| --- | --- | --- | --- | --- | --- |
-| tiscali | Tiscali Mobile 100 | 7,99 | 100 | ILLIMITATO | 1000 |
-| tiscali | Tiscali Mobile 50 | 5,99 | 50 | ILLIMITATO | 1000 |
-| tiscali | Tiscali Mobile 20 | 3,99 | 20 | ILLIMITATO | 150 |
+| Operatore | Offerta | €/mese | GB | Minuti |
+| --- | --- | --- | --- | --- |
+| tiscali | Mobile 300 5G | 6,99 | 300 | ILLIMITATO |
+| tiscali | Mobile 400 5G | 9,99 | 400 | ILLIMITATO |
 
 ## Trade-off per offerta top-3
 
-### tiscali — Tiscali Mobile 20
+### tiscali — Mobile 300 5G
 - **Vince su**: nessuna
 - **Perde su**: GB inclusi
 
-### tiscali — Tiscali Mobile 50
-- **Vince su**: nessuna
-- **Perde su**: costo annuo, GB inclusi
-
-### tiscali — Tiscali Mobile 100
+### tiscali — Mobile 400 5G
 - **Vince su**: nessuna
 - **Perde su**: costo annuo
 
 
 ## Top-3 motivata
 
-1. **tiscali — Tiscali Mobile 20** — €48/anno stimato, GB inclusi: 20, Velocità: 150 Mbps
-2. **tiscali — Tiscali Mobile 50** — €72/anno stimato, GB inclusi: 50, Velocità: 1000 Mbps
-3. **tiscali — Tiscali Mobile 100** — €96/anno stimato, GB inclusi: 100, Velocità: 1000 Mbps
+1. **tiscali — Mobile 300 5G** — €84/anno stimato, GB inclusi: 300, Rete: 5G
+2. **tiscali — Mobile 400 5G** — €120/anno stimato, GB inclusi: 400, Rete: 5G
 
 Fonte: live scrape di 1/1 operatori.

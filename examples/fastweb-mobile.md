@@ -2,31 +2,31 @@
 
 ## Tabella completa
 
-| Operatore | Offerta | €/mese | GB | Minuti | Velocità |
-| --- | --- | --- | --- | --- | --- |
-| fastweb | Fastweb Mobile 100 | 7,95 | 100 | ILLIMITATO | 1000 |
-| fastweb | Fastweb Mobile 50 | 5,95 | 50 | ILLIMITATO | 1000 |
-| fastweb | Fastweb Mobile Light | 3,95 | 20 | ILLIMITATO | 150 |
+| Operatore | Offerta | €/mese | GB | Minuti |
+| --- | --- | --- | --- | --- |
+| fastweb | Fastweb Mobile Start | 9,95 | 150 | ILLIMITATO |
+| fastweb | Fastweb Mobile Pro | 11,95 | 250 | ILLIMITATO |
+| fastweb | Fastweb Mobile Ultra | 19,95 | -1 | ILLIMITATO |
 
 ## Trade-off per offerta top-3
 
-### fastweb — Fastweb Mobile Light
+### fastweb — Fastweb Mobile Start
 - **Vince su**: nessuna
 - **Perde su**: GB inclusi
 
-### fastweb — Fastweb Mobile 50
-- **Vince su**: nessuna
-- **Perde su**: costo annuo, GB inclusi
-
-### fastweb — Fastweb Mobile 100
+### fastweb — Fastweb Mobile Pro
 - **Vince su**: nessuna
 - **Perde su**: costo annuo
+
+### fastweb — Fastweb Mobile Ultra
+- **Vince su**: nessuna
+- **Perde su**: costo annuo, GB inclusi
 
 
 ## Top-3 motivata
 
-1. **fastweb — Fastweb Mobile Light** — €47/anno stimato, GB inclusi: 20, Velocità: 150 Mbps
-2. **fastweb — Fastweb Mobile 50** — €71/anno stimato, GB inclusi: 50, Velocità: 1000 Mbps
-3. **fastweb — Fastweb Mobile 100** — €95/anno stimato, GB inclusi: 100, Velocità: 1000 Mbps
+1. **fastweb — Fastweb Mobile Start** — €119/anno stimato, GB inclusi: 150, Rete: 5G
+2. **fastweb — Fastweb Mobile Pro** — €143/anno stimato, GB inclusi: 250, Rete: 5G
+3. **fastweb — Fastweb Mobile Ultra** — €239/anno stimato, GB inclusi: -1, Rete: 5G
 
 Fonte: live scrape di 1/1 operatori.

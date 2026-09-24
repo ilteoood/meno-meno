@@ -4,29 +4,29 @@
 
 | Operatore | Offerta | €/kWh | Quota fissa €/anno | Verde | Meccanismo |
 | --- | --- | --- | --- | --- | --- |
-| plenitude | Plenitude Flex Luce | 0,14 | 96,00 | [C] | PUN |
-| plenitude | Plenitude Trend Luce | 0,12 | 84,00 | [C] | PUN |
-| plenitude | Plenitude Variabile Luce | 0,16 | 120,00 | [C] | PUN |
+| plenitude | Fixa Time 24 | 0,17 | 144,00 | [A] | fisso |
+| plenitude | Trend casa | 0,20 | 144,00 | [A] | PUN |
+| plenitude | Flexi Pertinenze | 0,22 | 144,00 | [A] | fisso |
 
 ## Trade-off per offerta top-3
 
-### plenitude — Plenitude Trend Luce
+### plenitude — Fixa Time 24
 - **Vince su**: nessuna
 - **Perde su**: nessuna
 
-### plenitude — Plenitude Flex Luce
+### plenitude — Trend casa
 - **Vince su**: nessuna
-- **Perde su**: costo annuo
+- **Perde su**: costo annuo, fissità
 
-### plenitude — Plenitude Variabile Luce
+### plenitude — Flexi Pertinenze
 - **Vince su**: nessuna
 - **Perde su**: costo annuo
 
 
 ## Top-3 motivata
 
-1. **plenitude — Plenitude Trend Luce** — €408/anno stimato, Verde: [C], Fissità: [PUN]
-2. **plenitude — Plenitude Flex Luce** — €474/anno stimato, Verde: [C], Fissità: [PUN]
-3. **plenitude — Plenitude Variabile Luce** — €552/anno stimato, Verde: [C], Fissità: [PUN]
+1. **plenitude — Fixa Time 24** — €607/anno stimato, Verde: [A], Fissità: [fisso]
+2. **plenitude — Trend casa** — €689/anno stimato, Verde: [A], Fissità: [PUN]
+3. **plenitude — Flexi Pertinenze** — €726/anno stimato, Verde: [A], Fissità: [fisso]
 
 Fonte: live scrape di 1/1 operatori.

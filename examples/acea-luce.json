@@ -1,18 +1,18 @@
 {
   "commodity": "luce",
   "scraped_at": "2026-09-13T10:00:00.000Z",
-  "count": 3,
+  "count": 11,
   "offerte": {
     "singole": [
       {
         "commodity": "luce",
         "operatore_id": "acea",
-        "codice_offerta": "AC-FIX-LUCE-001",
-        "nome_commerciale": "Acea Energia Fix Luce",
-        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.html",
+        "codice_offerta": "000774ESFML01XXRT4D4028300000000",
+        "nome_commerciale": "Acea Energia Fix  Luce e Gas",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.14,
-        "quota_fissa_euro_anno": 96,
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
         "meccanismo_prezzo": {
           "tipo": "fisso"
         },
@@ -21,32 +21,150 @@
       {
         "commodity": "luce",
         "operatore_id": "acea",
-        "codice_offerta": "AC-VAR-LUCE-002",
-        "nome_commerciale": "Acea Energia Variabile Luce",
-        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.html",
+        "codice_offerta": "000774ESFFP01XXRT4E4027860000000",
+        "nome_commerciale": "Acea Energia Placet Fissa Luce Domestico",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.16,
-        "quota_fissa_euro_anno": 108,
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "B"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "acea",
+        "codice_offerta": "000774ESVML01XXRT4D4027880000000",
+        "nome_commerciale": "Acea Energia Sprint Web  Luce e Gas",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
         "meccanismo_prezzo": {
           "tipo": "PUN",
-          "spread_euro_kwh": 0
+          "spread_euro_kwh": 0.2648
         },
         "green_flag": "C"
       },
       {
         "commodity": "luce",
         "operatore_id": "acea",
-        "codice_offerta": "AC-WEB-LUCE-003",
-        "nome_commerciale": "Acea Web Luce",
-        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.html",
+        "codice_offerta": "000774ESVFP01XXRT4E4027850000000",
+        "nome_commerciale": "Acea Energia Placet Variabile Luce Domestico",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.12,
-        "quota_fissa_euro_anno": 84,
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
         "meccanismo_prezzo": {
           "tipo": "PUN",
-          "spread_euro_kwh": 0
+          "spread_euro_kwh": 0.2648
+        },
+        "green_flag": "B"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "acea",
+        "codice_offerta": "000774ESVML01XXRT4D4027900000000",
+        "nome_commerciale": "Acea Energia Flex Casa  Luce e Gas",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0.2648
         },
         "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "acea",
+        "codice_offerta": "000774ESVML01XXRT4D4027890000000",
+        "nome_commerciale": "Acea Energia Sprint  Luce e Gas",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0.2648
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "acea",
+        "codice_offerta": "000774ESVML01XXRT4D4027990000000",
+        "nome_commerciale": "Acea Energia Trend 12  Luce e Gas",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0.2648
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "acea",
+        "codice_offerta": "000774ESVML01XXRT4D4028000000000",
+        "nome_commerciale": "Acea Energia Trend 24  Luce e Gas",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0.2648
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "acea",
+        "codice_offerta": "000774ESFFP01XXRT3E4027870000000",
+        "nome_commerciale": "Acea Energia Placet Fissa Luce Altri Usi",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "B"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "acea",
+        "codice_offerta": "000774ESVML01XXRT3D4027910000000",
+        "nome_commerciale": "Acea Energia Sprint  Luce e Gas",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0.2648
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "acea",
+        "codice_offerta": "000774ESVFP01XXRT3E4027970000000",
+        "nome_commerciale": "Acea Energia Placet Variabile Luce Altri Usi",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/acea/luce.json",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.2648,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0.2648
+        },
+        "green_flag": "B"
       }
     ],
     "bundle": []

@@ -1,4 +1,9 @@
-tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Offerta,luce,a2a,A2A-FIX-LUCE-001,,A2A Fix Luce,0.13,EUR/kWh,96,fisso,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,a2a,A2A-INDICE-LUCE-002,,A2A Indicizzata Luce,0.15,EUR/kWh,108,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,a2a,A2A-WEB-LUCE-003,,A2A Web Luce,0.11,EUR/kWh,72,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,luce,a2a,a2a-17228,,A2A Click,0.143,EUR/kWh,102,fisso,A,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,a2a,a2a-27948,,Noi2,0.105,EUR/kWh,114,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,a2a,a2a-87984,,A2A Start,0.149,EUR/kWh,114,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,a2a,a2a-11567,,Smart Casa,0.025003,EUR/kWh,114,PUN,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,a2a,a2a-88119,,A2A Full,0.149,EUR/kWh,135,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,a2a,a2a-12366,,Smart Casa+,0.025003,EUR/kWh,135,PUN,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,a2a,a2a-8399,,A2A Placet Fissa,0.189,EUR/kWh,144,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,a2a,a2a-8402,,A2A Placet Variabile,0.039996,EUR/kWh,144,PUN,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/a2a/luce.html,2026-09-13T10:00:00.000Z

@@ -1,4 +1,5 @@
-tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Offerta,luce,engie,ENG-FIX-LUCE-001,,Engie Fix Luce,0.14,EUR/kWh,96,fisso,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/engie/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,engie,ENG-INDICE-LUCE-002,,Engie Indicizzata Luce,0.16,EUR/kWh,108,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/engie/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,engie,ENG-WEB-LUCE-003,,Engie Web Luce,0.12,EUR/kWh,84,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/engie/luce.html,2026-09-13T10:00:00.000Z
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,luce,engie,energia-vedochiaro,,Energia VedoChiaro,0.008,EUR/kWh,59,PUN,A,,,,,,,,file:///root/workspaces/meno-meno/fixtures/engie/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,engie,taaanta-energia-sera-e-relax,,Taaanta Energia Sera & Relax,0.15,EUR/kWh,114,fisso,A,,,,,,,,file:///root/workspaces/meno-meno/fixtures/engie/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,engie,energia-puntofisso-12mesi,,Energia PuntoFisso 12 Mesi,0.1862,EUR/kWh,120,fisso,A,,,,,,,,file:///root/workspaces/meno-meno/fixtures/engie/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,engie,benvenuto-in-engie,,Benvenuto in ENGIE,0.0253,EUR/kWh,78,PUN,A,,,,,,,,file:///root/workspaces/meno-meno/fixtures/engie/luce.html,2026-09-13T10:00:00.000Z

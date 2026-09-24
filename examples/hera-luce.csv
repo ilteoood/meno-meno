@@ -1,4 +1,4 @@
-tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Offerta,luce,hera,HR-FIX-LUCE-001,,Hera Fix Luce,0.13,EUR/kWh,90,fisso,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/hera/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,hera,HR-VAR-LUCE-002,,Hera Variabile Luce,0.15,EUR/kWh,108,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/hera/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,hera,HR-WEB-LUCE-003,,Hera Web Luce,0.12,EUR/kWh,84,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/hera/luce.html,2026-09-13T10:00:00.000Z
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,luce,hera,piu-controllo-special-flat,,PiùControllo Special Flat,0.1422,EUR/kWh,144,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/hera/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,hera,placet-variabile,,Hera Placet Variabile,0.07,EUR/kWh,144,PUN,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/hera/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,hera,placet-fissa,,Hera Placet Fissa,0.265,EUR/kWh,144,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/hera/luce.html,2026-09-13T10:00:00.000Z

@@ -7,44 +7,41 @@
       {
         "commodity": "mobile",
         "operatore_id": "fastweb",
-        "codice_offerta": "FW-MOBILE-001",
-        "nome_commerciale": "Fastweb Mobile 100",
+        "codice_offerta": "fastweb-mobile-start",
+        "nome_commerciale": "Fastweb Mobile Start",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/fastweb/mobile.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_mese": 7.95,
-        "gb": 100,
+        "prezzo_effettivo_euro_mese": 9.95,
+        "gb": 150,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "5G",
-        "velocita_mbps": 1000
+        "tecnologia": "5G"
       },
       {
         "commodity": "mobile",
         "operatore_id": "fastweb",
-        "codice_offerta": "FW-MOBILE-002",
-        "nome_commerciale": "Fastweb Mobile 50",
+        "codice_offerta": "fastweb-mobile-pro",
+        "nome_commerciale": "Fastweb Mobile Pro",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/fastweb/mobile.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_mese": 5.95,
-        "gb": 50,
+        "prezzo_effettivo_euro_mese": 11.95,
+        "gb": 250,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "5G",
-        "velocita_mbps": 1000
+        "tecnologia": "5G"
       },
       {
         "commodity": "mobile",
         "operatore_id": "fastweb",
-        "codice_offerta": "FW-MOBILE-003",
-        "nome_commerciale": "Fastweb Mobile Light",
+        "codice_offerta": "fastweb-mobile-ultra",
+        "nome_commerciale": "Fastweb Mobile Ultra",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/fastweb/mobile.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_mese": 3.95,
-        "gb": 20,
+        "prezzo_effettivo_euro_mese": 19.95,
+        "gb": -1,
         "minuti": -1,
         "tipo_sim": "entrambe",
-        "tecnologia": "4G",
-        "velocita_mbps": 150
+        "tecnologia": "5G"
       }
     ],
     "bundle": []
