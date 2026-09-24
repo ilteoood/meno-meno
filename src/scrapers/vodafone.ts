@@ -10,34 +10,19 @@ import type {
   TipoSim,
 } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
+import { nowIso } from './_utils/clock.ts';
+import { fetchHtml } from './_utils/fetch-html.ts';
 
 const VODAFONE_MOBILE_URL = 'https://privati.vodafone.it/mobile/telefonia-mobile';
 const VODAFONE_FISSO_URL = 'https://privati.vodafone.it/casa/fibra';
 const SCRAPER_TIMEOUT_MS = 30_000;
 const PAGE_SETTLE_TIMEOUT_MS = 8_000;
 
-const DESKTOP_UA =
-  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
 const OFFER_QUERY_KEY = 'hubmobileline-consumer-eshop-mobile-line-products-all';
 const FISSO_OFFER_QUERY_KEY = 'hubfixedline-consumer-eshop-fixed-line-products-all';
 
-function nowIso(): string {
-  return new Date().toISOString();
-}
 
-async function fetchHtml(url: string, signal: AbortSignal): Promise<string> {
-  const browser = await launchBrowser();
-  const context = await browser.newContext({ userAgent: DESKTOP_UA, locale: 'it-IT' });
-  const page = await context.newPage();
-  try {
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: SCRAPER_TIMEOUT_MS });
-    await page.waitForTimeout(PAGE_SETTLE_TIMEOUT_MS);
-    return await page.content();
-  } finally {
-    await context.close();
-  }
-}
 
 function parsePriceEur(text: string): number | null {
   const match = text.match(/(\d{1,4})\s*[.,]\s*(\d{2})/);

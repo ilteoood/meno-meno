@@ -10,33 +10,16 @@ import type {
 } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
 import { launchBrowser } from '../browser/playwright.ts';
+import { nowIso } from './_utils/clock.ts';
+import { fetchHtml } from './_utils/fetch-html.ts';
 
 const WINDTRE_MOBILE_URL = 'https://www.windtre.it/offerte-mobile';
 const WINDTRE_FISSO_URL = 'https://www.windtre.it/offerte-fibra';
 const SCRAPER_TIMEOUT_MS = 15_000;
 const BROWSER_WAIT_TIMEOUT_MS = 10_000;
 
-const DESKTOP_UA =
-  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
-function nowIso(): string {
-  return new Date().toISOString();
-}
 
-async function fetchHtml(url: string, signal: AbortSignal): Promise<string> {
-  const browser = await launchBrowser();
-  const context = await browser.newContext({ userAgent: DESKTOP_UA });
-  const page = await context.newPage();
-  try {
-    await page.goto(url, { waitUntil: 'networkidle', timeout: SCRAPER_TIMEOUT_MS });
-    await page.waitForSelector('[data-offer-code], article[data-offer]', {
-      timeout: BROWSER_WAIT_TIMEOUT_MS,
-    });
-    return await page.content();
-  } finally {
-    await context.close();
-  }
-}
 
 function parsePriceEur(text: string): number | null {
   const match = text.match(/(\d{1,4}(?:[.,]\d{2})?)/);
