@@ -5,6 +5,7 @@ import type { Scraper, ScrapeSource } from './scrapers/types.ts';
 import { aggregate } from './aggregator.ts';
 import { format } from './formatters/index.ts';
 import { filterOfferte, validateFilter, type Constraint } from './filter/index.ts';
+import { V1_FIXTURE_SOURCES } from '../scripts/v1-sources.ts';
 
 const VALID_COMMODITIES: readonly Commodity[] = ['luce', 'gas', 'mobile', 'fisso'];
 
@@ -74,106 +75,8 @@ function validateCommodity(value: string | null): Commodity {
 }
 
 function liveUrl(operatore: string, commodity: Commodity): string | null {
-  if (operatore === 'enel' && commodity === 'luce') {
-    return 'https://www.enel.it/it-it/offerte-luce';
-  }
-  if (operatore === 'edison' && commodity === 'luce') {
-    return 'https://www.edisonenergia.it/edison/casa/luce';
-  }
-  if (operatore === 'eolo' && commodity === 'fisso') {
-    return 'https://www.eolo.it/';
-  }
-  if (operatore === 'plenitude' && commodity === 'luce') {
-    return 'https://eniplenitude.com/offerta/casa/gas-e-luce/offerte-energia-elettrica';
-  }
-  if (operatore === 'a2a' && commodity === 'luce') {
-    return 'https://www.a2a.it/casa/offerte-luce-gas';
-  }
-  if (operatore === 'iren' && commodity === 'luce') {
-    return 'https://www.irenlucegas.it/casa/offerte-luce';
-  }
-  if (operatore === 'hera' && commodity === 'luce') {
-    return 'https://heracomm.gruppohera.it/casa/offerte-luce-gas';
-  }
-  if (operatore === 'acea' && commodity === 'luce') {
-    return 'https://www.aceaenergia.it/elenco-offerte';
-  }
-  if (operatore === 'sorgenia' && commodity === 'luce') {
-    return 'https://www.sorgenia.it/sites/default/themes/sorgenia/modules/preprod_dynamic_card.php?offert=43124&commodity=ELE&consume=medium';
-  }
-  if (operatore === 'illumia' && commodity === 'luce') {
-    return 'https://www.illumia.it/casa/luce/';
-  }
-  if (operatore === 'engie' && commodity === 'luce') {
-    return 'https://www.engie.it/casa/offerte-luce-gas/';
-  }
-  if (operatore === 'octopus' && commodity === 'luce') {
-    return 'https://octopusenergy.it/offerta/tariffe';
-  }
-  if (operatore === 'nen' && commodity === 'luce') {
-    return 'https://nen.it/landing/migliore-offerta-luce';
-  }
-  if (operatore === 'tim' && commodity === 'mobile') {
-    return 'https://www.tim.it/fisso-e-mobile/mobile';
-  }
-  if (operatore === 'tim' && commodity === 'fisso') {
-    return 'https://www.tim.it/fisso-e-mobile/fibra-e-adsl';
-  }
-  if (operatore === 'vodafone' && commodity === 'mobile') {
-    return 'https://privati.vodafone.it/mobile/telefonia-mobile';
-  }
-  if (operatore === 'vodafone' && commodity === 'fisso') {
-    return 'https://privati.vodafone.it/casa/fibra';
-  }
-  if (operatore === 'iliad' && commodity === 'mobile') {
-    return 'https://www.iliad.it/offerte-iliad-mobile.html';
-  }
-  if (operatore === 'iliad' && commodity === 'fisso') {
-    return 'https://www.iliad.it/offerte-iliad-fibra.html';
-  }
-  if (operatore === 'fastweb' && commodity === 'mobile') {
-    return 'https://www.fastweb.it/adsl-fibra-ottica/offerta-mobile';
-  }
-  if (operatore === 'fastweb' && commodity === 'fisso') {
-    return 'https://www.fastweb.it/adsl-fibra-ottica/';
-  }
-  if (operatore === 'skywifi' && commodity === 'mobile') {
-    return 'https://www.sky.it/mobile';
-  }
-  if (operatore === 'skywifi' && commodity === 'fisso') {
-    return 'https://www.sky.it/sky-wifi-fibra';
-  }
-  if (operatore === 'postemobile' && commodity === 'mobile') {
-    return 'https://www.postemobile.it/privati/offerte-telefonia-mobile';
-  }
-  if (operatore === 'ho' && commodity === 'mobile') {
-    return 'https://www.ho-mobile.it/tutte-le-offerte';
-  }
-  if (operatore === 'kena' && commodity === 'mobile') {
-    return 'https://www.kenamobile.it/offerte/';
-  }
-  if (operatore === 'very' && commodity === 'mobile') {
-    return 'https://verymobile.it/offerte';
-  }
-  if (operatore === 'tiscali' && commodity === 'mobile') {
-    return 'https://casa.tiscali.it/mobile/';
-  }
-  if (operatore === 'tiscali' && commodity === 'fisso') {
-    return 'https://casa.tiscali.it/';
-  }
-  if (operatore === 'dimensione' && commodity === 'mobile') {
-    return 'https://www.dimensione.com/portale/sim-mobile/index.php';
-  }
-  if (operatore === 'windtre' && commodity === 'mobile') {
-    return 'https://www.windtre.it/offerte-mobile';
-  }
-  if (operatore === 'windtre' && commodity === 'fisso') {
-    return 'https://www.windtre.it/offerte-fibra';
-  }
-  if (operatore === 'linkem' && commodity === 'fisso') {
-    return 'https://www.linkem.com/';
-  }
-  return null;
+  const src = V1_FIXTURE_SOURCES.find((s) => s.operatore === operatore && s.commodity === commodity);
+  return src?.url ?? null;
 }
 
 function buildSource(
