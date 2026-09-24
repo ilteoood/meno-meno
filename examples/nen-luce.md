@@ -4,29 +4,23 @@
 
 | Operatore | Offerta | €/kWh | Quota fissa €/anno | Verde | Meccanismo |
 | --- | --- | --- | --- | --- | --- |
-| nen | NeN Fix Luce | 0,11 | 60,00 | [C] | fisso |
-| nen | NeN Indicizzata Luce | 0,13 | 72,00 | [C] | PUN |
-| nen | NeN Web Luce | 0,10 | 48,00 | [C] | PUN |
+| nen | Luce \| Due | 0,14 | 96,00 | [A] | fisso |
+| nen | Luce \| Dieci | 0,12 | 72,00 | [A] | fisso |
 
 ## Trade-off per offerta top-3
 
-### nen — NeN Web Luce
+### nen — Luce | Dieci
 - **Vince su**: nessuna
-- **Perde su**: fissità
+- **Perde su**: nessuna
 
-### nen — NeN Fix Luce
+### nen — Luce | Due
 - **Vince su**: nessuna
 - **Perde su**: costo annuo
-
-### nen — NeN Indicizzata Luce
-- **Vince su**: nessuna
-- **Perde su**: costo annuo, fissità
 
 
 ## Top-3 motivata
 
-1. **nen — NeN Web Luce** — €318/anno stimato, Verde: [C], Fissità: [PUN]
-2. **nen — NeN Fix Luce** — €357/anno stimato, Verde: [C], Fissità: [fisso]
-3. **nen — NeN Indicizzata Luce** — €423/anno stimato, Verde: [C], Fissità: [PUN]
+1. **nen — Luce | Dieci** — €393/anno stimato, Verde: [A], Fissità: [fisso]
+2. **nen — Luce | Due** — €471/anno stimato, Verde: [A], Fissità: [fisso]
 
 Fonte: live scrape di 1/1 operatori.

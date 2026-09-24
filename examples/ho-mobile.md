@@ -2,31 +2,33 @@
 
 ## Tabella completa
 
-| Operatore | Offerta | €/mese | GB | Minuti | Velocità |
-| --- | --- | --- | --- | --- | --- |
-| ho | ho. 9.99 | 9,99 | 100 | ILLIMITATO | 1000 |
-| ho | ho. 6.99 | 6,99 | 50 | ILLIMITATO | 1000 |
-| ho | ho. 4.99 | 4,99 | 30 | ILLIMITATO | 150 |
+| Operatore | Offerta | €/mese | GB | Minuti |
+| --- | --- | --- | --- | --- |
+| ho | Fino al | 5,95 | 100 | ILLIMITATO |
+| ho | Offerta 5G! | 6,95 | 150 | ILLIMITATO |
+| ho | Offerta 5G! | 8,95 | 250 | ILLIMITATO |
+| ho | 5G incluso! | 9,95 | 150 | ILLIMITATO |
+| ho | 5G incluso! | 11,95 | 250 | ILLIMITATO |
 
 ## Trade-off per offerta top-3
 
-### ho — ho. 4.99
+### ho — Fino al
 - **Vince su**: nessuna
 - **Perde su**: GB inclusi
 
-### ho — ho. 6.99
+### ho — Offerta 5G!
 - **Vince su**: nessuna
 - **Perde su**: costo annuo, GB inclusi
 
-### ho — ho. 9.99
+### ho — Offerta 5G!
 - **Vince su**: nessuna
 - **Perde su**: costo annuo
 
 
 ## Top-3 motivata
 
-1. **ho — ho. 4.99** — €60/anno stimato, GB inclusi: 30, Velocità: 150 Mbps
-2. **ho — ho. 6.99** — €84/anno stimato, GB inclusi: 50, Velocità: 1000 Mbps
-3. **ho — ho. 9.99** — €120/anno stimato, GB inclusi: 100, Velocità: 1000 Mbps
+1. **ho — Fino al** — €71/anno stimato, GB inclusi: 100, Rete: 4G
+2. **ho — Offerta 5G!** — €83/anno stimato, GB inclusi: 150, Rete: 5G
+3. **ho — Offerta 5G!** — €107/anno stimato, GB inclusi: 250, Rete: 5G
 
 Fonte: live scrape di 1/1 operatori.

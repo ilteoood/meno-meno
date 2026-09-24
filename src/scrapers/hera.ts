@@ -8,34 +8,17 @@ import type {
   OffertaLuce,
 } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
+import { nowIso } from './_utils/clock.ts';
+import { fetchHtml } from './_utils/fetch-html.ts';
+import { slugFromHref, slugify } from './_utils/slug.ts';
 
 const HERA_LUCE_URL = 'https://heracomm.gruppohera.it/casa/offerte-luce-gas';
 const SCRAPER_TIMEOUT_MS = 30_000;
 
-const DESKTOP_UA =
-  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
 const OFFER_CARD_SELECTOR = '.card.pb-2';
 
-function nowIso(): string {
-  return new Date().toISOString();
-}
 
-async function fetchHtml(url: string, signal: AbortSignal): Promise<string> {
-  const response = await fetch(url, {
-    headers: {
-      'User-Agent': DESKTOP_UA,
-      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-      'Accept-Language': 'it-IT,it;q=0.9,en;q=0.5',
-      Referer: 'https://heracomm.gruppohera.it/',
-    },
-    signal,
-  });
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-  return await response.text();
-}
 
 function parseEuroNumber(raw: string): number | null {
   const cleaned = raw.replace(/\./g, '').replace(',', '.').trim();
@@ -75,22 +58,6 @@ function detectGreenFlag(articleText: string): GreenFlag {
   return 'C';
 }
 
-function slugFromHref(href: string | undefined, fallback: string): string {
-  if (href) {
-    try {
-      const cleaned = href.split('?')[0]?.split('#')[0] ?? href;
-      const segments = cleaned.split('/').filter(Boolean);
-      const last = segments[segments.length - 1];
-      if (last && last.length > 0) return last;
-    } catch {
-      // fall through
-    }
-  }
-  return fallback
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
 
 interface CatalogEntry {
   codice_offerta: string;

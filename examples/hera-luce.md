@@ -4,29 +4,29 @@
 
 | Operatore | Offerta | €/kWh | Quota fissa €/anno | Verde | Meccanismo |
 | --- | --- | --- | --- | --- | --- |
-| hera | Hera Fix Luce | 0,13 | 90,00 | [C] | fisso |
-| hera | Hera Variabile Luce | 0,15 | 108,00 | [C] | PUN |
-| hera | Hera Web Luce | 0,12 | 84,00 | [C] | PUN |
+| hera | PiùControllo Special Flat | 0,14 | 144,00 | [C] | fisso |
+| hera | Hera Placet Variabile | 0,07 | 144,00 | [C] | PUN |
+| hera | Hera Placet Fissa | 0,27 | 144,00 | [C] | fisso |
 
 ## Trade-off per offerta top-3
 
-### hera — Hera Web Luce
+### hera — Hera Placet Variabile
 - **Vince su**: nessuna
 - **Perde su**: fissità
 
-### hera — Hera Fix Luce
+### hera — PiùControllo Special Flat
 - **Vince su**: nessuna
 - **Perde su**: costo annuo
 
-### hera — Hera Variabile Luce
+### hera — Hera Placet Fissa
 - **Vince su**: nessuna
-- **Perde su**: costo annuo, fissità
+- **Perde su**: costo annuo
 
 
 ## Top-3 motivata
 
-1. **hera — Hera Web Luce** — €408/anno stimato, Verde: [C], Fissità: [PUN]
-2. **hera — Hera Fix Luce** — €441/anno stimato, Verde: [C], Fissità: [fisso]
-3. **hera — Hera Variabile Luce** — €513/anno stimato, Verde: [C], Fissità: [PUN]
+1. **hera — Hera Placet Variabile** — €333/anno stimato, Verde: [C], Fissità: [PUN]
+2. **hera — PiùControllo Special Flat** — €528/anno stimato, Verde: [C], Fissità: [fisso]
+3. **hera — Hera Placet Fissa** — €860/anno stimato, Verde: [C], Fissità: [fisso]
 
 Fonte: live scrape di 1/1 operatori.

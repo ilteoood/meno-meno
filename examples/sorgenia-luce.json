@@ -1,50 +1,35 @@
 {
   "commodity": "luce",
   "scraped_at": "2026-09-13T10:00:00.000Z",
-  "count": 3,
+  "count": 2,
   "offerte": {
     "singole": [
       {
         "commodity": "luce",
         "operatore_id": "sorgenia",
-        "codice_offerta": "SRG-FIX-LUCE-001",
-        "nome_commerciale": "Sorgenia Fix Luce",
+        "codice_offerta": "000390ETVOL01XXES014991010000000",
+        "nome_commerciale": "NEXT ENERGY PUNTUALE LUCE",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/sorgenia/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.12,
-        "quota_fissa_euro_anno": 84,
+        "prezzo_effettivo_euro_kwh": 0.007,
+        "quota_fissa_euro_anno": 68.4,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0.007
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "sorgenia",
+        "codice_offerta": "000390ESFML01XXES014989010000000",
+        "nome_commerciale": "NEXT ENERGY SMART LUCE",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/sorgenia/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.155,
+        "quota_fissa_euro_anno": 108,
         "meccanismo_prezzo": {
           "tipo": "fisso"
-        },
-        "green_flag": "C"
-      },
-      {
-        "commodity": "luce",
-        "operatore_id": "sorgenia",
-        "codice_offerta": "SRG-NEXT-LUCE-002",
-        "nome_commerciale": "Sorgenia Next Luce",
-        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/sorgenia/luce.html",
-        "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.14,
-        "quota_fissa_euro_anno": 96,
-        "meccanismo_prezzo": {
-          "tipo": "PUN",
-          "spread_euro_kwh": 0
-        },
-        "green_flag": "C"
-      },
-      {
-        "commodity": "luce",
-        "operatore_id": "sorgenia",
-        "codice_offerta": "SRG-VAR-LUCE-003",
-        "nome_commerciale": "Sorgenia Variabile Luce",
-        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/sorgenia/luce.html",
-        "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.16,
-        "quota_fissa_euro_anno": 120,
-        "meccanismo_prezzo": {
-          "tipo": "PUN",
-          "spread_euro_kwh": 0
         },
         "green_flag": "C"
       }

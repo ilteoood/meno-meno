@@ -1,6 +1,8 @@
+import type { Commodity } from '../src/types/offerta.ts';
+
 export interface V1FixtureSource {
   readonly operatore: string;
-  readonly commodity: string;
+  readonly commodity: Commodity;
   readonly url: string;
   readonly playwright: boolean;
 }

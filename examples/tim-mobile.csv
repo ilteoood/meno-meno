@@ -1,4 +1,8 @@
-tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Offerta,mobile,tim,TIM-MOBILE-001,,TIM Power Mobile,9.99,EUR/mese,undefined,,,100,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/tim/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,tim,TIM-MOBILE-002,,TIM Young Mobile,6.99,EUR/mese,undefined,,,50,-1,entrambe,5G,1000,,,,file:///root/workspaces/meno-meno/fixtures/tim/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,tim,TIM-MOBILE-003,,TIM Base Mobile,4.99,EUR/mese,undefined,,,30,-1,entrambe,4G,150,,,,file:///root/workspaces/meno-meno/fixtures/tim/mobile.html,2026-09-13T10:00:00.000Z
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,mobile,tim,sim-giovani,,TIM Young,9.99,EUR/mese,undefined,,,300,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/tim/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,tim,ODVBE-TIM_MOBILE_DIGITAL,,TIM Mobile Digital,12.99,EUR/mese,undefined,,,150,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/tim/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,tim,mobile,,TIM CROSS Steel 5G,5.99,EUR/mese,undefined,,,300,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/tim/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,tim,mobile,,TIM CROSS Gold 5G,9.99,EUR/mese,undefined,,,200,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/tim/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,tim,ODUPY-TIM_60+BASIC_AL,,TIM Basic,7.99,EUR/mese,undefined,,,1,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/tim/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,tim,sim-solo-internet,,TIM Mobile Giga,9.99,EUR/mese,undefined,,,300,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/tim/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,tim,sim-solo-internet-apple-music,,TIM Giga&Music,0,EUR/mese,undefined,,,100,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/tim/mobile.html,2026-09-13T10:00:00.000Z

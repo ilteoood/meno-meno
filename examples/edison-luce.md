@@ -4,29 +4,29 @@
 
 | Operatore | Offerta | €/kWh | Quota fissa €/anno | Verde | Meccanismo |
 | --- | --- | --- | --- | --- | --- |
-| edison | Edison Energia Fix Luce | 0,13 | 96,00 | [C] | fisso |
-| edison | Edison Energia Variabile Luce | 0,15 | 108,00 | [C] | PUN |
-| edison | Edison Web Luce | 0,11 | 72,00 | [C] | PUN |
+| edison | Sweet Luce | 0,18 | 80,00 | [C] | fisso |
+| edison | WEB Luce | 0,14 | 90,00 | [C] | fisso |
+| edison | Dynamic Luce | 0,01 | 99,00 | [A] | PUN |
 
 ## Trade-off per offerta top-3
 
-### edison — Edison Web Luce
+### edison — Dynamic Luce
 - **Vince su**: nessuna
 - **Perde su**: fissità
 
-### edison — Edison Energia Fix Luce
+### edison — WEB Luce
 - **Vince su**: nessuna
-- **Perde su**: costo annuo
+- **Perde su**: costo annuo, verde
 
-### edison — Edison Energia Variabile Luce
+### edison — Sweet Luce
 - **Vince su**: nessuna
-- **Perde su**: costo annuo, fissità
+- **Perde su**: costo annuo, verde
 
 
 ## Top-3 motivata
 
-1. **edison — Edison Web Luce** — €369/anno stimato, Verde: [C], Fissità: [PUN]
-2. **edison — Edison Energia Fix Luce** — €447/anno stimato, Verde: [C], Fissità: [fisso]
-3. **edison — Edison Energia Variabile Luce** — €513/anno stimato, Verde: [C], Fissità: [PUN]
+1. **edison — Dynamic Luce** — €131/anno stimato, Verde: [A], Fissità: [PUN]
+2. **edison — WEB Luce** — €482/anno stimato, Verde: [C], Fissità: [fisso]
+3. **edison — Sweet Luce** — €562/anno stimato, Verde: [C], Fissità: [fisso]
 
 Fonte: live scrape di 1/1 operatori.

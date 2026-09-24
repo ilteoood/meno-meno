@@ -7,12 +7,12 @@
       {
         "commodity": "luce",
         "operatore_id": "edison",
-        "codice_offerta": "EDS-FIX-LUCE-001",
-        "nome_commerciale": "Edison Energia Fix Luce",
+        "codice_offerta": "LECHO_001",
+        "nome_commerciale": "Sweet Luce",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/edison/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.13,
-        "quota_fissa_euro_anno": 96,
+        "prezzo_effettivo_euro_kwh": 0.1785,
+        "quota_fissa_euro_anno": 80,
         "meccanismo_prezzo": {
           "tipo": "fisso"
         },
@@ -21,32 +21,31 @@
       {
         "commodity": "luce",
         "operatore_id": "edison",
-        "codice_offerta": "EDS-VAR-LUCE-002",
-        "nome_commerciale": "Edison Energia Variabile Luce",
+        "codice_offerta": "1-SRKVVA",
+        "nome_commerciale": "WEB Luce",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/edison/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.15,
-        "quota_fissa_euro_anno": 108,
+        "prezzo_effettivo_euro_kwh": 0.145,
+        "quota_fissa_euro_anno": 90,
         "meccanismo_prezzo": {
-          "tipo": "PUN",
-          "spread_euro_kwh": 0
+          "tipo": "fisso"
         },
         "green_flag": "C"
       },
       {
         "commodity": "luce",
         "operatore_id": "edison",
-        "codice_offerta": "EDS-WEB-LUCE-003",
-        "nome_commerciale": "Edison Web Luce",
+        "codice_offerta": "LESPE_001",
+        "nome_commerciale": "Dynamic Luce",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/edison/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.11,
-        "quota_fissa_euro_anno": 72,
+        "prezzo_effettivo_euro_kwh": 0.012,
+        "quota_fissa_euro_anno": 99,
         "meccanismo_prezzo": {
           "tipo": "PUN",
           "spread_euro_kwh": 0
         },
-        "green_flag": "C"
+        "green_flag": "A"
       }
     ],
     "bundle": []

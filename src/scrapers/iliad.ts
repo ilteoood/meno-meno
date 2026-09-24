@@ -9,32 +9,16 @@ import type {
   TipoSim,
 } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
+import { nowIso } from './_utils/clock.ts';
+import { fetchHtml } from './_utils/fetch-html.ts';
+import { slugify, slugFromHref } from './_utils/slug.ts';
 
 const ILIAD_MOBILE_URL = 'https://www.iliad.it/offerte-iliad-mobile.html';
 const ILIAD_FISSO_URL = 'https://www.iliad.it/offerte-iliad-fibra.html';
 const SCRAPER_TIMEOUT_MS = 15_000;
 
-const DESKTOP_UA =
-  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
-function nowIso(): string {
-  return new Date().toISOString();
-}
 
-async function fetchHtml(url: string, signal: AbortSignal): Promise<string> {
-  const response = await fetch(url, {
-    headers: {
-      'User-Agent': DESKTOP_UA,
-      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'Accept-Language': 'it-IT,it;q=0.9,en;q=0.5',
-    },
-    signal,
-  });
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-  return await response.text();
-}
 
 function priceFromCents(cents: string): number | null {
   const n = Number(cents);
@@ -71,31 +55,6 @@ function tecnologiaFromCard($card: Cheerio<any>): TecnologiaMobile {
   return isTecnologia5G($card) ? '5G' : '4G';
 }
 
-function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
-function slugFromHref(href: string | undefined, fallback: string): string {
-  if (href && !href.startsWith('javascript:')) {
-    try {
-      const url = new URL(href, ILIAD_MOBILE_URL);
-      const cleaned = url.pathname.replace(/\/$/, '');
-      const segments = cleaned.split('/').filter(Boolean);
-      // Offer hrefs are /mobile/<slug> or /privati/mobile/<slug>; skip generic /supporto/<id>/
-      if (segments.length >= 2 && !segments.includes('supporto')) {
-        return slugify(segments[segments.length - 1]!.replace(/\.html$/, ''));
-      }
-    } catch {
-      // fall through
-    }
-  }
-  return slugify(fallback);
-}
 
 interface ParsedCard {
   codice_offerta: string;
@@ -211,15 +170,6 @@ interface IliadFissoTracking {
 
 const ILIAD_FIBRA_OFFER_NAME = new Map<string, string>([['iliadbox', 'iliadbox']]);
 
-function slugifyFisso(input: string): string {
-  return input
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
 function parseIliadFissoPriceEur(priceEur: string | undefined): number | null {
   if (!priceEur) return null;
   const value = Number(priceEur.replace(',', '.'));
@@ -275,7 +225,7 @@ function parseFissoOfferCards(html: string): readonly ParsedFissoCard[] {
     const nome = ILIAD_FIBRA_OFFER_NAME.get(variant) ?? variant;
     seen.add(tracking.offer_id);
     cards.push({
-      codice_offerta: slugifyFisso(`${tracking.offer_id}-${variant}`),
+      codice_offerta: slugify(`${tracking.offer_id}-${variant}`),
       nome_commerciale: `${nome.charAt(0).toUpperCase()}${nome.slice(1)} Super`,
       prezzo_effettivo_euro_mese: prezzo,
     });

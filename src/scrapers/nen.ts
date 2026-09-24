@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import type { Commodity as CommodityType, OffertaLuce } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
+import { nowIso } from './_utils/clock.ts';
 
 const NEN_LUCE_URL = 'https://nen.it/landing/migliore-offerta-luce';
 const NEN_CATALOG_URL =
@@ -23,9 +24,6 @@ interface RawOffer {
   readonly baseOffer?: RawBaseOffer;
 }
 
-function nowIso(): string {
-  return new Date().toISOString();
-}
 
 async function fetchJson(url: string, signal: AbortSignal): Promise<unknown> {
   const response = await fetch(url, {

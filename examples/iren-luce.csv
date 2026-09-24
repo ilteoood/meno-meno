@@ -1,4 +1,5 @@
-tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Offerta,luce,iren,IR-FIX-LUCE-001,,Iren Fix Luce,0.13,EUR/kWh,96,fisso,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/iren/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,iren,IR-MERCATO-LUCE-002,,Iren Mercato Libero Luce,0.14,EUR/kWh,108,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/iren/luce.html,2026-09-13T10:00:00.000Z
-Offerta,luce,iren,IR-WEB-LUCE-003,,Iren Web Luce,0.12,EUR/kWh,84,PUN,C,,,,,,,,,file:///root/workspaces/meno-meno/fixtures/iren/luce.html,2026-09-13T10:00:00.000Z
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Offerta,luce,iren,iren-web-self-prezzo-fisso-luce,,Iren Web Self Luce Prezzo Fisso,0.1452,EUR/kWh,125.03999999999999,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/iren/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,iren,iren-no-stress-luce,,Iren Smart No Stress Luce,0.15,EUR/kWh,159,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/iren/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,iren,iren-prezzo-fisso-luce-verde,,Iren Revolution Salute Luce Prezzo Fisso,0.1881,EUR/kWh,165,fisso,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/iren/luce.html,2026-09-13T10:00:00.000Z
+Offerta,luce,iren,iren-10x3-luce,,Iren 10x3 Luce Variabile,0.0332,EUR/kWh,165,PUN,C,,,,,,,,file:///root/workspaces/meno-meno/fixtures/iren/luce.html,2026-09-13T10:00:00.000Z

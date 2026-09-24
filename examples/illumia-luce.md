@@ -4,29 +4,23 @@
 
 | Operatore | Offerta | €/kWh | Quota fissa €/anno | Verde | Meccanismo |
 | --- | --- | --- | --- | --- | --- |
-| illumia | Illumia Fix Luce | 0,13 | 90,00 | [C] | fisso |
-| illumia | Illumia Variabile Luce | 0,15 | 108,00 | [C] | PUN |
-| illumia | Illumia Web Luce | 0,11 | 72,00 | [C] | PUN |
+| illumia | Energia Lunga Luce | 0,14 | 84,00 | [A] | fisso |
+| illumia | Energia Senza Pensieri | 0,15 | 144,00 | [A] | fisso |
 
 ## Trade-off per offerta top-3
 
-### illumia — Illumia Web Luce
+### illumia — Energia Lunga Luce
 - **Vince su**: nessuna
-- **Perde su**: fissità
+- **Perde su**: nessuna
 
-### illumia — Illumia Fix Luce
+### illumia — Energia Senza Pensieri
 - **Vince su**: nessuna
 - **Perde su**: costo annuo
-
-### illumia — Illumia Variabile Luce
-- **Vince su**: nessuna
-- **Perde su**: costo annuo, fissità
 
 
 ## Top-3 motivata
 
-1. **illumia — Illumia Web Luce** — €369/anno stimato, Verde: [C], Fissità: [PUN]
-2. **illumia — Illumia Fix Luce** — €441/anno stimato, Verde: [C], Fissità: [fisso]
-3. **illumia — Illumia Variabile Luce** — €513/anno stimato, Verde: [C], Fissità: [PUN]
+1. **illumia — Energia Lunga Luce** — €449/anno stimato, Verde: [A], Fissità: [fisso]
+2. **illumia — Energia Senza Pensieri** — €563/anno stimato, Verde: [A], Fissità: [fisso]
 
 Fonte: live scrape di 1/1 operatori.

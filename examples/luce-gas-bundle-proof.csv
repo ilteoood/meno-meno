@@ -1,4 +1,4 @@
-tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,velocita_mbps,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Bundle,,edison,,edison-world-luce-gas,Edison World Luce e Gas,,,,,,,,,,,,12,80,https://www.edison.it/casa/luce-gas/offerta-world,2026-09-13T10:00:00.000Z
-Bundle,,tim,,tim-energia-tim-wifi-fibra,TIM Energia + TIM WiFi Fibra,,,,,,,,,,,,24,60,https://www.tim.it/fisso-e-mobile/luce-e-gas/tim-energia,2026-09-13T10:00:00.000Z
-Bundle,,sorgenia,,sorgenia-next-energy-sun,Sorgenia Next Energy Sun,,,,,,,,,,,,,40,https://www.sorgenia.it/luce-gas/next-energy-sun,2026-09-13T10:00:00.000Z
+tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
+Bundle,,edison,,edison-world-luce-gas,Edison World Luce e Gas,,,,,,,,,,,12,80,https://www.edison.it/casa/luce-gas/offerta-world,2026-09-13T10:00:00.000Z
+Bundle,,tim,,tim-energia-tim-wifi-fibra,TIM Energia + TIM WiFi Fibra,,,,,,,,,,,24,60,https://www.tim.it/fisso-e-mobile/luce-e-gas/tim-energia,2026-09-13T10:00:00.000Z
+Bundle,,sorgenia,,sorgenia-next-energy-sun,Sorgenia Next Energy Sun,,,,,,,,,,,,40,https://www.sorgenia.it/luce-gas/next-energy-sun,2026-09-13T10:00:00.000Z

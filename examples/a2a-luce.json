@@ -1,18 +1,32 @@
 {
   "commodity": "luce",
   "scraped_at": "2026-09-13T10:00:00.000Z",
-  "count": 3,
+  "count": 8,
   "offerte": {
     "singole": [
       {
         "commodity": "luce",
         "operatore_id": "a2a",
-        "codice_offerta": "A2A-FIX-LUCE-001",
-        "nome_commerciale": "A2A Fix Luce",
+        "codice_offerta": "a2a-17228",
+        "nome_commerciale": "A2A Click",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.13,
-        "quota_fissa_euro_anno": 96,
+        "prezzo_effettivo_euro_kwh": 0.143,
+        "quota_fissa_euro_anno": 102,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "A"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "a2a",
+        "codice_offerta": "a2a-27948",
+        "nome_commerciale": "Noi2",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.105,
+        "quota_fissa_euro_anno": 114,
         "meccanismo_prezzo": {
           "tipo": "fisso"
         },
@@ -21,30 +35,87 @@
       {
         "commodity": "luce",
         "operatore_id": "a2a",
-        "codice_offerta": "A2A-INDICE-LUCE-002",
-        "nome_commerciale": "A2A Indicizzata Luce",
+        "codice_offerta": "a2a-87984",
+        "nome_commerciale": "A2A Start",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.15,
-        "quota_fissa_euro_anno": 108,
+        "prezzo_effettivo_euro_kwh": 0.149,
+        "quota_fissa_euro_anno": 114,
         "meccanismo_prezzo": {
-          "tipo": "PUN",
-          "spread_euro_kwh": 0
+          "tipo": "fisso"
         },
         "green_flag": "C"
       },
       {
         "commodity": "luce",
         "operatore_id": "a2a",
-        "codice_offerta": "A2A-WEB-LUCE-003",
-        "nome_commerciale": "A2A Web Luce",
+        "codice_offerta": "a2a-11567",
+        "nome_commerciale": "Smart Casa",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.11,
-        "quota_fissa_euro_anno": 72,
+        "prezzo_effettivo_euro_kwh": 0.025003,
+        "quota_fissa_euro_anno": 114,
         "meccanismo_prezzo": {
           "tipo": "PUN",
-          "spread_euro_kwh": 0
+          "spread_euro_kwh": 0.025003
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "a2a",
+        "codice_offerta": "a2a-88119",
+        "nome_commerciale": "A2A Full",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.149,
+        "quota_fissa_euro_anno": 135,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "a2a",
+        "codice_offerta": "a2a-12366",
+        "nome_commerciale": "Smart Casa+",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.025003,
+        "quota_fissa_euro_anno": 135,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0.025003
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "a2a",
+        "codice_offerta": "a2a-8399",
+        "nome_commerciale": "A2A Placet Fissa",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.189,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "a2a",
+        "codice_offerta": "a2a-8402",
+        "nome_commerciale": "A2A Placet Variabile",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/a2a/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.039996,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "PUN",
+          "spread_euro_kwh": 0.039996
         },
         "green_flag": "C"
       }

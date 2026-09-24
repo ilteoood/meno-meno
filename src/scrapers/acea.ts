@@ -8,6 +8,7 @@ import type {
   OffertaLuce,
 } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
+import { nowIso } from './_utils/clock.ts';
 
 const ACEA_LISTING_URL = 'https://www.aceaenergia.it/elenco-offerte';
 const ACEA_JSON_URL = `${ACEA_LISTING_URL}/_jcr_content/article-par/lista_offerte.listaOfferte.json`;
@@ -17,9 +18,6 @@ const SCRAPER_TIMEOUT_MS = 15_000;
 const DESKTOP_UA =
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
-function nowIso(): string {
-  return new Date().toISOString();
-}
 
 async function fetchText(url: string, signal: AbortSignal): Promise<string> {
   const response = await fetch(url, {

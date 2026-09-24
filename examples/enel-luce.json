@@ -1,18 +1,18 @@
 {
   "commodity": "luce",
   "scraped_at": "2026-09-13T10:00:00.000Z",
-  "count": 4,
+  "count": 8,
   "offerte": {
     "singole": [
       {
         "commodity": "luce",
         "operatore_id": "enel",
-        "codice_offerta": "EN-FIX-WEB-LUCE-001",
+        "codice_offerta": "enel-fix-web-luce",
         "nome_commerciale": "Enel Fix Web Luce",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.12,
-        "quota_fissa_euro_anno": 84,
+        "prezzo_effettivo_euro_kwh": 0.139,
+        "quota_fissa_euro_anno": 144,
         "meccanismo_prezzo": {
           "tipo": "fisso"
         },
@@ -21,12 +21,26 @@
       {
         "commodity": "luce",
         "operatore_id": "enel",
-        "codice_offerta": "EN-MESE-LIGHT-LUCE-002",
-        "nome_commerciale": "Enel Mese Light",
+        "codice_offerta": "enel-mese-light-luce",
+        "nome_commerciale": "Enel Mese Light Luce",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.18,
-        "quota_fissa_euro_anno": 120,
+        "prezzo_effettivo_euro_kwh": 0.145,
+        "quota_fissa_euro_anno": 156,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "enel",
+        "codice_offerta": "enel-flex-control-luce",
+        "nome_commerciale": "Enel Flex Control Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.022,
+        "quota_fissa_euro_anno": 180,
         "meccanismo_prezzo": {
           "tipo": "PUN",
           "spread_euro_kwh": 0
@@ -36,12 +50,54 @@
       {
         "commodity": "luce",
         "operatore_id": "enel",
-        "codice_offerta": "EN-MOVE-LUCE-003",
-        "nome_commerciale": "Enel Move",
+        "codice_offerta": "enel-drive-luce",
+        "nome_commerciale": "Enel Drive Luce",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.14,
-        "quota_fissa_euro_anno": 96,
+        "prezzo_effettivo_euro_kwh": 0.154,
+        "quota_fissa_euro_anno": 252,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "enel",
+        "codice_offerta": "enel-move-luce",
+        "nome_commerciale": "Enel Move Luce",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.179,
+        "quota_fissa_euro_anno": 168,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "enel",
+        "codice_offerta": "placet-consumer-luce-fissa",
+        "nome_commerciale": "Enel Energia PLACET Fissa Luce Consumer",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.204,
+        "quota_fissa_euro_anno": 144,
+        "meccanismo_prezzo": {
+          "tipo": "fisso"
+        },
+        "green_flag": "C"
+      },
+      {
+        "commodity": "luce",
+        "operatore_id": "enel",
+        "codice_offerta": "placet-consumer-luce-variabile",
+        "nome_commerciale": "Enel Energia PLACET Variabile Luce Consumer",
+        "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
+        "scraped_at": "2026-09-13T10:00:00.000Z",
+        "prezzo_effettivo_euro_kwh": 0.05,
+        "quota_fissa_euro_anno": 144,
         "meccanismo_prezzo": {
           "tipo": "PUN",
           "spread_euro_kwh": 0
@@ -51,12 +107,12 @@
       {
         "commodity": "luce",
         "operatore_id": "enel",
-        "codice_offerta": "EN-MOVE-PLUS-LUCE-004",
-        "nome_commerciale": "Enel Move Plus",
+        "codice_offerta": "enel-flex-box",
+        "nome_commerciale": "Enel Flex Box",
         "url_sorgente": "file:///root/workspaces/meno-meno/fixtures/enel/luce.html",
         "scraped_at": "2026-09-13T10:00:00.000Z",
-        "prezzo_effettivo_euro_kwh": 0.16,
-        "quota_fissa_euro_anno": 108,
+        "prezzo_effettivo_euro_kwh": 0.041,
+        "quota_fissa_euro_anno": 72,
         "meccanismo_prezzo": {
           "tipo": "PUN",
           "spread_euro_kwh": 0

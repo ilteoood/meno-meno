@@ -7,31 +7,15 @@ import type {
   TipoSim,
 } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
+import { nowIso } from './_utils/clock.ts';
+import { fetchHtml } from './_utils/fetch-html.ts';
+import { slugify, slugFromHref } from './_utils/slug.ts';
 
 const DIMENSIONE_MOBILE_URL = 'https://www.dimensione.com/portale/sim-mobile/index.php';
 const SCRAPER_TIMEOUT_MS = 15_000;
 
-const DESKTOP_UA =
-  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
-function nowIso(): string {
-  return new Date().toISOString();
-}
 
-async function fetchHtml(url: string, signal: AbortSignal): Promise<string> {
-  const response = await fetch(url, {
-    headers: {
-      'User-Agent': DESKTOP_UA,
-      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'Accept-Language': 'it-IT,it;q=0.9,en;q=0.5',
-    },
-    signal,
-  });
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-  return await response.text();
-}
 
 function parsePriceEur(text: string): number | null {
   const match = text.match(/(\d{1,4})\s*[.,]\s*(\d{2})/);
@@ -51,14 +35,6 @@ function tecnologiaFromCard(cardText: string): TecnologiaMobile {
   return '4G';
 }
 
-function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
 
 interface ParsedCard {
   codice_offerta: string;

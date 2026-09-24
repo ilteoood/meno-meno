@@ -2,31 +2,44 @@
 
 ## Tabella completa
 
-| Operatore | Offerta | €/mese | GB | Minuti | Velocità |
-| --- | --- | --- | --- | --- | --- |
-| vodafone | Vodafone Easy Mobile | 7,99 | 100 | ILLIMITATO | 1000 |
-| vodafone | Vodafone Red Mobile | 12,99 | -1 | ILLIMITATO | 2000 |
-| vodafone | Vodafone Smart Mobile | 4,99 | 30 | ILLIMITATO | 150 |
+| Operatore | Offerta | €/mese | GB | Minuti |
+| --- | --- | --- | --- | --- |
+| vodafone | 150 GIGA | 9,95 | 150 | ILLIMITATO |
+| vodafone | 250 GIGA | 11,95 | 250 | ILLIMITATO |
+| vodafone | GIGA ILLIMITATI* | 11,95 | -1 | ILLIMITATO |
+| vodafone | GIGA ILLIMITATI* | 19,95 | -1 | ILLIMITATO |
+| vodafone | 150 GIGA | 9,95 | 150 | ILLIMITATO |
+| vodafone | 150 GIGA | 11,95 | 150 | ILLIMITATO |
+| vodafone | GIGA ILLIMITATI* | 11,95 | -1 | ILLIMITATO |
+| vodafone | GIGA ILLIMITATI* | 11,95 | -1 | ILLIMITATO |
+| vodafone | 250 GIGA | 11,95 | 250 | ILLIMITATO |
+| vodafone | GIGA ILLIMITATI* | 11,95 | -1 | ILLIMITATO |
+| vodafone | GIGA ILLIMITATI* | 11,95 | -1 | ILLIMITATO |
+| vodafone | GIGA ILLIMITATI* | 19,95 | -1 | ILLIMITATO |
+| vodafone | 250 GIGA | 11,95 | 250 | ILLIMITATO |
+| vodafone | GIGA ILLIMITATI* | 11,95 | -1 | ILLIMITATO |
+| vodafone | GIGA ILLIMITATI* | 11,95 | -1 | ILLIMITATO |
+| vodafone | 150 GIGA | 9,95 | 150 | ILLIMITATO |
 
 ## Trade-off per offerta top-3
 
-### vodafone — Vodafone Smart Mobile
+### vodafone — 150 GIGA
 - **Vince su**: nessuna
-- **Perde su**: GB inclusi
+- **Perde su**: nessuna
 
-### vodafone — Vodafone Easy Mobile
+### vodafone — 150 GIGA
 - **Vince su**: nessuna
-- **Perde su**: costo annuo
+- **Perde su**: nessuna
 
-### vodafone — Vodafone Red Mobile
+### vodafone — 150 GIGA
 - **Vince su**: nessuna
-- **Perde su**: costo annuo, GB inclusi
+- **Perde su**: nessuna
 
 
 ## Top-3 motivata
 
-1. **vodafone — Vodafone Smart Mobile** — €60/anno stimato, GB inclusi: 30, Velocità: 150 Mbps
-2. **vodafone — Vodafone Easy Mobile** — €96/anno stimato, GB inclusi: 100, Velocità: 1000 Mbps
-3. **vodafone — Vodafone Red Mobile** — €156/anno stimato, GB inclusi: -1, Velocità: 2000 Mbps
+1. **vodafone — 150 GIGA** — €119/anno stimato, GB inclusi: 150, Rete: 4G
+2. **vodafone — 150 GIGA** — €119/anno stimato, GB inclusi: 150, Rete: 4G
+3. **vodafone — 150 GIGA** — €119/anno stimato, GB inclusi: 150, Rete: 4G
 
 Fonte: live scrape di 1/1 operatori.

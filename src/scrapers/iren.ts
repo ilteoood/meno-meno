@@ -2,31 +2,15 @@ import { load } from 'cheerio';
 import { readFile } from 'node:fs/promises';
 import type { OffertaLuce, Commodity } from '../types/offerta.ts';
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
+import { nowIso } from './_utils/clock.ts';
+import { fetchHtml } from './_utils/fetch-html.ts';
+import { slugify, slugFromHref } from './_utils/slug.ts';
 
 const IREN_LUCE_URL = 'https://www.irenlucegas.it/casa/offerte-luce';
 const SCRAPER_TIMEOUT_MS = 15_000;
 
-const DESKTOP_UA =
-  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
-function nowIso(): string {
-  return new Date().toISOString();
-}
 
-async function fetchHtml(url: string, signal: AbortSignal): Promise<string> {
-  const response = await fetch(url, {
-    headers: {
-      'User-Agent': DESKTOP_UA,
-      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'Accept-Language': 'it-IT,it;q=0.9,en;q=0.5',
-    },
-    signal,
-  });
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ${response.statusText}`);
-  }
-  return await response.text();
-}
 
 function parseEurPerKwh(text: string): number | null {
   const match = text.match(/(\d{1,4}(?:[.,]\d{1,6})?)\s*€\s*\/\s*kWh/i);
@@ -42,26 +26,7 @@ function parseEurPerMonth(text: string): number | null {
   return Number.isFinite(n) && n > 0 ? n : null;
 }
 
-function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
 
-function slugFromHref(href: string | undefined): string | null {
-  if (!href) return null;
-  try {
-    const url = new URL(href, IREN_LUCE_URL);
-    const segments = url.pathname.replace(/\/$/, '').split('/').filter(Boolean);
-    if (segments.length === 0) return null;
-    return slugify(segments[segments.length - 1] ?? '');
-  } catch {
-    return null;
-  }
-}
 
 interface ParsedCard {
   codice_offerta: string;
