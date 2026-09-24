@@ -170,15 +170,6 @@ interface IliadFissoTracking {
 
 const ILIAD_FIBRA_OFFER_NAME = new Map<string, string>([['iliadbox', 'iliadbox']]);
 
-function slugifyFisso(input: string): string {
-  return input
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
 function parseIliadFissoPriceEur(priceEur: string | undefined): number | null {
   if (!priceEur) return null;
   const value = Number(priceEur.replace(',', '.'));
@@ -234,7 +225,7 @@ function parseFissoOfferCards(html: string): readonly ParsedFissoCard[] {
     const nome = ILIAD_FIBRA_OFFER_NAME.get(variant) ?? variant;
     seen.add(tracking.offer_id);
     cards.push({
-      codice_offerta: slugifyFisso(`${tracking.offer_id}-${variant}`),
+      codice_offerta: slugify(`${tracking.offer_id}-${variant}`),
       nome_commerciale: `${nome.charAt(0).toUpperCase()}${nome.slice(1)} Super`,
       prezzo_effettivo_euro_mese: prezzo,
     });
