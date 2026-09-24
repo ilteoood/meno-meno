@@ -1,6 +1,6 @@
 tipo,commodity,operatore_id,codice_offerta,bundle_id,nome_commerciale,prezzo_effettivo,unita_prezzo,quota_fissa_euro_anno,meccanismo_prezzo,green_flag,gb,minuti,tipo_sim,tecnologia,costo_attivazione_euro,durata_mesi,sconto_bundle_euro_anno,url_sorgente,scraped_at
-Offerta,mobile,ho,fino-al-100,,Fino al,5.95,EUR/mese,undefined,,,100,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/ho/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,ho,offerta-5g-150,,Offerta 5G!,6.95,EUR/mese,undefined,,,150,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/ho/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,ho,offerta-5g-250,,Offerta 5G!,8.95,EUR/mese,undefined,,,250,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/ho/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,ho,5g-incluso-150,,5G incluso!,9.95,EUR/mese,undefined,,,150,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/ho/mobile.html,2026-09-13T10:00:00.000Z
-Offerta,mobile,ho,5g-incluso-250,,5G incluso!,11.95,EUR/mese,undefined,,,250,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/ho/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,ho,flussi-attivazione.138,,100 Giga,5.95,EUR/mese,undefined,,,100,-1,entrambe,4G,,,,file:///root/workspaces/meno-meno/fixtures/ho/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,ho,flussi-attivazione.132,,150 Giga,6.95,EUR/mese,undefined,,,150,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/ho/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,ho,flussi-attivazione.133,,250 Giga,8.95,EUR/mese,undefined,,,250,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/ho/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,ho,flussi-attivazione.134,,150 Giga,9.95,EUR/mese,undefined,,,150,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/ho/mobile.html,2026-09-13T10:00:00.000Z
+Offerta,mobile,ho,flussi-attivazione.135,,250 Giga,11.95,EUR/mese,undefined,,,250,-1,entrambe,5G,,,,file:///root/workspaces/meno-meno/fixtures/ho/mobile.html,2026-09-13T10:00:00.000Z

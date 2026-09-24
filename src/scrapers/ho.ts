@@ -9,7 +9,7 @@ import type {
 import type { Scraper, ScrapeSource, ScrapeResult } from './types.ts';
 import { nowIso } from './_utils/clock.ts';
 import { fetchHtml } from './_utils/fetch-html.ts';
-import { slugify, slugFromHref } from './_utils/slug.ts';
+import { slugFromHref } from './_utils/slug.ts';
 
 const HO_MOBILE_URL = 'https://www.ho-mobile.it/tutte-le-offerte';
 const SCRAPER_TIMEOUT_MS = 15_000;
@@ -66,25 +66,24 @@ function parseOfferCards(html: string): readonly ParsedCard[] {
     if (!gbMatch) return;
     const gb = Number(gbMatch[1]);
 
-    const hasIllimitati = /illimitat/i.test(cardText);
-    const minuti = hasIllimitati ? -1 : -1;
+    const nome = $el
+      .find('.offerCarousel__slider__card__stripe__firstLine')
+      .first()
+      .text()
+      .replace(/\s+/g, ' ')
+      .trim() || `${gb} Giga`;
 
-    const labelText = $el.find('.offerCarousel__slider__card__label').first().text().trim();
-    const nome = labelText.replace(/\s+/g, ' ') || `${gb} Giga`;
-
-    const tecnologia = tecnologiaFromCard($el, cardText);
-
-    const slug = slugify(`${nome}-${gb}`);
-    if (seen.has(slug)) return;
-    seen.add(slug);
+    const codice = slugFromHref($el.attr('data-offerlink'), nome);
+    if (seen.has(codice)) return;
+    seen.add(codice);
 
     cards.push({
-      codice_offerta: slug,
+      codice_offerta: codice,
       nome_commerciale: nome,
       prezzo_effettivo_euro_mese: prezzo,
       gb,
-      minuti,
-      tecnologia,
+      minuti: -1,
+      tecnologia: tecnologiaFromCard($el, cardText),
     });
   });
 
